@@ -1,28 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a9f1fbb8-c7e2-40d0-a191-02e1008288bf" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/api/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/routes/auth/otp.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/routes/auth/sign_in.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/routes/auth/sign_up.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/routes/db.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/routes/db.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/routes/map/get_live_status.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/routes/map/nearby_coordinates.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/routes/users.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/routes/users.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/map/map.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/map/map.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/client/yarn.lock" afterDir="false" />
-    </list>
+    <list default="true" id="a9f1fbb8-c7e2-40d0-a191-02e1008288bf" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/client" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1oyt37h9yYt2lEVRkXc1cslE42a" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -91,7 +77,7 @@
       <workItem from="1614757282182" duration="1133000" />
       <workItem from="1614775299412" duration="34249000" />
       <workItem from="1615378334460" duration="5521000" />
-      <workItem from="1615428506352" duration="3356000" />
+      <workItem from="1615428506352" duration="3675000" />
     </task>
     <servers />
   </component>
