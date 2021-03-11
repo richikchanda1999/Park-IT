@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { Component } from "react";
 import styled from "styled-components";
 import { LoginForm } from "./loginForm";
 import { motion } from "framer-motion";
@@ -9,7 +9,7 @@ import {OTPForm} from "./otp";
 
 const BoxContainer = styled.div`
   width: 280px;
-  min-height: 600px;
+  height: 75%;
   display: flex;
   flex-direction: column;
   border-radius: 19px;

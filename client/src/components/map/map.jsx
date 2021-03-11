@@ -4,7 +4,6 @@ import mapStyles from "./mapStyles";
 import SideNav, {MenuIcon} from 'react-simple-sidenav';
 import { withRouter } from "react-router";
 import { BookButton } from "./common";
-import {Navabc} from "../nav/nav";
 
 const { REACT_APP_GOOGLE_MAP_KEY_PAID, REACT_APP_GOOGLE_MAP_KEY_FREE, REACT_APP_API_BACKEND } = process.env;
 
@@ -146,7 +145,6 @@ class _Map extends Component {
         const WrappedMap = withScriptjs(withGoogleMap(_MyMap));
         return (
             <div style={{ width: "100vw", height: "100vh",background: 'rgb(31, 138, 112)' }}>
-                <Navabc/>
                 <WrappedMap
                     googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${REACT_APP_GOOGLE_MAP_KEY_PAID}`}
                     loadingElement={<div style={{ height: "100%" }} />}

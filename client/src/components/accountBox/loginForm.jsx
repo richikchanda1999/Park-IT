@@ -10,6 +10,7 @@ import {
 import { Marginer } from "../marginer";
 import { AccountContext } from "./accountContext";
 import { withRouter } from "react-router";
+import {AuthContext} from "../../App";
 const { REACT_APP_API_BACKEND } = process.env;
 
 class _LoginForm extends Component {
@@ -52,8 +53,10 @@ class _LoginForm extends Component {
         state: {
           test: 'test'
         }
-    });
+      });
+      return true;
     }
+    return false;
   }
 
   render() {
@@ -66,7 +69,11 @@ class _LoginForm extends Component {
         <Marginer direction="vertical" margin={10} />
         <MutedLink href="#">Forget your password?</MutedLink>
         <Marginer direction="vertical" margin="1.6em" />
-        <SubmitButton enabled={this.state.submitEnable} type="submit" onClick={this.onLogin}>Sign In</SubmitButton>
+        <AuthContext.Consumer>
+          {({ authUpdate }) => (
+              <SubmitButton enabled={this.state.submitEnable} type="submit" onClick={() => authUpdate(this.onLogin())}>Sign In</SubmitButton>
+          )}
+        </AuthContext.Consumer>
         <Marginer direction="vertical" margin="1em" />
         <MutedLink href="#">
           Login using {" "}

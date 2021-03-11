@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import SideNav, {MenuIcon} from 'react-simple-sidenav';
 import {
     Customer,
     Td1,
@@ -12,7 +11,6 @@ import {
 } from "./common";
 import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
-import { Navabc } from "../nav/nav";
 
 const { REACT_APP_GOOGLE_MAP_KEY_PAID, REACT_APP_GOOGLE_MAP_KEY_FREE, REACT_APP_API_BACKEND } = process.env;
 
@@ -126,13 +124,11 @@ class UserHistory extends Component{
 class MyHistory extends Component {
     constructor(props) {
         super(props);
-        console.log('Test1');
     }
 
     render() {
         return (
             <div style={{ width: "100vw", height: "100vh", background: 'rgb(31, 138, 112)'}}>
-                <Navabc />
                 <DivA>
                     <h3>USER PARKING HISTORY</h3>
                 </DivA>
