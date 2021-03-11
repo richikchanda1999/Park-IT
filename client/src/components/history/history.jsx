@@ -11,6 +11,7 @@ import {
 } from "./common";
 import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
+import BeautyStars from "beauty-stars";
 
 const { REACT_APP_GOOGLE_MAP_KEY_PAID, REACT_APP_GOOGLE_MAP_KEY_FREE, REACT_APP_API_BACKEND } = process.env;
 
@@ -25,12 +26,12 @@ class UserHistory extends Component{
         super(props);
         this.state = { userStatus: null}
         this.state = { open: false}
+        this.state =  {value: 0};
         this.email = "rk722579@gmail.com";
         this.statusFetched = false;
-        this.getabc("rk722579@gmail.com");
         this.getHistory = this.getHistory.bind(this);
         this.getabc = this.getabc.bind(this);
-
+        this.getabc("rk722579@gmail.com");
     }
 
     onOpenModal = () => {
@@ -38,22 +39,22 @@ class UserHistory extends Component{
     };
 
     onCloseModal = () => {
-        this.setState({ open: false });
+        this.setState({ open: false, value: 0 });
     };
 
     async getHistory(email) {
         if (!this.statusFetched) {
-            var requestOption = {
+            let requestOption = {
                 method: "POST",
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ 'email': email}),
             };
             console.log(requestOption);
-            var res = await fetch(`${REACT_APP_API_BACKEND}/users/get_user_history`, requestOption);
+            let res = await fetch(`${REACT_APP_API_BACKEND}/users/get_user_history`, requestOption);
             console.log(res);
             console.log("70");
             if (res.status === 200) {
-                var val = await res.json();
+                let val = await res.json();
                 console.log(val);
                 return val;
             }
@@ -62,7 +63,7 @@ class UserHistory extends Component{
     }
 
     async getabc(email){
-        var ret = await this.getHistory(email);
+        let ret = await this.getHistory(email);
         this.setState({ userStatus: ret})
         console.log(this.state.userStatus)
     }
@@ -75,6 +76,7 @@ class UserHistory extends Component{
                 <Modal open={open} onClose={this.onCloseModal}>
                     <h2 style={{padding: "8px"}}>How Was Your Experience?</h2>
                     <InputRating type="number" max="5" min="1" id="rating" name="rating" style={{textAlign: "center"}}></InputRating>/5
+                    <BeautyStars value={this.state.value} onChange={value=>this.setState({value})} size="20px"/>
                     <RatingButton type="submit" style={{marginTop: "14px"}}>Submit</RatingButton>
                 </Modal>
             </div>
@@ -93,7 +95,7 @@ class UserHistory extends Component{
                         <Td1 style={{color: 'white'}}>{entry_time}</Td1>
                         <Td1 style={{color: 'white'}}>{exit_time}</Td1>
                         <Td1 style={{color: 'white'}}>{cost}</Td1>
-                        <Td1 style={{color: 'white'}}>{rating?rating:this.renderButton()}</Td1>
+                        <Td1 style={{color: 'white'}}>{rating?<BeautyStars value={rating} size="12px"/>:this.renderButton()}</Td1>
                     </Tr1>
                 )
             })
@@ -101,7 +103,6 @@ class UserHistory extends Component{
     }
 
     render(){
-
         return(
             <Customer >
                 <Tr1>
