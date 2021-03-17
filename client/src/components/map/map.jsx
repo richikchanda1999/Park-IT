@@ -1,31 +1,51 @@
-import React, { Component } from 'react';
-import { GoogleMap, withGoogleMap, withScriptjs, Marker, InfoWindow } from 'react-google-maps';
+import React, { Component, useState, useEffect, useCallback, memo } from 'react';
+import { GoogleMap, useJsApiLoader, Marker, InfoWindow } from '@react-google-maps/api';
 import mapStyles from "./mapStyles";
 import SideNav, {MenuIcon} from 'react-simple-sidenav';
-import { withRouter } from "react-router";
 import { BookButton } from "./common";
+import {navigate} from "hookrouter";
 
 const { REACT_APP_GOOGLE_MAP_KEY_PAID, REACT_APP_GOOGLE_MAP_KEY_FREE, REACT_APP_API_BACKEND } = process.env;
 
-class _MyMap extends Component {
-    constructor(props) {
-        super(props);
-        console.log(props.st);
-        this.state = { selectedPark: null, selectedParkCAP: -1, selectedParkTPS: -1, parkData: [] };
-        this.getParkingLots = this.getParkingLots.bind(this);
-        this.getStatus = this.getStatus.bind(this);
-        this.handleDrag = this.handleDrag.bind(this);
-        this.booking_nav = this.booking_nav.bind(this);
+function MyMap(props) {
+    const [selectedPark, setSelectedPark] = useState(null);
+    const [selectedParkCAP, setSelectedParkCAP] = useState(-1);
+    const [selectedParkTPS, setSelectedParkTPS] = useState(-1);
+    const [parkData, setParkData] = useState([]);
+    const [show, setShow] = useState(false);
+    const [map, setMap] = React.useState(null)
 
-        this.lotsFetched = false;
-        this.statusFetched = false;
-        this.mapRef = null;
-        this.markersMap = new Map();
-    }
+    let lotsFetched = false;
+    let statusFetched = false;
+    let mapRef = null;
+    let markersMap = new Map();
 
-    async getParkingLots(latitude, longitude) {
-        if (!this.lotsFetched) {
-            this.lotsFetched = true;
+    const containerStyle = {
+        width: '100vw',
+        height: '100vh'
+    };
+
+    const center = {
+        lat: 22.572645,
+        lng: 88.363892
+    };
+
+    const onLoad = useCallback(function callback(map) {
+        setMap(map);
+        console.log(map.zoom);
+    }, [])
+
+    const onUnmount = useCallback(function callback(map) {
+        setMap(null)
+    }, [])
+
+    useEffect(() => {
+        getParkingLots(22.572645, 88.363892);
+    }, []);
+
+    async function getParkingLots(latitude, longitude) {
+        if (!lotsFetched) {
+            lotsFetched = true;
 
             let requestOption = {
                 method: "POST",
@@ -38,20 +58,20 @@ class _MyMap extends Component {
             if (res.status === 200) {
                 let val = (await res.json())['parking_lots'];
                 console.log(val);
-                this.markersMap.clear();
+                markersMap.clear();
                 val.forEach((lot) => {
-                    this.markersMap.set(lot['place_id'], lot);
+                    markersMap.set(lot['place_id'], lot);
                 });
                 let parkingData = [];
-                for (let lot of this.markersMap.values()) parkingData.push(lot);
-                this.setState((state, props) => ({ parkData: parkingData }));
+                for (let lot of markersMap.values()) parkingData.push(lot);
+                setParkData(parkingData);
             }
-            this.lotsFetched = false;
+            lotsFetched = false;
         }
     }
 
-    async getStatus(place_id) {
-        if (!this.statusFetched) {
+    async function getStatus(place_id) {
+        if (!statusFetched) {
             let requestOption = {
                 method: "POST",
                 headers: { 'Content-Type': 'application/json' },
@@ -65,99 +85,113 @@ class _MyMap extends Component {
                 console.log(val);
                 return val;
             }
-            this.statusFetched = false;
+            statusFetched = false;
         }
     }
 
-    async handleDrag() {
-        let center = this.mapRef.getCenter();
+    async function handleDrag() {
+        let center = mapRef.getCenter();
         console.log(center);
-        await this.getParkingLots(center.lat(), center.lng());
+        await getParkingLots(center.lat(), center.lng());
     }
 
-    async booking_nav(){
-        console.log(this.state.selectedPark)
-        // var id=this.state.selectedPark['place_id'];
-        this.props.history.push({pathname: "/booking", state: {selectedPark: this.state.selectedPark}});
-        //"/booking",{selectedPark:this.state.selectedPark});
+    async function booking_nav(){
+        console.log(selectedPark)
+        // var id=state.selectedPark['place_id'];
+        navigate('/booking', false, {selectedPark: selectedPark});
+        // props.history.push({pathname: "/booking", state: {selectedPark: selectedPark}});
+        //"/booking",{selectedPark:state.selectedPark});
     }
 
+    const { isLoaded } = useJsApiLoader({
+        id: 'google-map-script',
+        googleMapsApiKey: REACT_APP_GOOGLE_MAP_KEY_PAID
+    })
 
-    componentDidMount() {
-        this.getParkingLots(22.572645, 88.363892);
-    }
+    return isLoaded ? (
+        <GoogleMap
+            mapContainerStyle={containerStyle}
+            center={center}
+            zoom={14}
+            onLoad={onLoad}
+            onUnmount={onUnmount}
+            options={{styles: mapStyles}}
+        >
 
-    render() {
-        return (
-            <GoogleMap
-                ref={(mapRef) => this.mapRef = mapRef}
-                defaultZoom={14}
-                defaultCenter={{ lat: 22.572645, lng: 88.363892 }}
-                defaultOptions={{ styles: mapStyles }}
-                onClick={(e) => {
-                    console.log(e);
-                }}
-                onDragEnd={this.handleDrag}
-            >
-                {this.state.parkData.map(park => (
-                    <Marker
-                        key={park['latitude'] + " " + park['longitude']}
-                        position={{
-                            lat: park['latitude'],
-                            lng: park['longitude']
-                        }}
-                        onClick={async () => {
-                            let ret = await this.getStatus(park['place_id']);
-                            this.setState({ selectedPark: park, selectedParkCAP: ret['CAP'], selectedParkTPS: ret['TPS'] });
-                        }}
-                    />
-                ))}
+            {parkData.map(park => (
+                <Marker
+                    key={park['latitude'] + " " + park['longitude']}
+                    position={{
+                        lat: park['latitude'],
+                        lng: park['longitude']
+                    }}
+                    onClick={async () => {
+                        let ret = await getStatus(park['place_id']);
+                        setSelectedPark(park);
+                        setSelectedParkCAP(ret['CAP']);
+                        setSelectedParkTPS(ret['TPS']);
+                    }}
+                />
+            ))}
 
-                {this.state.selectedPark && (
-                    <InfoWindow
-                        position={{
-                            lat: this.state.selectedPark['latitude'],
-                            lng: this.state.selectedPark['longitude']
-                        }}
-                        onCloseClick={() => {
-                            this.setState({ selectedPark: null });
-                        }}
-                    >
-                        <div>
-                            <h4>{this.state.selectedPark['name']}</h4>
-                            <p>Current status: {this.state.selectedParkCAP} / {this.state.selectedParkTPS}</p>
-                            <BookButton type="submit" onClick={this.booking_nav}>BOOK</BookButton>
-                        </div>
-                    </InfoWindow>
-                )}
-            </GoogleMap>
-        );
-    }
+            {selectedPark && (
+                <InfoWindow
+                    position={{
+                        lat: selectedPark['latitude'],
+                        lng: selectedPark['longitude']
+                    }}
+                    onCloseClick={() => {
+                        setSelectedPark(null);
+                    }}
+                >
+                    <div>
+                        <h4>{selectedPark['name']}</h4>
+                        <p>Current status: {selectedParkCAP} / {selectedParkTPS}</p>
+                        <BookButton type="submit" onClick={booking_nav}>BOOK</BookButton>
+                    </div>
+
+
+                </InfoWindow>
+            )}
+            { /* Child components, such as markers, info windows, etc. */ }
+            <></>
+        </GoogleMap>
+    ) : <></>
 }
 
-class _Map extends Component {
+class Navabc extends Component {
     constructor(props) {
         super(props);
-        console.log(props.location.state);
+        this.state = {
+            showNav: false
+        }
     }
 
-    render() {
-        const WrappedMap = withScriptjs(withGoogleMap(_MyMap));
-        return (
-            <div style={{ width: "100vw", height: "100vh",background: 'rgb(31, 138, 112)' }}>
-                <WrappedMap
-                    googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${REACT_APP_GOOGLE_MAP_KEY_PAID}`}
-                    loadingElement={<div style={{ height: "100%" }} />}
-                    containerElement={<div style={{ height: "100%" }} />}
-                    mapElement={<div style={{ height: "100%" }} />}
-                    st={this.props.location.state}
-                    history={this.props.history}
-                >
-                </WrappedMap>
+    handleClick = state => {
+        this.setState({
+            showNav: !this.state.showNav
+        });
+    }
+    render(){
+        return(
+            <div>
+                <MenuIcon style={{marginLeft: '10px'}} onClick={this.handleClick}/>
+                <SideNav
+                    showNav        =  {this.state.showNav}
+                    onHideNav      =  {this.handleClick}
+                    title          =  "PARK-IT"
+                    items          =  {[
+                        <a style={{textDecoration:'none', color :'black'}} href=''>Home</a>,
+                        <a style={{textDecoration:'none', color :'black'}} href=''>History</a>,
+                        <a style={{textDecoration:'none', color :'black'}} href=''>LOGOUT</a>
+                    ]}
+                    titleStyle     =  {{backgroundColor: 'rgba(31, 138, 112, 1)'}}
+                    itemStyle      =  {{backgroundColor: '#fff', listStyleType:'none'}}
+                    itemHoverStyle =  {{backgroundColor: 'rgba(70, 64, 253, 1)'}}
+                />
             </div>
         );
     }
 }
 
-const MyMap = withRouter(_Map)
-export { MyMap };
+export default memo(MyMap);

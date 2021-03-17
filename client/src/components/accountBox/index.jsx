@@ -1,10 +1,10 @@
-import React, { Component } from "react";
+import React, { Component, useState, useEffect } from "react";
 import styled from "styled-components";
-import { LoginForm } from "./loginForm";
+import LoginForm from "./loginForm";
 import { motion } from "framer-motion";
 import { AccountContext } from "./accountContext";
-import { SignupForm } from "./signupForm";
-import {OTPForm} from "./otp";
+import SignupForm from "./signupForm";
+import OTPForm from "./otp";
 
 
 const BoxContainer = styled.div`
@@ -80,96 +80,92 @@ const InnerContainer = styled.div`
   padding: 0 1.8em;
 `;
 
-class AccountBox extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { isExpanded: false, active: "signin", setActive: this.setActive };
-    this.playExpandingAnimation = this.playExpandingAnimation.bind(this);
-    this.switchToSignup = this.switchToSignup.bind(this);
-    this.switchToSignin = this.switchToSignin.bind(this);
-  }
+function AccountBox() {
+  const [isExpanded, setExpanded] = useState(false);
+  const [active, setActive] = useState("signin");
 
-  setActive = active => {
-    if (active === "signup") this.switchToSignup();
-    else if (active === "signin") this.switchToSignin();
-    else if (active === "otp") this.switchToOTP();
-  };
+  useEffect(() => {
+    if (active === "signup") switchToSignup();
+    else if (active === "signin") switchToSignin();
+    else if (active === "otp") switchToOTP();
+  }, [active]);
 
-  backdropVariants = {
+  const backdropVariants = {
     expanded: {
       width: "233%",
-      height: "1050px",
+      height: "180%",
       borderRadius: "20%",
       transform: "rotate(60deg)",
     },
     collapsed: {
       width: "160%",
-      height: "550px",
+      height: "95%",
       borderRadius: "50%",
       transform: "rotate(60deg)",
     },
   };
 
-  expandingTransition = {
+  const expandingTransition = {
     type: "spring",
     duration: 2.3,
     stiffness: 30,
   };
 
-  playExpandingAnimation() {
-    this.setState({ isExpanded: true });
+  function playExpandingAnimation() {
+    setExpanded(true);
     setTimeout(() => {
-      this.setState({ isExpanded: false });
-    }, this.expandingTransition.duration * 1000 - 1500);
-  };
+      setExpanded(false);
+    }, expandingTransition.duration * 1000 - 1500);
+  }
 
-  switchToSignup() {
-    this.playExpandingAnimation();
+  function switchToSignup() {
+    playExpandingAnimation();
     setTimeout(() => {
-      this.setState({ active: "signup" });
-    }, 400);
-  };
-
-  switchToSignin() {
-    this.playExpandingAnimation();
-    setTimeout(() => {
-      this.setState({ active: "signin" });
-    }, 400);
-  };
-
-  switchToOTP() {
-    this.playExpandingAnimation();
-    setTimeout(() => {
-      this.setState({ active: "otp" });
+      setActive("signup");
     }, 400);
   }
 
-  render() {
-    return (
-      <AccountContext.Provider value={this.state}>
+  function switchToSignin() {
+    playExpandingAnimation();
+    setTimeout(() => {
+      setActive("signin");
+    }, 400);
+  }
+
+  function switchToOTP() {
+    playExpandingAnimation();
+    setTimeout(() => {
+      setActive("otp");
+    }, 400);
+  }
+
+  const contextValue = {switchToSignin, switchToSignup, switchToOTP};
+
+  return (
+      <AccountContext.Provider value={contextValue}>
         <BoxContainer>
           <TopContainer>
             <BackDrop
-              initial={false}
-              animate={this.state.isExpanded ? "expanded" : "collapsed"}
-              variants={this.backdropVariants}
-              transition={this.expandingTransition}
+                initial={false}
+                animate={isExpanded ? "expanded" : "collapsed"}
+                variants={backdropVariants}
+                transition={expandingTransition}
             />
-            {this.state.active === "signin" && (
-              <HeaderContainer>
-                <HeaderText>Welcome</HeaderText>
-                <HeaderText>Back</HeaderText>
-                <SmallText>Please sign-in to continue!</SmallText>
-              </HeaderContainer>
+            {active === "signin" && (
+                <HeaderContainer>
+                  <HeaderText>Welcome</HeaderText>
+                  <HeaderText>Back</HeaderText>
+                  <SmallText>Please sign-in to continue!</SmallText>
+                </HeaderContainer>
             )}
-            {this.state.active === "signup" && (
-              <HeaderContainer>
-                <HeaderText>Create</HeaderText>
-                <HeaderText>Account</HeaderText>
-                <SmallText>Please sign-up to continue!</SmallText>
-              </HeaderContainer>
+            {active === "signup" && (
+                <HeaderContainer>
+                  <HeaderText>Create</HeaderText>
+                  <HeaderText>Account</HeaderText>
+                  <SmallText>Please sign-up to continue!</SmallText>
+                </HeaderContainer>
             )}
-            {this.state.active === "otp" && (
+            {active === "otp" && (
                 <HeaderContainer>
                   <HeaderText>Welcome</HeaderText>
                   <HeaderText>Back</HeaderText>
@@ -178,14 +174,13 @@ class AccountBox extends Component {
             )}
           </TopContainer>
           <InnerContainer>
-            {this.state.active === "signin" && <LoginForm />}
-            {this.state.active === "signup" && <SignupForm />}
-            {this.state.active === "otp" && <OTPForm />}
+            {active === "signin" && <LoginForm />}
+            {active === "signup" && <SignupForm />}
+            {active === "otp" && <OTPForm />}
           </InnerContainer>
         </BoxContainer>
       </AccountContext.Provider>
-    );
-  }
+  );
 }
 
-export { AccountBox };
+export default AccountBox;

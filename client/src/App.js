@@ -1,18 +1,20 @@
-import React, {Component} from 'react';
+import React, {useState, useEffect} from 'react';
 import "./App.css";
-import styled, {ThemeProvider} from "styled-components";
-import { AccountBox } from "./components/accountBox";
-import { MyMap } from "./components/map/map"; import {
-  Switch,
-  Route,
-} from "react-router-dom";
-import {Booking} from "./components/booking/booking";
+import styled from "styled-components";
+import AccountBox from "./components/accountBox";
+import MyMap from "./components/map/map";
+import Booking from "./components/booking/booking";
 import {MyHistory} from "./components/history/history";
-import {ToastProvider, useToasts} from 'react-toast-notifications'
-import {Navabc} from "./components/nav/nav";
-import { createContext } from "react";
+import {useRoutes} from 'hookrouter';
+import NavBar from "./components/nav/nav";
+import {AuthContext} from "./authContext";
 
-export const AuthContext = createContext();
+const routes = {
+    '/': () => <AppContainer><AccountBox /></AppContainer>,
+    '/map': () => <MyMap />,
+    '/history': () => <MyHistory />,
+    '/booking': () => <Booking />
+};
 
 const AppContainer = styled.div`
   width: 100%;
@@ -27,42 +29,25 @@ const AppContainer = styled.div`
   justify-content: center;
 `;
 
-class App extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {isSignedIn: false, authUpdate: this.authUpdate};
+function App() {
+    const [isSignedIn, setSignIn] = useState(false);
+
+    function authUpdate(val) {
+        setSignIn(val);
     }
 
-    authUpdate = authState => {
-        this.setState({isSignedIn: authState});
-    };
+    useEffect(() => {
+        console.log("Sign In State: ", isSignedIn);
+    }, [isSignedIn]);
 
-    render() {
-        return (
-            <ToastProvider>
-                <AuthContext.Provider value={this.state}>
-                    <div style={{height: "100%", background: 'rgb(31, 138, 112)'}}>
-                        {this.state.isSignedIn && <Navabc/>}
-                        <Switch>
-                            {/* <Redirect from="/" to="/map"></Redirect> */}
-                            <Route path="/map">
-                                <MyMap />
-                            </Route>
-                            <Route path="/booking">
-                                <Booking />
-                            </Route>
-                            <Route path="/history">
-                                <MyHistory />
-                            </Route>
-                            <Route path="/">
-                                <AppContainer><AccountBox /></AppContainer>
-                            </Route>
-                        </Switch>
-                    </div>
-                </AuthContext.Provider>
-            </ToastProvider>
-        );
-    }
+    const contextValue = {authUpdate};
+    return <AuthContext.Provider value={contextValue}>
+                <div style={{ width: "100vw", height: "100vh", background: 'rgb(31, 138, 112)'}}>
+                    {isSignedIn && <NavBar />}
+                    {useRoutes(routes)}
+                </div>
+            </AuthContext.Provider>
+    // return useRoutes(routes);
 }
 
-export {App};
+export default App;

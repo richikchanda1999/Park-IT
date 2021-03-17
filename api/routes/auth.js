@@ -8,17 +8,19 @@ require('dotenv').config();
 let countryCode, number, verificationID, service;
 
 router.post('/sign_in', async function (req, res) {
-    console.log(req);
     let email = req.body.email;
     let password = req.body.password;
 
-    let passwordFromDB = await db.getPassword(email);
-    if (passwordFromDB == null) res.status(598).send("Email does not exist!\n");
+    let info = await db.getPassword(email);
+    if (info == null) res.status(598).send("Email does not exist!\n");
     else {
-        let isEqual = await bcrypt.compare(password, passwordFromDB);
+        let isEqual = await bcrypt.compare(password, info['pass']);
+
         console.log(isEqual);
+        console.log(info);
         if (isEqual) {
-            res.status(200).send('Received!');
+
+            res.status(200).send(JSON.stringify(info));
         } else {
             res.status(599).send("Password or email incorrect\n");
         }

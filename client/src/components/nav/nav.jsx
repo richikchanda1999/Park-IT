@@ -1,41 +1,44 @@
-import React, {Component} from "react";
+import React, {useState, useEffect} from "react";
 import SideNav, {MenuIcon} from "react-simple-sidenav";
+import Session from "react-session-api";
+import {navigate} from "hookrouter";
 
-class Navabc extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            showNav: false
-        }
+function NavBar() {
+    const [showNav, setNav] = useState(false);
+    const [page, setPage] = useState("/");
+
+    useEffect(() => {
+        console.log(Session.get("email"));
+    }, []);
+
+    const handleClick = state => {
+        setNav(!showNav);
     }
 
-    handleClick = state => {
-        this.setState({
-            showNav: !this.state.showNav
-        });
-    }
+    useEffect(() => {
+        navigate(page);
+        console.log("Current page: ", page);
+    }, [page]);
 
-    render(){
-        return(
-            <>
-                <MenuIcon style={{marginLeft: '10px', backgroundColor: 'rgba(31, 138, 112, 1)'}} onClick={this.handleClick}/>
-                <SideNav
-                    showNav        =  {this.state.showNav}
-                    onHideNav      =  {this.handleClick}
-                    title          =  "PARK-IT"
-                    items          =  {[
-                        <a style={{textDecoration:'none', color :'black'}} href="/map">Home</a>,
-                        <a style={{textDecoration:'none', color :'black'}} href="/history">History</a>,
-                        <a style={{textDecoration:'none', color :'black'}} href="/">LOGOUT</a>
+    return(
+        <>
+            <MenuIcon style={{marginLeft: '10px', backgroundColor: 'rgba(31, 138, 112, 1)'}} onClick={handleClick}/>
+            <SideNav
+                showNav        =  {showNav}
+                onHideNav      =  {handleClick}
+                title          =  "PARK-IT"
+                items          =  {[
+                    <a name="home" style={{textDecoration:'none', color :'black'}} onClick={() => setPage("/map")}>Home</a>,
+                    <a name="history" style={{textDecoration:'none', color :'black'}} onClick={() => setPage("/history")}>History</a>,
+                    <a name="logout" style={{textDecoration:'none', color :'black'}} onClick={() => setPage("/")}>LOGOUT</a>
 
-                    ]}
-                    titleStyle     =  {{backgroundColor: 'rgba(31, 138, 112, 1)'}}
-                    itemStyle      =  {{backgroundColor: '#fff', listStyleType:'none'}}
-                    itemHoverStyle =  {{backgroundColor: 'rgba(70, 64, 253, 1)'}}
-                />
-            </>
-        );
-    }
+                ]}
+                titleStyle     =  {{backgroundColor: 'rgba(31, 138, 112, 1)'}}
+                itemStyle      =  {{backgroundColor: '#fff', listStyleType:'none'}}
+                itemHoverStyle =  {{backgroundColor: 'rgba(70, 64, 253, 1)'}}
+            />
+        </>
+    );
 }
 
-export { Navabc };
+export default NavBar;

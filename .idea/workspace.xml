@@ -3,9 +3,30 @@
   <component name="ChangeListManager">
     <list default="true" id="a9f1fbb8-c7e2-40d0-a191-02e1008288bf" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/.env" beforeDir="false" afterPath="$PROJECT_DIR$/api/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/api/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/api/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/routes/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/routes/auth.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/routes/db.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/routes/db.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/routes/users.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/routes/users.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/views/error.jade" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/views/index.jade" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/views/layout.jade" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/.env" beforeDir="false" afterPath="$PROJECT_DIR$/client/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/accountBox/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/accountBox/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/accountBox/loginForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/accountBox/loginForm.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/accountBox/otp.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/accountBox/otp.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/accountBox/signupForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/accountBox/signupForm.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/booking/booking.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/booking/booking.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/history/history.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/history/history.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/map/map.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/map/map.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/marginer/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/marginer/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/nav/nav.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/nav/nav.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/client/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -23,6 +44,14 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
   <component name="ProjectId" id="1oyt37h9yYt2lEVRkXc1cslE42a" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="1" id="Add" />
@@ -36,19 +65,26 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/client/src/components/booking" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
     <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
   </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/client/src/components/booking" />
+    </key>
+  </component>
   <component name="RunManager">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -90,7 +126,8 @@
       <workItem from="1614757282182" duration="1133000" />
       <workItem from="1614775299412" duration="34249000" />
       <workItem from="1615378334460" duration="5521000" />
-      <workItem from="1615428506352" duration="14603000" />
+      <workItem from="1615428506352" duration="38349000" />
+      <workItem from="1615977057620" duration="19023000" />
     </task>
     <servers />
   </component>

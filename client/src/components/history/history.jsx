@@ -12,6 +12,8 @@ import {
 import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
 import BeautyStars from "beauty-stars";
+import SideNav, {MenuIcon} from "react-simple-sidenav";
+import Session from "react-session-api";
 
 const { REACT_APP_GOOGLE_MAP_KEY_PAID, REACT_APP_GOOGLE_MAP_KEY_FREE, REACT_APP_API_BACKEND } = process.env;
 
@@ -27,11 +29,10 @@ class UserHistory extends Component{
         this.state = { userStatus: null}
         this.state = { open: false}
         this.state =  {value: 0};
-        this.email = "rk722579@gmail.com";
         this.statusFetched = false;
         this.getHistory = this.getHistory.bind(this);
         this.getabc = this.getabc.bind(this);
-        this.getabc("rk722579@gmail.com");
+        this.getabc(Session.get("email"));
     }
 
     onOpenModal = () => {
@@ -44,6 +45,7 @@ class UserHistory extends Component{
 
     async getHistory(email) {
         if (!this.statusFetched) {
+            console.log(Session.get("email"), Session.get("user_id"), Session.get("name"));
             let requestOption = {
                 method: "POST",
                 headers: { 'Content-Type': 'application/json' },
@@ -52,7 +54,6 @@ class UserHistory extends Component{
             console.log(requestOption);
             let res = await fetch(`${REACT_APP_API_BACKEND}/users/get_user_history`, requestOption);
             console.log(res);
-            console.log("70");
             if (res.status === 200) {
                 let val = await res.json();
                 console.log(val);
@@ -75,7 +76,6 @@ class UserHistory extends Component{
                 <RatingButton type="submit" onClick={this.onOpenModal}>Rate</RatingButton>
                 <Modal open={open} onClose={this.onCloseModal}>
                     <h2 style={{padding: "8px"}}>How Was Your Experience?</h2>
-                    <InputRating type="number" max="5" min="1" id="rating" name="rating" style={{textAlign: "center"}}></InputRating>/5
                     <BeautyStars value={this.state.value} onChange={value=>this.setState({value})} size="20px"/>
                     <RatingButton type="submit" style={{marginTop: "14px"}}>Submit</RatingButton>
                 </Modal>
@@ -89,7 +89,7 @@ class UserHistory extends Component{
                 const { vehicle, parking_lot, entry_time, exit_time, cost, rating} = history //destructuring
                 return (
                     <Tr1 >
-                        <Td1 style={{color: 'white'}}>{this.email}</Td1>
+                        <Td1 style={{color: 'white'}}>{Session.get("email")}</Td1>
                         <Td1 style={{color: 'white'}}>{vehicle}</Td1>
                         <Td1 style={{color: 'white'}}>{parking_lot}</Td1>
                         <Td1 style={{color: 'white'}}>{entry_time}</Td1>
@@ -125,17 +125,14 @@ class UserHistory extends Component{
 class MyHistory extends Component {
     constructor(props) {
         super(props);
+        console.log(Session.get("email"));
     }
 
     render() {
         return (
             <div style={{ width: "100vw", height: "100vh", background: 'rgb(31, 138, 112)'}}>
-                <DivA>
-                    <h3>USER PARKING HISTORY</h3>
-                </DivA>
-                <DivB>
-                    <UserHistory/>
-                </DivB>
+                <h3 style={{textAlign: "center"}}>USER PARKING HISTORY</h3>
+                <UserHistory />
             </div>
         );
     }

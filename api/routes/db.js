@@ -9,7 +9,7 @@ async function init() {
 async function getPassword(email) {
     let db = client.db();
     let doc = await (await db.collection('users')).findOne({ 'email': email });
-    return doc != null ? doc['pass'] : null;
+    return doc != null ? doc: null;
 }
 async function signUp(first_name, last_name, email, pass, number, rating) {
     let db = client.db();
@@ -43,13 +43,29 @@ async function getRealtimeData(place_id) {
 }
 
 async function getUserHistory(email){
-    var db = client.db();
-    var userHistory = await (await db.collection('parking_status')).find({ 'email': email });
+    let db = client.db();
+    let userHistory = await (await db.collection('parking_status')).find({ 'email': email });
     const status = [];
     await userHistory.forEach((history) => {
         status.push({'vehicle': history['vehicle'], 'parking_lot' : history['parking_lot'], 'entry_time' : history['entry_time'], 'exit_time' : history['exit_time'], 'cost' : history['cost'], 'rating' : history['rating']})
     });
     return status;
+}
+
+async function booking_complete(email,parking_lot,entry_time,vehicleNum,cost,status)
+{
+    console.log(email, parking_lot, entry_time, vehicleNum, cost, status);
+    let db=client.db();
+    let res=await (await db.collection('parking_status')).insertOne({'email':email,'vehicle':vehicleNum,'parking_lot':parking_lot,'entry_time':entry_time,'cost':cost,'status':status});
+    return res.insertedCount===1;
+}
+
+async function getParkingName(parking_id){
+    var db = client.db();
+    console.log(parking_id);
+    var parking = await (await db.collection('parking_lots')).findOne({ 'place_id': parking_id });
+    console.log(parking);
+    return parking['name'];
 }
 
 module.exports.signUp = signUp;
@@ -59,3 +75,5 @@ module.exports.checkEmail = checkEmail;
 module.exports.getNearbyParkingLots = getNearbyParkingLots;
 module.exports.getRealtimeData = getRealtimeData;
 module.exports.getUserHistory = getUserHistory;
+module.exports.booking_complete = booking_complete;
+module.exports.getParkingName = getParkingName;
