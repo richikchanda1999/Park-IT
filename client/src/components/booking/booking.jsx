@@ -1,5 +1,5 @@
-import React,{useState ,useEffect} from "react";
-import{
+import React, {useState, useEffect, useCallback} from "react";
+import {
     Td,
     Th,
     Tr,
@@ -9,33 +9,32 @@ import Session from "react-session-api";
 import {useQueryParams} from "hookrouter";
 
 
-const { REACT_APP_API_BACKEND } = process.env;
+const {REACT_APP_API_BACKEND} = process.env;
 
-function Booking(props)
-{
+function Booking(props) {
     const [queryParams] = useQueryParams();
 
-    const [booked,setBooking]=useState(false);
-    const [vehicleType,setVehicleType]=useState("");
-    const [current,setCurrent]=useState(0);
-    const [tot,setTot]=useState(0);
-    const [vehicleNum,setVehicleNum]=useState("");
-    const [amount,setAmount]=useState(0);
+    const [booked, setBooking] = useState(false);
+    const [vehicleType, setVehicleType] = useState("");
+    const [current, setCurrent] = useState(0);
+    const [tot, setTot] = useState(0);
+    const [vehicleNum, setVehicleNum] = useState("");
+    const [amount, setAmount] = useState(0);
     const [value, setValue] = useState(null);
 
-    let selectedPark= queryParams.selectedPark;//doubt here
-    let place_id =selectedPark['place_id'];
-    let name=selectedPark['name'];
-    let rateChart=selectedPark['rate_per_hour'];
+    let selectedPark = queryParams.selectedPark;//doubt here
+    let place_id = selectedPark['place_id'];
+    let name = selectedPark['name'];
+    let rateChart = selectedPark['rate_per_hour'];
 
     let statusFetched = false;
 
-    async function getStatus(place_id){
+    const getStatus = useCallback(async () => {
         if (!statusFetched) {
             let requestOption = {
                 method: "POST",
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ 'place_id': place_id }),
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({'place_id': place_id}),
             };
             console.log(requestOption);
             let res = await fetch(`${REACT_APP_API_BACKEND}/map/get_live_status`, requestOption);
@@ -44,12 +43,16 @@ function Booking(props)
             if (res.status === 200) {
                 let val = await res.json();
                 console.log(val);
-                return val;
+                setCurrent(val['CAP']);
+                setTot(val['TPS']);
             }
             statusFetched = false;
         }
-    }
-    function  loadScript(src) {
+    }, []);
+
+    useEffect(getStatus, []);
+
+    function loadScript(src) {
         return new Promise((resolve) => {
             const script = document.createElement("script");
             script.src = src;
@@ -72,15 +75,15 @@ function Booking(props)
             alert("Razorpay SDK failed to load. Are you online?");
             return;
         }
-        const tran={
+        const tran = {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({'amount': amount})
         }
-        const result= await fetch('http://localhost:9000/payment/order',tran);
+        const result = await fetch('http://localhost:9000/payment/order', tran);
         //console.log(result);
         // const { amount, id: order_id, currency } = result.data;
-        const data=await result.json();
+        const data = await result.json();
         console.log(data);
 
 
@@ -101,33 +104,31 @@ function Booking(props)
                 };
                 let requestOption = {
                     method: "POST",
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: {'Content-Type': 'application/json'},
                     body: JSON.stringify(_data),
                 };
-                const result = await fetch('http://localhost:9000/payment/success',requestOption);
-                const ar=await result.json();
-                console.log("here:",ar.msg);
-                if(ar.msg === "success")
-                {
+                const result = await fetch('http://localhost:9000/payment/success', requestOption);
+                const ar = await result.json();
+                console.log("here:", ar.msg);
+                if (ar.msg === "success") {
                     var today = new Date();
                     var time = today.getHours() + ":" + today.getMinutes();
-                    var date = today.getDate()+'/'+(today.getMonth()+1)+'/'+today.getFullYear();
-                    let requestOption={
+                    var date = today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear();
+                    let requestOption = {
                         method: "POST",
-                        headers:{ 'Content-Type':'application/json'},
+                        headers: {'Content-Type': 'application/json'},
                         body: JSON.stringify({
-                            'email':Session.get("email"),
+                            'email': Session.get("email"),
                             'parking_lot': selectedPark['place_id'],
-                            'entry_time':time+" "+date,
+                            'entry_time': time + " " + date,
                             'vehicle': vehicleNum,
                             'cost': amount,
-                            'status':'booked',
+                            'status': 'booked',
                         })
                     }
                     console.log(requestOption);
-                    const booked=await fetch('http://localhost:9000/payment/booked',requestOption);
-                    if(booked.status===200)
-                    {
+                    const booked = await fetch('http://localhost:9000/payment/booked', requestOption);
+                    if (booked.status === 200) {
 
                     }
 
@@ -157,39 +158,37 @@ function Booking(props)
 
         // setVehicleType(name);
         // setVehicleNum(value);
-        if(name === "vehicleType")
-        {
+        if (name === "vehicleType") {
             setVehicleType(value);
         } else if (name === "vehicleNum") {
             setVehicleNum(value);
         }
-        console.log("event: \n",event.target);
-        if(name === "vehicleType")
-        {
-            if(value==="bike")
+        console.log("event: \n", event.target);
+        if (name === "vehicleType") {
+            if (value === "bike")
                 setAmount(10);
-            if(value==="car")
-               setAmount(20);
-            if(value==="truck")
+            if (value === "car")
+                setAmount(20);
+            if (value === "truck")
                 setAmount(30);
+
+        }
 
     }
 
-}
-
-    const myStyle={
-        margin:"auto",
+    const myStyle = {
+        margin: "auto",
         width: "30%",
         padding: "10px",
         justifyContent: "center",
         alignItems: "center",
     }
 
-    return(
+    return (
         <body style={{background: "rgb(31, 138, 112)"}}>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
         <div style={myStyle}>
-            <div >
+            <div>
                 <h1>The Rate chart of {name} is:</h1>
                 <Table>
                     <Tr>
@@ -233,7 +232,7 @@ function Booking(props)
                     <br/><br/>
                     <h1>You Need To pay {amount} for first hour of booking</h1>
                 </form>
-                <button  onClick={displayRazorpay}>Proceed To Payment</button>
+                <button onClick={displayRazorpay}>Proceed To Payment</button>
 
             </div>
         </div>
