@@ -5,7 +5,6 @@ import {navigate} from "hookrouter";
 
 function NavBar() {
     const [showNav, setNav] = useState(false);
-    const [page, setPage] = useState("/");
 
     useEffect(() => {
         console.log(Session.get("email"));
@@ -15,10 +14,9 @@ function NavBar() {
         setNav(!showNav);
     }
 
-    useEffect(() => {
-        navigate(page);
-        console.log("Current page: ", page);
-    }, [page]);
+    function onClick(path) {
+        navigate(path);
+    }
 
     return(
         <>
@@ -28,10 +26,9 @@ function NavBar() {
                 onHideNav      =  {handleClick}
                 title          =  "PARK-IT"
                 items          =  {[
-                    <a name="home" style={{textDecoration:'none', color :'black'}} onClick={() => setPage("/map")}>Home</a>,
-                    <a name="history" style={{textDecoration:'none', color :'black'}} onClick={() => setPage("/history")}>History</a>,
-                    <a name="logout" style={{textDecoration:'none', color :'black'}} onClick={() => setPage("/")}>LOGOUT</a>
-
+                    <a name="home" style={{textDecoration:'none', color :'black'}} onClick={() => onClick("/map")}>Home</a>,
+                    <a name="history" style={{textDecoration:'none', color :'black'}} onClick={() => onClick("/history")}>History</a>,
+                    <a name="logout" style={{textDecoration:'none', color :'black'}} onClick={() => onClick("/")}>LOGOUT</a>
                 ]}
                 titleStyle     =  {{backgroundColor: 'rgba(31, 138, 112, 1)'}}
                 itemStyle      =  {{backgroundColor: '#fff', listStyleType:'none'}}

@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import LoginForm from "./loginForm";
 import { motion } from "framer-motion";
@@ -84,12 +84,6 @@ function AccountBox() {
   const [isExpanded, setExpanded] = useState(false);
   const [active, setActive] = useState("signin");
 
-  useEffect(() => {
-    if (active === "signup") switchToSignup();
-    else if (active === "signin") switchToSignin();
-    else if (active === "otp") switchToOTP();
-  }, [active]);
-
   const backdropVariants = {
     expanded: {
       width: "233%",
@@ -138,6 +132,14 @@ function AccountBox() {
       setActive("otp");
     }, 400);
   }
+
+  function setActiveScreen() {
+    if (active === "signup") switchToSignup();
+    else if (active === "signin") switchToSignin();
+    else if (active === "otp") switchToOTP();
+  }
+
+  useEffect(setActiveScreen, [active]);
 
   const contextValue = {switchToSignin, switchToSignup, switchToOTP};
 

@@ -4,18 +4,14 @@ import {
     Td1,
     Tr1,
     Th1,
-    DivA,
-    DivB,
     RatingButton,
-    InputRating,
 } from "./common";
 import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
 import BeautyStars from "beauty-stars";
-import SideNav, {MenuIcon} from "react-simple-sidenav";
 import Session from "react-session-api";
 
-const { REACT_APP_GOOGLE_MAP_KEY_PAID, REACT_APP_GOOGLE_MAP_KEY_FREE, REACT_APP_API_BACKEND } = process.env;
+const { REACT_APP_API_BACKEND } = process.env;
 
 const styles = {
     fontFamily: "sans-serif",

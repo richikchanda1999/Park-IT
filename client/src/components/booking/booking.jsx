@@ -9,7 +9,7 @@ import Session from "react-session-api";
 import {useQueryParams} from "hookrouter";
 
 
-const { REACT_APP_GOOGLE_MAP_KEY_PAID, REACT_APP_GOOGLE_MAP_KEY_FREE, REACT_APP_API_BACKEND } = process.env;
+const { REACT_APP_API_BACKEND } = process.env;
 
 function Booking(props)
 {
@@ -22,10 +22,6 @@ function Booking(props)
     const [vehicleNum,setVehicleNum]=useState("");
     const [amount,setAmount]=useState(0);
     const [value, setValue] = useState(null);
-
-    useEffect(() => {
-        console.log(props);
-    }, []);
 
     let selectedPark= queryParams.selectedPark;//doubt here
     let place_id =selectedPark['place_id'];

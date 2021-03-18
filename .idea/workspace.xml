@@ -3,30 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="a9f1fbb8-c7e2-40d0-a191-02e1008288bf" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/.env" beforeDir="false" afterPath="$PROJECT_DIR$/api/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/api/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/api/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/routes/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/routes/auth.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/routes/db.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/routes/db.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/routes/users.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/routes/users.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/views/error.jade" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/views/index.jade" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/views/layout.jade" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/.env" beforeDir="false" afterPath="$PROJECT_DIR$/client/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/accountBox/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/accountBox/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/accountBox/loginForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/accountBox/loginForm.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/accountBox/otp.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/accountBox/otp.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/accountBox/signupForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/accountBox/signupForm.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/booking/booking.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/booking/booking.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/history/history.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/history/history.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/map/map.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/map/map.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/marginer/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/marginer/index.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/nav/nav.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/nav/nav.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/client/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -76,19 +59,6 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="/Users/aditi/Development/ParkIT/api" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -127,7 +97,8 @@
       <workItem from="1614775299412" duration="34249000" />
       <workItem from="1615378334460" duration="5521000" />
       <workItem from="1615428506352" duration="38349000" />
-      <workItem from="1615977057620" duration="19023000" />
+      <workItem from="1615977057620" duration="19302000" />
+      <workItem from="1616032964933" duration="4934000" />
     </task>
     <servers />
   </component>
