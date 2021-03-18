@@ -3,12 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="a9f1fbb8-c7e2-40d0-a191-02e1008288bf" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/routes/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/routes/auth.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/accountBox/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/accountBox/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/booking/booking.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/booking/booking.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/history/history.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/history/history.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/map/map.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/map/map.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/accountBox/loginForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/accountBox/loginForm.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/nav/nav.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/nav/nav.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/client/yarn.lock" afterDir="false" />
     </list>
@@ -98,7 +97,7 @@
       <workItem from="1615378334460" duration="5521000" />
       <workItem from="1615428506352" duration="38349000" />
       <workItem from="1615977057620" duration="19302000" />
-      <workItem from="1616032964933" duration="4934000" />
+      <workItem from="1616032964933" duration="7798000" />
     </task>
     <servers />
   </component>

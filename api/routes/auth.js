@@ -22,7 +22,7 @@ router.post('/sign_in', async function (req, res) {
 
             res.status(200).send(JSON.stringify(info));
         } else {
-            res.status(599).send("Password or email incorrect\n");
+            res.status(599).send("Password incorrect\n");
         }
     }
 });

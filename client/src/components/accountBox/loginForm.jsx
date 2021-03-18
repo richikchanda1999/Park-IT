@@ -12,6 +12,7 @@ import {AccountContext} from "./accountContext";
 import {navigate} from 'hookrouter';
 import Session from "react-session-api";
 import {AuthContext} from "../../authContext";
+import {toast} from "react-toastify";
 
 const { REACT_APP_API_BACKEND } = process.env;
 
@@ -34,6 +35,10 @@ function LoginForm(props) {
     setEnabled(email.length > 0 && val.length > 0);
   }
 
+  const success = () => toast.success("Login Successful !");
+  const emailNotPresent = () => toast.error("Email ID not present! Please sign up");
+  const passwordIncorrect = () => toast.error("Password Incorrect!");
+
   async function onLogin(authUpdate) {
     if (!submitEnable) return;
     console.log(`Email: ${email}, Password: ${password}`);
@@ -45,6 +50,7 @@ function LoginForm(props) {
     let res = await fetch(`${REACT_APP_API_BACKEND}/auth/sign_in`, requestOptions);
     console.log(res.status);
     if (res.status === 200) {
+      success();
       const data= await res.json();
       console.log(data);
       Session.set("email", data.email);
@@ -53,10 +59,12 @@ function LoginForm(props) {
       setEmail("");
       setPassword("");
       authUpdate(true);
-      console.log("1");
       navigate('/map', true);
-      console.log("2");
       return true;
+    } else if (res.status === 598) {
+      emailNotPresent();
+    } else if (res.status === 599) {
+      passwordIncorrect();
     }
     authUpdate(false);
     return false;
