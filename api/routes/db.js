@@ -68,6 +68,14 @@ async function getParkingName(parking_id){
     return parking['name'];
 }
 
+async function updateRating(email, entry_time, rating) {
+    let db = client.db();
+    console.log(email, entry_time, rating);
+
+    let ret = await (await db.collection('parking_status')).updateOne({ 'email': email, 'entry_time': entry_time}, { $set: {'rating': rating}});
+    return ret.result.nModified === 1;
+}
+
 module.exports.signUp = signUp;
 module.exports.init = init;
 module.exports.getPassword = getPassword;
@@ -77,3 +85,4 @@ module.exports.getRealtimeData = getRealtimeData;
 module.exports.getUserHistory = getUserHistory;
 module.exports.booking_complete = booking_complete;
 module.exports.getParkingName = getParkingName;
+module.exports.updateRating = updateRating;

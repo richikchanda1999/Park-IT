@@ -28,11 +28,11 @@ router.post('/sign_in', async function (req, res) {
 });
 
 router.post('/sign_up', async function (req, res) {
-    let first_name = req.body.FirstName;
-    let last_name = req.body.LastName;
-    let email = req.body.Email;
-    let password = req.body.Password;
-    let con_pass = req.body.ConfirmPassword;
+    let first_name = req.body.firstName;
+    let last_name = req.body.lastName;
+    let email = req.body.email;
+    let password = req.body.password;
+    let con_pass = req.body.confirmPassword;
     let rating = 5;
 
     let pass = await bcrypt.hash(req.body.Password, 12);

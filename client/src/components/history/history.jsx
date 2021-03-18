@@ -61,11 +61,11 @@ class UserHistory extends Component{
 
     async getabc(email){
         let ret = await this.getHistory(email);
-        this.setState({ userStatus: ret})
-        console.log(this.state.userStatus)
+        this.setState({ userStatus: ret});
+        console.log(this.state.userStatus);
     }
 
-    renderButton(){
+    renderButton(entry_time){
         const { open } = this.state;
         return(
             <div style={styles}>
@@ -73,7 +73,7 @@ class UserHistory extends Component{
                 <Modal open={open} onClose={this.onCloseModal}>
                     <h2 style={{padding: "8px"}}>How Was Your Experience?</h2>
                     <BeautyStars value={this.state.value} onChange={value=>this.setState({value})} size="20px"/>
-                    <RatingButton type="submit" style={{marginTop: "14px"}}>Submit</RatingButton>
+                    <RatingButton type="submit" onClick={() => this.onClick(entry_time)} style={{marginTop: "14px"}}>Submit</RatingButton>
                 </Modal>
             </div>
         )
@@ -91,10 +91,28 @@ class UserHistory extends Component{
                         <Td1 style={{color: 'white'}}>{entry_time}</Td1>
                         <Td1 style={{color: 'white'}}>{exit_time}</Td1>
                         <Td1 style={{color: 'white'}}>{cost}</Td1>
-                        <Td1 style={{color: 'white'}}>{rating?<BeautyStars value={rating} size="12px"/>:this.renderButton()}</Td1>
+                        <Td1 style={{color: 'white'}}>{rating?<BeautyStars value={rating} size="12px"/>:this.renderButton(entry_time)}</Td1>
                     </Tr1>
                 )
             })
+        }
+    }
+
+    async onClick(entry_time) {
+        let requestOption = {
+            method: "POST",
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ 'email': Session.get("email"), 'entry_time': entry_time, 'rating':this.state.value.toString()}),
+        };
+        console.log(requestOption);
+        let res = await fetch(`${REACT_APP_API_BACKEND}/users/update_rating`, requestOption);
+        console.log(res);
+        this.setState({ open: false, value: 0 });
+        if (res.status === 200) {
+            let val = await res.json();
+            console.log(val);
+            await this.getabc(Session.get("email"));
+            return val;
         }
     }
 
