@@ -107,68 +107,59 @@ function MyMap(props) {
     const { isLoaded } = useJsApiLoader({
         id: 'google-map-script',
         googleMapsApiKey: REACT_APP_GOOGLE_MAP_KEY_PAID,
+        // libraries: 'places'
     })
-    async function autoComplete()
+
+    function autoComplete()
     {
-        // console.log("here");
-        // return (
-        //     <div>
-        //       <PlacesAutocomplete
-        //         value={address}
-        //         onChange={setAddress}
-        //         onSelect={handleSelect}
-        //       >
-        //         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-        //           <div>
-        //             {/* <p>Latitude: {center.lat}</p>
-        //             <p>Longitude: {center.lng}</p> */}
-        
-        //             <input {...getInputProps({ placeholder: "Type address" })} />
-        
-        //             <div>
-        //               {loading ? <div>...loading</div> : null}
-        
-        //               {suggestions.map(suggestion => {
-        //                 const style = {
-        //                   backgroundColor: suggestion.active ? "#41b6e6" : "#fff"
-        //                 };
-        
-        //                 return (
-        //                   <div {...getSuggestionItemProps(suggestion, { style })}>
-        //                     {suggestion.description}
-        //                   </div>
-        //                 );
-        //               })}
-        //             </div>
-        //           </div>
-        //         )}
-        //       </PlacesAutocomplete>
-        //     </div>
-        //   );
+        return (
+              <PlacesAutocomplete
+                value={address}
+                onChange={setAddress}
+                onSelect={handleSelect}
+              >
+                {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+                  <div>
+                    <input {...getInputProps({ placeholder: "Type address" })} />
+                    <div>
+                      {loading ? <div>...loading</div> : null}
+                      {suggestions.map(suggestion => {
+                        const style = {
+                          backgroundColor: suggestion.active ? "#41b6e6" : "#fff"
+                        };
+                        return (
+                          <div {...getSuggestionItemProps(suggestion, { style })}>
+                            {suggestion.description}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
+              </PlacesAutocomplete>
+          );
 
-        var url=`https://maps.googleapis.com/maps/api/place/autocomplete/json?input=1600+Amphitheatre&key=${REACT_APP_GOOGLE_MAP_KEY_PAID}&sessiontoken=1234567890`;
-
-        let requestOption = {
-            method: "GET",
-            headers: { 'Content-Type': 'application/json' ,"Access-Control-Allow-Origin": "*"},
-        };
-        console.log(requestOption);
-        let res = await fetch(url, requestOption);
-        // console.log(res);
-        if (res.status === 200) {
-            let val = await res.json();
-            console.log(val);
-        }
-        
-
+        // var url=`https://maps.googleapis.com/maps/api/place/autocomplete/json?input=1600+Amphitheatre&key=${REACT_APP_GOOGLE_MAP_KEY_PAID}&sessiontoken=1234567890`;
+        //
+        // let requestOption = {
+        //     method: "GET",
+        //     headers: { 'Content-Type': 'application/json' ,"Access-Control-Allow-Origin": "*"},
+        // };
+        // console.log(requestOption);
+        // let res = await fetch(url, requestOption);
+        // // console.log(res);
+        // if (res.status === 200) {
+        //     let val = await res.json();
+        //     console.log(val);
+        // }
     }
+
     useEffect(() => {
         getParkingLots(22.572645, 88.363892);
     }, [getParkingLots]);
 
     return isLoaded ? (
-        <React.Fragment>
-             <GoogleMap
+        <GoogleMap
             mapContainerStyle={containerStyle}
             center={center}
             zoom={14}
@@ -176,8 +167,8 @@ function MyMap(props) {
             onUnmount={onUnmount}
             options={{styles: mapStyles}}
             onDragEnd={handleDrag}
-        >   
-            
+        >
+            {/*{autoComplete()}*/}
             {parkData.map(park => (
                 <Marker
                     key={park['latitude'] + " " + park['longitude']}
@@ -192,9 +183,6 @@ function MyMap(props) {
                         setSelectedParkTPS(ret['TPS']);
                     }}
                 />
-
-                ///Autocomplete box would be present here
-                
             ))}
             {selectedPark && (
                 <InfoWindow
@@ -211,14 +199,9 @@ function MyMap(props) {
                         <p>Current status: {selectedParkCAP} / {selectedParkTPS}</p>
                         <BookButton type="submit" onClick={booking_nav}>BOOK</BookButton>
                     </div>
-
-
                 </InfoWindow>
             )}
-            { /* Child components, such as markers, info windows, etc. */ }
-            <></>
         </GoogleMap>
-        </React.Fragment>       
     ) : <></>
 }
 

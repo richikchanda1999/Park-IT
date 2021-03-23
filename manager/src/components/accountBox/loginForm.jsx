@@ -47,7 +47,7 @@ function LoginForm(props) {
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({'email': email, 'password': password}),
     };
-    let res = await fetch(`${REACT_APP_API_BACKEND}/auth/sign_in`, requestOptions);
+    let res = await fetch(`${REACT_APP_API_BACKEND}/manager/auth/sign_in`, requestOptions);
     console.log(res.status);
     if (res.status === 200) {
       success();
@@ -59,7 +59,7 @@ function LoginForm(props) {
       setEmail("");
       setPassword("");
       authUpdate(true);
-      navigate('/map', true);
+      // navigate('/map', true);
       return true;
     } else if (res.status === 598) {
       emailNotPresent();

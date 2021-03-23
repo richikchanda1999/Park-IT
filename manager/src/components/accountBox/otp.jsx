@@ -47,7 +47,7 @@ function OTPForm() {
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({'countryCode': country, 'number': number}),
         };
-        let res = await fetch(`${REACT_APP_API_BACKEND}/auth/otp/send`, requestOptions);
+        let res = await fetch(`${REACT_APP_API_BACKEND}/manager/auth/otp/send`, requestOptions);
         console.log(res.status);
         if (res.status === 200) {
             setCountry("");
@@ -63,7 +63,7 @@ function OTPForm() {
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({'code': code}),
         };
-        let res = await fetch(`${REACT_APP_API_BACKEND}/auth/otp/verify`, requestOptions);
+        let res = await fetch(`${REACT_APP_API_BACKEND}/manager/auth/otp/verify`, requestOptions);
         console.log(res.status);
         if (res.status === 200) {
             setCode("");

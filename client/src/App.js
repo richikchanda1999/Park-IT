@@ -8,7 +8,7 @@ import {MyHistory} from "./components/history/history";
 import {useRoutes} from 'hookrouter';
 import NavBar from "./components/nav/nav";
 import {AuthContext} from "./authContext";
-import {toast, ToastContainer} from "react-toastify";
+import {ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
 const routes = {

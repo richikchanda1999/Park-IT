@@ -10,12 +10,19 @@ var usersRouter = require('./routes/users');
 var authRouter = require('./routes/auth');
 var mapRouter = require('./routes/map');
 var paymentRouter = require('./routes/payment');
+var managerAuthRouter = require('./routes/manager/auth')
 var db = require('./routes/db');
+var managerDB = require('./routes/manager/db');
 
 var app = express();
 
 db.init().then(err => {
-  console.log("DB Connected!");
+  console.log("User DB Connected!");
+  // console.log(db.getNearbyParkingLots());
+});
+
+managerDB.init().then(err => {
+  console.log("Manager DB Connected!");
   // console.log(db.getNearbyParkingLots());
 });
 
@@ -36,6 +43,7 @@ app.use('/users', usersRouter);
 app.use('/auth', authRouter);
 app.use('/map', mapRouter);
 app.use('/payment', paymentRouter);
+app.use('/manager/auth', managerAuthRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
