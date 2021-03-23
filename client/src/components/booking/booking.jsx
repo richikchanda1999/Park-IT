@@ -6,7 +6,7 @@ import {
     Table,
 } from "./common";
 import Session from "react-session-api";
-import {useQueryParams} from "hookrouter";
+import {navigate, useQueryParams} from "hookrouter";
 
 
 const {REACT_APP_API_BACKEND} = process.env;
@@ -129,7 +129,7 @@ function Booking(props) {
                     console.log(requestOption);
                     const booked = await fetch('http://localhost:9000/payment/booked', requestOption);
                     if (booked.status === 200) {
-
+                            //navigate('/navigateToLoc',false,{coordinate:coordinates});
                     }
 
                 }
