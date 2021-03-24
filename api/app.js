@@ -1,20 +1,21 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var cors = require('cors');
+let createError = require('http-errors');
+let express = require('express');
+let path = require('path');
+let cookieParser = require('cookie-parser');
+let logger = require('morgan');
+let cors = require('cors');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var authRouter = require('./routes/auth');
-var mapRouter = require('./routes/map');
-var paymentRouter = require('./routes/payment');
-var managerAuthRouter = require('./routes/manager/auth')
-var db = require('./routes/db');
-var managerDB = require('./routes/manager/db');
+let indexRouter = require('./routes/index');
+let usersRouter = require('./routes/users');
+let authRouter = require('./routes/auth');
+let mapRouter = require('./routes/map');
+let paymentRouter = require('./routes/payment');
+let managerAuthRouter = require('./routes/manager/auth')
+let managerParking = require('./routes/manager/parking')
+let db = require('./routes/db');
+let managerDB = require('./routes/manager/db');
 
-var app = express();
+let app = express();
 
 db.init().then(err => {
   console.log("User DB Connected!");
@@ -44,6 +45,7 @@ app.use('/auth', authRouter);
 app.use('/map', mapRouter);
 app.use('/payment', paymentRouter);
 app.use('/manager/auth', managerAuthRouter);
+app.use('/manager/parking', managerParking);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

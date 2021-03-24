@@ -25,45 +25,95 @@ async function checkEmail(email) {
     return check != null;
 }
 
-// async function getUserHistory(email){
-//     let db = client.db();
-//     let userHistory = await (await db.collection('parking_status')).find({ 'email': email });
-//     const status = [];
-//     await userHistory.forEach((history) => {
-//         status.push({'vehicle': history['vehicle'], 'parking_lot' : history['parking_lot'], 'entry_time' : history['entry_time'], 'exit_time' : history['exit_time'], 'cost' : history['cost'], 'rating' : history['rating']})
-//     });
-//     return status;
-// }
+async function getParkingLotId(email){
+    var db = client.db();
+    var parking = await (await db.collection('parking_manager')).findOne({ 'email': email });
+    return parking['parking_id'];
+}
 
-// async function booking_complete(email,parking_lot,entry_time,vehicleNum,cost,status)
-// {
-//     console.log(email, parking_lot, entry_time, vehicleNum, cost, status);
-//     let db=client.db();
-//     let res=await (await db.collection('parking_status')).insertOne({'email':email,'vehicle':vehicleNum,'parking_lot':parking_lot,'entry_time':entry_time,'cost':cost,'status':status});
-//     return res.insertedCount===1;
-// }
-//
-// async function getParkingName(parking_id){
-//     var db = client.db();
-//     console.log(parking_id);
-//     var parking = await (await db.collection('parking_lots')).findOne({ 'place_id': parking_id });
-//     console.log(parking);
-//     return parking['name'];
-// }
-//
-// async function updateRating(email, entry_time, rating) {
-//     let db = client.db();
-//     console.log(email, entry_time, rating);
-//
-//     let ret = await (await db.collection('parking_status')).updateOne({ 'email': email, 'entry_time': entry_time}, { $set: {'rating': rating}});
-//     return ret.result.nModified === 1;
-// }
+async function getCurrentParking(parkingId){
+    var db = client.db();
+    var currParking = await (await db.collection('parking_status')).find({ 'parking_lot': parkingId });
+    var status = [];
+    await currParking.forEach((history) => {
+        if(history['exit_time'] == "")
+            status.push({'vehicle': history['vehicle'], 'parking_lot' : history['parking_lot'], 'entry_time' : history['entry_time'], 'status': history['status']})
+    });
+    return status;
+}
+
+async function vehicleEnter(parking_lot, vehicle, vehicleType, entry_time){
+    var db = client.db();
+    var book = await (await db.collection('parking_status')).findOne({'vehicle': vehicle, 'parking_lot': parking_lot, 'status': "booked" });
+    var park = await (await db.collection('parking_curr_data')).findOne({'place_id': parking_lot });
+    if(park['CAP'] == park['TPS']){
+        return false;
+    }
+    await (await db.collection('parking_curr_data')).updateOne({'place_id': parking_lot }, { $inc: {'CAP': 1}});
+    if(book != null){
+        var ret = await (await db.collection('parking_status')).updateOne({'vehicle': vehicle, 'parking_lot': parking_lot, 'status': "booked"}, { $set: {'status': "parked"}});
+        console.log(ret);
+        return ret.result.nModified === 1;
+    }
+    else{
+        var ret = await (await db.collection('parking_status')).insertOne({'email': "other", 'vehicle': vehicle, 'parking_lot': parking_lot, 'vehicleType': vehicleType, 'entry_time': entry_time, 'status': "parked"});
+        return ret.insertedCount === 1;
+    }
+}
+
+
+async function vehicleExit(parking_lot, vehicle, exit_time){
+    var db = client.db();
+    var book = await (await db.collection('parking_status')).findOne({'vehicle': vehicle, 'parking_lot': parking_lot, 'status': "parked" });
+    var park = await (await db.collection('parking_curr_data')).findOne({'place_id': parking_lot });
+    if(park['CAP'] == 0){
+        return -1;
+    }
+    if(book == null){
+        return -1;
+    }
+    if(book['email'] == 'other'){
+        await (await db.collection('parking_curr_data')).updateOne({'place_id': parking_lot }, { $inc: {'CAP': -1}});
+        var ret = await (await db.collection('parking_status')).deleteOne({'email': "other", 'vehicle': vehicle, 'parking_lot': parking_lot, 'status': "parked" });
+        const dateOneObj = new Date(book['entry_time']);
+        console.log(dateOneObj);
+        const dateTwoObj = new Date(exit_time);
+        console.log(dateTwoObj);
+        const milliseconds = Math.abs(dateTwoObj - dateOneObj);
+        const hours = milliseconds / 36e5;
+
+        var parking = await (await db.collection('parking_lots')).findOne({'place_id': parking_lot });
+        var rate = parking['rate_per_hour'][book['vehicleType']];
+        cost = (Math.ceil(hours)) * rate;
+        console.log(cost);
+
+        return cost;
+    }
+    else{
+        await (await db.collection('parking_curr_data')).updateOne({'place_id': parking_lot }, { $inc: {'CAP': -1}});
+        const dateOneObj = new Date(book['entry_time']);
+        console.log(dateOneObj);
+        const dateTwoObj = new Date(exit_time);
+        console.log(dateTwoObj);
+        const milliseconds = Math.abs(dateTwoObj - dateOneObj);
+        const hours = milliseconds / 36e5;
+
+        var parking = await (await db.collection('parking_lots')).findOne({'place_id': parking_lot });
+        var rate = parking['rate_per_hour'][book['vehicleType']];
+        cost = (Math.ceil(hours)-1) * rate;
+        console.log(cost);
+
+        var ret = await (await db.collection('parking_status')).updateOne({'vehicle': vehicle, 'parking_lot': parking_lot, 'status': "parked"}, { $set: {'exit_time':exit_time, 'status': "complete", 'cost': (cost+rate)}});
+
+        return cost;
+    }
+}
 
 module.exports.signUp = signUp;
 module.exports.init = init;
 module.exports.getPassword = getPassword;
 module.exports.checkEmail = checkEmail;
-// module.exports.getUserHistory = getUserHistory;
-// module.exports.booking_complete = booking_complete;
-// module.exports.getParkingName = getParkingName;
-// module.exports.updateRating = updateRating;
+module.exports.vehicleEnter = vehicleEnter;
+module.exports.vehicleExit = vehicleExit;
+module.exports.getParkingLotId = getParkingLotId;
+module.exports.getCurrentParking = getCurrentParking;

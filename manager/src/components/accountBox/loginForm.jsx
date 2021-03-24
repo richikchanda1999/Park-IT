@@ -59,7 +59,7 @@ function LoginForm(props) {
       setEmail("");
       setPassword("");
       authUpdate(true);
-      // navigate('/map', true);
+      navigate('/start', true);
       return true;
     } else if (res.status === 598) {
       emailNotPresent();

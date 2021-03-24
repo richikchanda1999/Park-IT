@@ -4,114 +4,14 @@
     <list default="true" id="a9f1fbb8-c7e2-40d0-a191-02e1008288bf" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/map/map.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/map/map.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/client/yarn.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manager/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/routes/manager/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/routes/manager/auth.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/routes/manager/db.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/routes/manager/db.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manager/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/manager/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manager/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/manager/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/manager/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/manager/src/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/manager/src/components/accountBox/loginForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/manager/src/components/accountBox/loginForm.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manager/src/components/accountBox/otp.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/manager/src/components/accountBox/otp.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manager/src/components/accountBox/signupForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/manager/src/components/accountBox/signupForm.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manager/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/manager/src/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manager/yarn.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.bin/loose-envify" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/js-tokens/CHANGELOG.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/js-tokens/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/js-tokens/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/js-tokens/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/js-tokens/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/lodash.debounce/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/lodash.debounce/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/lodash.debounce/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/lodash.debounce/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/loose-envify/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/loose-envify/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/loose-envify/cli.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/loose-envify/custom.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/loose-envify/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/loose-envify/loose-envify.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/loose-envify/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/loose-envify/replace.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/object-assign/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/object-assign/license" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/object-assign/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/object-assign/readme.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/prop-types/CHANGELOG.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/prop-types/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/prop-types/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/prop-types/checkPropTypes.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/prop-types/factory.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/prop-types/factoryWithThrowingShims.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/prop-types/factoryWithTypeCheckers.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/prop-types/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/prop-types/lib/ReactPropTypesSecret.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/prop-types/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/prop-types/prop-types.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/prop-types/prop-types.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-google-autocomplete/.babelrc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-google-autocomplete/LICENSE.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-google-autocomplete/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-google-autocomplete/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-google-autocomplete/lib/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-google-autocomplete/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-google-autocomplete/src/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-is/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-is/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-is/build-info.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-is/cjs/react-is.development.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-is/cjs/react-is.production.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-is/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-is/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-is/umd/react-is.development.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-is/umd/react-is.production.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-places-autocomplete/LICENSE.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-places-autocomplete/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-places-autocomplete/dist/PlacesAutocomplete.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-places-autocomplete/dist/helpers.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-places-autocomplete/dist/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-places-autocomplete/dist/index.umd.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-places-autocomplete/dist/index.umd.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-places-autocomplete/dist/index.umd.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-places-autocomplete/dist/index.umd.min.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-places-autocomplete/dist/tests/__snapshots__/initialRender.test.js.snap" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-places-autocomplete/dist/tests/__snapshots__/utils.test.js.snap" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-places-autocomplete/dist/tests/childrenProp.test.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-places-autocomplete/dist/tests/helpers.test.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-places-autocomplete/dist/tests/helpers/googlePayloads.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-places-autocomplete/dist/tests/helpers/jestSetup.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-places-autocomplete/dist/tests/helpers/setup.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-places-autocomplete/dist/tests/helpers/testHelpers.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-places-autocomplete/dist/tests/initialRender.test.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-places-autocomplete/dist/tests/keyboardEvents.test.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-places-autocomplete/dist/tests/loading.test.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-places-autocomplete/dist/tests/mouseEvents.test.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-places-autocomplete/dist/tests/onChangeProp.test.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-places-autocomplete/dist/tests/onSelectProp.test.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-places-autocomplete/dist/tests/utils.test.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-places-autocomplete/dist/utils.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-places-autocomplete/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react/build-info.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react/cjs/react-jsx-dev-runtime.development.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react/cjs/react-jsx-dev-runtime.production.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react/cjs/react-jsx-dev-runtime.profiling.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react/cjs/react-jsx-runtime.development.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react/cjs/react-jsx-runtime.production.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react/cjs/react-jsx-runtime.profiling.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react/cjs/react.development.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react/cjs/react.production.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react/jsx-dev-runtime.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react/jsx-runtime.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react/umd/react.development.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react/umd/react.production.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react/umd/react.profiling.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -149,26 +49,29 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/manager/public/images" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/manager" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
     <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/manager" />
       <recent name="$PROJECT_DIR$/manager/public/images" />
       <recent name="$PROJECT_DIR$/manager/src/components" />
       <recent name="$PROJECT_DIR$/client/src/components/booking" />
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -214,7 +117,8 @@
       <workItem from="1615977057620" duration="19302000" />
       <workItem from="1616032964933" duration="12911000" />
       <workItem from="1616152839238" duration="7000" />
-      <workItem from="1616516847640" duration="7389000" />
+      <workItem from="1616516847640" duration="9097000" />
+      <workItem from="1616578290483" duration="2822000" />
     </task>
     <servers />
   </component>

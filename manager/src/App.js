@@ -1,4 +1,4 @@
-import {useState, useContext, useEffect} from "react";
+import React, {useState, useContext, useEffect} from "react";
 import './App.css';
 import AccountBox from "./components/accountBox";
 import styled from "styled-components";
@@ -6,9 +6,14 @@ import {AuthContext} from "./authContext";
 import {useRoutes} from "hookrouter";
 import NavBar from "./nav/nav";
 import {ToastContainer} from "react-toastify";
+import ManagerHistory from "./components/parked/parked";
+import MyStart from "./components/start/start";
+import {AppBar} from "@material-ui/core";
 
 const routes = {
   '/': () => <AppContainer><AccountBox /></AppContainer>,
+  '/parked': () => <ManagerHistory/>,
+  '/start': () => <StartContainer><MyStart/></StartContainer>
 };
 
 const AppContainer = styled.div`
@@ -19,6 +24,16 @@ const AppContainer = styled.div`
   background-image: url("/images/bg.jpg");
   background-position: center;
   background-repeat: no-repeat;
+  background-size: cover;
+  align-items: center;
+  justify-content: center;
+`;
+
+const StartContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
   background-size: cover;
   align-items: center;
   justify-content: center;
