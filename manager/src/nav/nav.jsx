@@ -52,8 +52,8 @@ function NavBar() {
                 onHideNav      =  {handleClick}
                 title          =  "PARK-IT"
                 items          =  {[
-                    <a name="logout" style={{textDecoration:'none', color :'black'}} onClick={gotoHome}>HOME</a>,
-                    <a name="logout" style={{textDecoration:'none', color :'black'}} onClick={gotoStatus}>STATUS</a>,
+                    <a name="home" style={{textDecoration:'none', color :'black'}} onClick={gotoHome}>HOME</a>,
+                    <a name="status" style={{textDecoration:'none', color :'black'}} onClick={gotoStatus}>STATUS</a>,
                     <a name="logout" style={{textDecoration:'none', color :'black'}} onClick={logout}>LOGOUT</a>,
                 ]}
                 titleStyle     =  {{backgroundColor: 'rgba(31, 138, 112, 1)'}}

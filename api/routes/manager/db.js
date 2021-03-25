@@ -47,7 +47,7 @@ async function vehicleEnter(parking_lot, vehicle, vehicleType, entry_time){
     var book = await (await db.collection('parking_status')).findOne({'vehicle': vehicle, 'parking_lot': parking_lot, 'status': "booked" });
     var park = await (await db.collection('parking_curr_data')).findOne({'place_id': parking_lot });
     if(park['CAP'] == park['TPS']){
-        return false;
+        return -1;
     }
     await (await db.collection('parking_curr_data')).updateOne({'place_id': parking_lot }, { $inc: {'CAP': 1}});
     if(book != null){

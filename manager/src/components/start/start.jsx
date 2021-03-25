@@ -9,6 +9,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import { Modal } from "react-responsive-modal";
+import {toast} from "react-toastify";
 
 const {REACT_APP_API_BACKEND} = process.env;
 
@@ -38,6 +39,11 @@ function Content1(){
   const [vehicleType, setVehicleType] = useState("bike");
   const parking_lot = "ChIJ4znoDUD9DDkRxt3lBXKW96Q";
 
+  const vehicleEnter = () => toast.success("Successfully Parked "+ vehicle, {position: "top-center",autoClose: false, draggable: true});
+  const vehicleNotPresent = () => toast.info("Vehicle No. not present! Please Enter", {position: "top-center",autoClose: false, draggable: true});
+  const noSpace = () => toast.error("No Space In Parking Lot", {position: "top-center",autoClose: false, draggable: true});
+
+
   async function onClick(){
     console.log(vehicle, vehicleType);
     if(vehicle != ""){
@@ -55,13 +61,20 @@ function Content1(){
       };
       let res = await fetch(`${REACT_APP_API_BACKEND}/manager/parking/vehicle_enter`, requestOption);
       console.log(res);
-      setVehicleType(null);
-      setVehicle("");
+      
       if (res.status === 200) {
           let val = await res.json();
           console.log(val);
-          
+          if(val == '-1')
+            noSpace();
+          else
+            vehicleEnter();
+          setVehicleType(null);
+          setVehicle("");
       }
+    }
+    else{
+      vehicleNotPresent();
     }
   }
 
@@ -100,6 +113,10 @@ function Content2(){
 
   const [vehicle, setVehicle] = useState("");
   const parking_lot = "ChIJ4znoDUD9DDkRxt3lBXKW96Q";
+  const [cost, setCost] = useState(0);
+
+  const parkCost = () => toast.info("Total Cost is Rs."+ cost, {position: "top-center",autoClose: false, draggable: true});
+  const noVehicle = () => toast.error("Vehicle Number Not Present!!!", {position: "top-center",autoClose: false, draggable: true});
 
   function vehicleChange(fn){
     let val = fn.target.value;
@@ -122,11 +139,17 @@ function Content2(){
       };
       let res = await fetch(`${REACT_APP_API_BACKEND}/manager/parking/vehicle_exit`, requestOption);
       console.log(res);
-      setVehicle("");
       if (res.status === 200) {
           let val = await res.json();
           console.log(val);
-          
+          if(val == '-1')
+            noVehicle();
+          else{
+            setCost(val);
+            while(cost != val);
+            parkCost();
+          }
+          setVehicle("");
       }
     }
   }

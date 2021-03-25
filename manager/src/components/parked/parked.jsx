@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Customer, Td1, Th1, Tr1,} from "./common";
+import 'react-toastify/dist/ReactToastify.css';
 
 const {REACT_APP_API_BACKEND} = process.env;
 
