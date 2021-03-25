@@ -9770,6 +9770,11 @@
   "resolved" "https://registry.npmjs.org/react-error-overlay/-/react-error-overlay-6.0.9.tgz"
   "version" "6.0.9"
 
+"react-floating-component@^1.0.1":
+  "integrity" "sha512-WYK9itQHxBWHbgd2KT7bJfwxsmt3jcbENp1YfFjztiXOcqqg/c/dI0ZPZJrzhNYgL1NgqPZY7ploCGyi0J5thQ=="
+  "resolved" "https://registry.npmjs.org/react-floating-component/-/react-floating-component-1.0.1.tgz"
+  "version" "1.0.1"
+
 "react-google-autocomplete@^1.2.6":
   "integrity" "sha512-qHz0+CLrpPTbrQItonFKY/8NQVioxikeW1/EyFoEMG3ekgqOmjN5b6FQAVy3qwRrUJALx5DCTWtbYOFG0Bw87Q=="
   "resolved" "https://registry.npmjs.org/react-google-autocomplete/-/react-google-autocomplete-1.2.6.tgz"
@@ -9995,7 +10000,7 @@
     "prop-types" "^15.7.2"
     "react-lifecycles-compat" "^3.0.4"
 
-"react@*", "react@^0.14.0 || ^15.0.0 || ^16.0.0", "react@^0.14.0 || ^15.0.0 || ^16.0.0 || ^17.0.0", "react@^0.14.9 || >=15.3.0", "react@^15.0.0 || ^16.0.0", "react@^15.3.0 || ^16.0.0-alpha", "react@^16.14.0", "react@^16.6.3 || ^17.0.0", "react@^16.8.0", "react@^16.8.0 || ^17", "react@^16.8.0 || ^17.0.0", "react@^16.8.0 || 17.x", "react@^16.9.0", "react@>= 16", "react@>= 16.8.0", "react@>=0.14.0", "react@>=0.14.7", "react@>=15", "react@>=15.0.0", "react@>=15.3.0", "react@>=16", "react@>=16.3.0", "react@>=16.4.2", "react@>=16.6.0", "react@>=16.8 || ^17.0.0", "react@0.14.x || ^15.0.0 || ^16.0.0 || ^17.0.0":
+"react@*", "react@^0.14.0 || ^15.0.0 || ^16.0.0", "react@^0.14.0 || ^15.0.0 || ^16.0.0 || ^17.0.0", "react@^0.14.9 || >=15.3.0", "react@^15.0.0 || ^16.0.0", "react@^15.3.0 || ^16.0.0-alpha", "react@^16.0.0", "react@^16.14.0", "react@^16.6.3 || ^17.0.0", "react@^16.8.0", "react@^16.8.0 || ^17", "react@^16.8.0 || ^17.0.0", "react@^16.8.0 || 17.x", "react@^16.9.0", "react@>= 16", "react@>= 16.8.0", "react@>=0.14.0", "react@>=0.14.7", "react@>=15", "react@>=15.0.0", "react@>=15.3.0", "react@>=16", "react@>=16.3.0", "react@>=16.4.2", "react@>=16.6.0", "react@>=16.8 || ^17.0.0", "react@0.14.x || ^15.0.0 || ^16.0.0 || ^17.0.0":
   "integrity" "sha512-0X2CImDkJGApiAlcf0ODKIneSwBPhqJawOa5wCtKbu7ZECrmS26NvtSILynQ66cgkT/RJ4LidJOc3bUESwmU8g=="
   "resolved" "https://registry.npmjs.org/react/-/react-16.14.0.tgz"
   "version" "16.14.0"
