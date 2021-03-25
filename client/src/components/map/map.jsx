@@ -107,7 +107,7 @@ function MyMap(props) {
     const { isLoaded } = useJsApiLoader({
         id: 'google-map-script',
         googleMapsApiKey: REACT_APP_GOOGLE_MAP_KEY_PAID,
-        // libraries: 'places'
+        libraries: 'places'
     })
 
     function autoComplete()
@@ -158,50 +158,52 @@ function MyMap(props) {
         getParkingLots(22.572645, 88.363892);
     }, [getParkingLots]);
 
-    return isLoaded ? (
-        <GoogleMap
-            mapContainerStyle={containerStyle}
-            center={center}
-            zoom={14}
-            onLoad={onLoad}
-            onUnmount={onUnmount}
-            options={{styles: mapStyles}}
-            onDragEnd={handleDrag}
-        >
-            {/*{autoComplete()}*/}
-            {parkData.map(park => (
-                <Marker
-                    key={park['latitude'] + " " + park['longitude']}
-                    position={{
-                        lat: park['latitude'],
-                        lng: park['longitude']
-                    }}
-                    onClick={async () => {
-                        let ret = await getStatus(park['place_id']);
-                        setSelectedPark(park);
-                        setSelectedParkCAP(ret['CAP']);
-                        setSelectedParkTPS(ret['TPS']);
-                    }}
-                />
-            ))}
-            {selectedPark && (
-                <InfoWindow
-                    position={{
-                        lat: selectedPark['latitude'],
-                        lng: selectedPark['longitude']
-                    }}
-                    onCloseClick={() => {
-                        setSelectedPark(null);
-                    }}
-                >
-                    <div>
-                        <h4>{selectedPark['name']}</h4>
-                        <p>Current status: {selectedParkCAP} / {selectedParkTPS}</p>
-                        <BookButton type="submit" onClick={booking_nav}>BOOK</BookButton>
-                    </div>
-                </InfoWindow>
-            )}
-        </GoogleMap>
+    return isLoaded ? (autoComplete()
+        // <div>
+        //     {autoComplete()}
+        // <GoogleMap
+        //     mapContainerStyle={containerStyle}
+        //     center={center}
+        //     zoom={14}
+        //     onLoad={onLoad}
+        //     onUnmount={onUnmount}
+        //     options={{styles: mapStyles}}
+        //     onDragEnd={handleDrag}
+        // >
+        //     {parkData.map(park => (
+        //         <Marker
+        //             key={park['latitude'] + " " + park['longitude']}
+        //             position={{
+        //                 lat: park['latitude'],
+        //                 lng: park['longitude']
+        //             }}
+        //             onClick={async () => {
+        //                 let ret = await getStatus(park['place_id']);
+        //                 setSelectedPark(park);
+        //                 setSelectedParkCAP(ret['CAP']);
+        //                 setSelectedParkTPS(ret['TPS']);
+        //             }}
+        //         />
+        //     ))}
+        //     {selectedPark && (
+        //         <InfoWindow
+        //             position={{
+        //                 lat: selectedPark['latitude'],
+        //                 lng: selectedPark['longitude']
+        //             }}
+        //             onCloseClick={() => {
+        //                 setSelectedPark(null);
+        //             }}
+        //         >
+        //             <div>
+        //                 <h4>{selectedPark['name']}</h4>
+        //                 <p>Current status: {selectedParkCAP} / {selectedParkTPS}</p>
+        //                 <BookButton type="submit" onClick={booking_nav}>BOOK</BookButton>
+        //             </div>
+        //         </InfoWindow>
+        //     )}
+        // </GoogleMap>
+        // </div>
     ) : <></>
 }
 

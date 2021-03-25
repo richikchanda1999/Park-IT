@@ -146,7 +146,6 @@ function Content2(){
 
 function MyStart() {
   return (
-    <>
     <BoxContainer >
       <Tabs activeTab="1" className="" ulClassName="" activityClassName="bg-success" onClick={(event, tab) => console.log(event, tab)}>
             <Tab title=" ENTRY " className="mr-3" >
@@ -161,7 +160,6 @@ function MyStart() {
             </Tab>
         </Tabs>   
     </BoxContainer>
-    </>
   );
 }
 

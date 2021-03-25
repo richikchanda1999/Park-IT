@@ -3,11 +3,12 @@ import './App.css';
 import AccountBox from "./components/accountBox";
 import styled from "styled-components";
 import {AuthContext} from "./authContext";
-import {useRoutes} from "hookrouter";
+import {usePath, useRoutes} from "hookrouter";
 import NavBar from "./nav/nav";
 import {ToastContainer} from "react-toastify";
 import ManagerHistory from "./components/parked/parked";
 import MyStart from "./components/start/start";
+
 import {AppBar} from "@material-ui/core";
 
 const routes = {
@@ -41,6 +42,7 @@ const StartContainer = styled.div`
 
 function App() {
   const [isSignedIn, setSignIn] = useState(false);
+  const path = usePath();
 
   function authUpdate(val) {
     setSignIn(val);
@@ -50,6 +52,10 @@ function App() {
     console.log("Sign In State: ", isSignedIn);
   }, [isSignedIn]);
 
+  useEffect(() => {
+    console.log("Path changed to: ", path)
+  }, [path])
+
   const contextValue = {authUpdate};
   return <AuthContext.Provider value={contextValue}>
     <div style={{ width: "100vw", height: "100vh", background: 'rgb(31, 138, 112)'}}>
@@ -58,7 +64,6 @@ function App() {
       <ToastContainer />
     </div>
   </AuthContext.Provider>
-  // return useRoutes(routes);
 }
 
 export default App;

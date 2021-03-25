@@ -3,15 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="a9f1fbb8-c7e2-40d0-a191-02e1008288bf" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/routes/manager/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/routes/manager/auth.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/routes/manager/db.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/routes/manager/db.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manager/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/manager/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manager/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/manager/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/accountBox/loginForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/accountBox/loginForm.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/map/map.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/map/map.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/manager/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/manager/src/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/manager/src/components/accountBox/loginForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/manager/src/components/accountBox/loginForm.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/manager/src/components/start/start.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/manager/src/components/start/start.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manager/src/nav/nav.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/manager/src/nav/nav.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,19 +61,6 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="/Users/aditi/Development/ParkIT/api" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -118,7 +103,9 @@
       <workItem from="1616032964933" duration="12911000" />
       <workItem from="1616152839238" duration="7000" />
       <workItem from="1616516847640" duration="9097000" />
-      <workItem from="1616578290483" duration="2822000" />
+      <workItem from="1616578290483" duration="4022000" />
+      <workItem from="1616650357863" duration="2493000" />
+      <workItem from="1616657151426" duration="1342000" />
     </task>
     <servers />
   </component>

@@ -19,22 +19,6 @@ function NavBar() {
         setNav(!showNav);
     }
 
-    const gotoHome = useCallback(() => {
-        if (page !== "/map") {
-            setPage("/map");
-            navigate("/map");
-        }
-        setNav(false);
-    }, []);
-
-    const gotoHistory = useCallback(() => {
-        if (page !== "/history") {
-            setPage("/history");
-            navigate("/history");
-        }
-        setNav(false);
-    }, []);
-
     const logout = useCallback(() => {
         Session.clear();
         setPage("/");
@@ -52,8 +36,6 @@ function NavBar() {
                 onHideNav      =  {handleClick}
                 title          =  "PARK-IT"
                 items          =  {[
-                    <a name="home" style={{textDecoration:'none', color :'black'}} onClick={gotoHome}>Home</a>,
-                    <a name="history" style={{textDecoration:'none', color :'black'}} onClick={gotoHistory}>History</a>,
                     <a name="logout" style={{textDecoration:'none', color :'black'}} onClick={logout}>LOGOUT</a>,
                 ]}
                 titleStyle     =  {{backgroundColor: 'rgba(31, 138, 112, 1)'}}

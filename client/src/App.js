@@ -5,7 +5,7 @@ import AccountBox from "./components/accountBox";
 import MyMap from "./components/map/map";
 import Booking from "./components/booking/booking";
 import {MyHistory} from "./components/history/history";
-import {useRoutes} from 'hookrouter';
+import {usePath, useRoutes} from 'hookrouter';
 import NavBar from "./components/nav/nav";
 import {AuthContext} from "./authContext";
 import {ToastContainer} from "react-toastify";
@@ -33,6 +33,7 @@ const AppContainer = styled.div`
 
 function App() {
     const [isSignedIn, setSignIn] = useState(false);
+    const path = usePath();
 
     function authUpdate(val) {
         setSignIn(val);
@@ -41,6 +42,10 @@ function App() {
     useEffect(() => {
         console.log("Sign In State: ", isSignedIn);
     }, [isSignedIn]);
+
+    useEffect(() => {
+        console.log("Path changed to: ", path)
+    }, [path])
 
     const contextValue = {authUpdate};
     return <AuthContext.Provider value={contextValue}>
