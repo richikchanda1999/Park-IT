@@ -6,7 +6,7 @@ import {AuthContext} from "./authContext";
 import {usePath, useRoutes} from "hookrouter";
 import NavBar from "./nav/nav";
 import {ToastContainer} from "react-toastify";
-import ManagerHistory from "./components/parked/parked";
+import ManagerHistory from "./components/parked/parkedNew";
 import MyStart from "./components/start/start";
 import 'react-toastify/dist/ReactToastify.css';
 
