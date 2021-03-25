@@ -8,13 +8,14 @@ import NavBar from "./nav/nav";
 import {ToastContainer} from "react-toastify";
 import ManagerHistory from "./components/parked/parked";
 import MyStart from "./components/start/start";
+import 'react-toastify/dist/ReactToastify.css';
 
 import {AppBar} from "@material-ui/core";
 
 const routes = {
   '/': () => <AppContainer><AccountBox /></AppContainer>,
   '/parked': () => <ManagerHistory/>,
-  '/start': () => <StartContainer><MyStart/></StartContainer>
+  '/start': () => <MyStart/>
 };
 
 const AppContainer = styled.div`

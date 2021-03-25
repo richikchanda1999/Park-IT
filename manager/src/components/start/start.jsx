@@ -88,7 +88,7 @@ function Content1(){
     <FormControlLabel value="car" control={<Radio color="primary" />} label="Car" onChange={onChange} />
     <FormControlLabel value="truck" control={<Radio color="primary" />} label="Truck" onChange={onChange} />
     </RadioGroup>
-    <div style={{marginTop: "10px"}}>
+    <div style={{marginTop: "10px" ,  marginLeft: '25%'}}>
     <AwesomeButton type="primary" onPress={onClick}>ENTER</AwesomeButton>
     </div>
     </Form1>
@@ -136,16 +136,27 @@ function Content2(){
       <div>
         Vehicle No : <input value={vehicle} type="text" onChange={vehicleChange} style={{textAlign: "center"}}></input><br/><br/>
       </div>
-      <AwesomeButton  type="primary" onPress={onClick}>EXIT</AwesomeButton>
+      <AwesomeButton  style={{ marginLeft: '30%'}}  type="primary" onPress={onClick}>EXIT</AwesomeButton>
     </Form1>
   );
 }
 
+const StartContainer = styled.div`
+  width: 100%;
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  background-size: cover;
+  align-items: center;
+  justify-content: center;
+  background-colour: white;
+`;
 
 
 
 function MyStart() {
   return (
+    <StartContainer style={{backgroundColor: 'white'}}>
     <BoxContainer >
       <Tabs activeTab="1" className="" ulClassName="" activityClassName="bg-success" onClick={(event, tab) => console.log(event, tab)}>
             <Tab title=" ENTRY " className="mr-3" >
@@ -160,6 +171,7 @@ function MyStart() {
             </Tab>
         </Tabs>   
     </BoxContainer>
+    </StartContainer>
   );
 }
 
