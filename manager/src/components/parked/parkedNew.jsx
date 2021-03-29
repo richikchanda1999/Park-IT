@@ -1,4 +1,4 @@
-import React, {useState, useCallback, useEffect} from 'react';
+import React, {useState, useCallback, useLayoutEffect, useEffect} from 'react';
 import MaterialTable from 'material-table';
 
 const {REACT_APP_API_BACKEND} = process.env;
@@ -28,7 +28,7 @@ function ManagerHistory(){
 }, []);
 
 
-useEffect(getHistory, userStatus);
+useLayoutEffect(()=>{getHistory()}, userStatus);
 
   
     const column = [
