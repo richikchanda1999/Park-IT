@@ -1,4 +1,4 @@
-import React, {useState, useCallback, useLayoutEffect, useEffect} from 'react';
+import React, {useState, useCallback, useLayoutEffect} from 'react';
 import MaterialTable from 'material-table';
 
 const {REACT_APP_API_BACKEND} = process.env;

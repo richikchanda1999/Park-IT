@@ -50,7 +50,7 @@ function Booking(props) {
         }
     }, []);
 
-    useLayoutEffect(()=>getStatus, []);
+    useLayoutEffect(()=>{getStatus()}, []);
 
     function loadScript(src) {
         return new Promise((resolve) => {
