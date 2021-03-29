@@ -1,11 +1,36 @@
-import React, {useState} from 'react';
+import React, {useState, useCallback, useEffect} from 'react';
 import MaterialTable from 'material-table';
 
 const {REACT_APP_API_BACKEND} = process.env;
 
 
+
 function ManagerHistory(){
-    
+
+  let email = "apple@gmail.com";
+  let statusFetched = false;
+  const [userStatus, setUserStatus] = useState([]);
+
+  const getHistory = useCallback(async () => {
+    let requestOption = {
+      method: "POST",
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ 'email': email}),
+  };
+  console.log(requestOption);
+  let res = await fetch(`${REACT_APP_API_BACKEND}/manager/parking/get_current_parking`, requestOption);
+  console.log(res);
+    if (res.status === 200) {
+        let val = await res.json();
+        console.log(val);
+        setUserStatus(val);
+    }
+}, []);
+
+
+useEffect(getHistory, userStatus);
+
+  
     const column = [
         { title: 'Vehicle No.', field: 'vehicle',
           cellStyle: {
@@ -18,15 +43,10 @@ function ManagerHistory(){
         { title: 'Status', field: 'status' }
     ]
 
-    const data = [
-        { vehicle: 'PY01 8065', parking_lot: 'East Coast', entry_time: '03/26/2021 15:00' , status: 'Parked' },
-        { vehicle: 'DL04 3154 ', parking_lot: 'East Coast', entry_time: '03/26/2021 12:30' , status: 'Booked' },
-        { vehicle: 'GC43 1643', parking_lot: 'East Coast', entry_time: '03/26/2021 13:20' , status: 'Parked' },
-    ]
     return(
         <div>
             <MaterialTable title = "Current Parking Status"
-            data = {data}
+            data = {userStatus}
             columns={column}
             options={{
                 pageSize: 10,

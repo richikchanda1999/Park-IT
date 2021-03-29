@@ -27,7 +27,7 @@ async function checkEmail(email) {
 
 async function getParkingLotId(email){
     var db = client.db();
-    var parking = await (await db.collection('parking_manager')).findOne({ 'email': email });
+    var parking = await (await db.collection('managers')).findOne({ 'email': email });
     return parking['parking_id'];
 }
 
