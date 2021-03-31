@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useCallback} from "react";
+import React, {useState, useLayoutEffect, useCallback} from "react";
 import {
     Td,
     Th,
@@ -50,7 +50,7 @@ function Booking(props) {
         }
     }, []);
 
-    useEffect(getStatus, []);
+    useLayoutEffect(()=>{getStatus()}, []);
 
     function loadScript(src) {
         return new Promise((resolve) => {

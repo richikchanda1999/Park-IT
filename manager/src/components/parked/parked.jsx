@@ -8,11 +8,11 @@ class ManagerHistory extends Component{
     constructor(props) {
         super(props);
         this.state = { userStatus: null}
-        this.email = "ashok@gmail.com";
+        this.email = "apple@gmail.com";
         this.statusFetched = false;
         this.getHistory = this.getHistory.bind(this);
         this.getabc = this.getabc.bind(this);
-        this.getabc("ashok@gmail.com");
+        this.getabc("apple@gmail.com");
     }
 
     async getHistory(email) {

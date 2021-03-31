@@ -113,9 +113,9 @@ function Content2(){
 
   const [vehicle, setVehicle] = useState("");
   const parking_lot = "ChIJ4znoDUD9DDkRxt3lBXKW96Q";
-  const [cost, setCost] = useState(0);
+  let cost1 = 0;
 
-  const parkCost = () => toast.info("Total Cost is Rs."+ cost, {position: "top-center",autoClose: false, draggable: true});
+  const parkCost = () => toast.info("Total Cost is Rs."+ cost1, {position: "top-center",autoClose: false, draggable: true});
   const noVehicle = () => toast.error("Vehicle Number Not Present!!!", {position: "top-center",autoClose: false, draggable: true});
 
   function vehicleChange(fn){
@@ -145,8 +145,7 @@ function Content2(){
           if(val == '-1')
             noVehicle();
           else{
-            setCost(val);
-            while(cost != val);
+            cost1 = val;
             parkCost();
           }
           setVehicle("");
