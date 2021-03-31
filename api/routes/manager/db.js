@@ -18,6 +18,13 @@ async function signUp(first_name, last_name, email, pass, number, rating, isAppr
     return ret.insertedCount === 1;
 }
 
+async function isApproved(email)
+{
+    let db=client.db();
+    let app=await (await db.collection('managers')).findOne({'email':email});
+    return app['is_approved'];
+}
+
 async function checkEmail(email) {
     let db = client.db();
     let check = await (await db.collection('managers')).findOne({ 'email': email});
@@ -117,3 +124,4 @@ module.exports.vehicleEnter = vehicleEnter;
 module.exports.vehicleExit = vehicleExit;
 module.exports.getParkingLotId = getParkingLotId;
 module.exports.getCurrentParking = getCurrentParking;
+module.exports.isApproved = isApproved;

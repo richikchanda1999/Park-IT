@@ -12,6 +12,7 @@ router.post('/sign_in', async function (req, res) {
     let password = req.body.password;
 
     let info = await db.getPassword(email);
+    let approved = await db.isApproved(email);
     if (info == null) res.status(598).send("Email does not exist!\n");
     else {
         let isEqual = await bcrypt.compare(password, info['pass']);
@@ -19,8 +20,11 @@ router.post('/sign_in', async function (req, res) {
         console.log(isEqual);
         console.log(info);
         if (isEqual) {
-
-            res.status(200).send(JSON.stringify(info));
+            if (!approved) {
+                res.status(590).send("Manager Not Verified\n");
+            } else {
+                res.status(200).send(JSON.stringify(info));
+            }
         } else {
             res.status(599).send("Password incorrect\n");
         }
@@ -45,10 +49,8 @@ router.post('/sign_up', async function (req, res) {
             let ret = await db.signUp(first_name, last_name, email, pass, '', rating, false);
             if (ret) res.status(200).send('');
             else res.status(599).send('DB Error');
-        }
-        else res.status(499).send('Password does not match');
-    }
-    else res.status(498).send('User already present!');
+        } else res.status(499).send('Password does not match');
+    } else res.status(498).send('User already present!');
 });
 
 router.post('/otp/send', async function (req, res) {
@@ -67,7 +69,7 @@ router.post('/otp/send', async function (req, res) {
     try {
         // let service = await client.verify.services.create({friendlyName: 'My Verify Service'});
         let services = await client.verify.services.list();
-        for(let i = 0 ; i < services.length; ++i) {
+        for (let i = 0; i < services.length; ++i) {
             let temp = services[i];
             if (temp.friendlyName === process.env.OTP_SERVICE_NAME) {
                 service = temp;
@@ -85,7 +87,7 @@ router.post('/otp/send', async function (req, res) {
 
 });
 
-router.post('/otp/verify', async function(req, res) {
+router.post('/otp/verify', async function (req, res) {
     const accountSid = process.env.TWILIO_ACCOUNT_SID;
     const authToken = process.env.TWILIO_AUTH_TOKEN;
     const client = twilio(accountSid, authToken);
@@ -99,9 +101,8 @@ router.post('/otp/verify', async function(req, res) {
             let ret = await db.signUp('', '', '', '', '', 5, false);
             if (ret) res.status(200).send('Success');
             else res.status(599).send('DB Error');
-        }
-        else res.status(500).send('');
-    } catch(e) {
+        } else res.status(500).send('');
+    } catch (e) {
         console.error(e);
         res.status(500).send(e);
     }

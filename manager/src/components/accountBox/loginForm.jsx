@@ -38,7 +38,7 @@ function LoginForm(props) {
     const success = () => toast.success("Login Successful !");
     const emailNotPresent = () => toast.error("Email ID not present! Please sign up");
     const passwordIncorrect = () => toast.error("Password Incorrect!");
-
+    const managerNotApproved = () =>toast.error("You have not been verified by admin!")
     async function onLogin(authUpdate) {
         if (!submitEnable) return;
         console.log(`Email: ${email}, Password: ${password}`);
@@ -50,38 +50,24 @@ function LoginForm(props) {
         let res = await fetch(`${REACT_APP_API_BACKEND}/manager/auth/sign_in`, requestOptions);
         console.log(res.status);
         if (res.status === 200) {
-            console.log(1);
             success();
-            console.log(2);
             const data = await res.json();
-            console.log(3);
             console.log(data);
             Session.set("email", data.email);
-            console.log(4);
-
             Session.set("user_id", data._id);
-            console.log(5);
-
             Session.set("name", data.firstName + " " + data.lastName);
-            console.log(6);
-
             setEmail("");
-            console.log(7);
-
             setPassword("");
-            console.log(8);
-
             authUpdate(true);
-            console.log(9);
-
             navigate('/start', true);
-            console.log(10);
-
             return true;
         } else if (res.status === 598) {
             emailNotPresent();
         } else if (res.status === 599) {
             passwordIncorrect();
+        }else if(res.status=== 590)
+        {
+            managerNotApproved();
         }
         authUpdate(false);
         return false;

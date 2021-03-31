@@ -13,6 +13,7 @@ import "./autocompleteStyle.css";
 import { classnames } from './helpers';
 import Autocomplete from 'react-google-autocomplete';
 import FloatingComponent from "react-floating-component";
+import {toast} from "react-toastify";
 
 const {REACT_APP_GOOGLE_MAP_KEY_PAID, REACT_APP_API_BACKEND} = process.env;
 const libraries = ["places"];
@@ -98,7 +99,12 @@ function MyMap(props) {
 
     async function booking_nav() {
         console.log(selectedPark);
-        navigate('/booking', false, {selectedPark: selectedPark});
+        if (selectedParkCAP < selectedParkTPS) {
+            navigate('/booking', false, {selectedPark: selectedPark});
+        }
+        else {
+            toast.error("Oops!!! No space available in this parking lot!");
+        }
     }
 
     const handleSelect = async value => {

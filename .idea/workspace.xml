@@ -3,17 +3,17 @@
   <component name="ChangeListManager">
     <list default="true" id="a9f1fbb8-c7e2-40d0-a191-02e1008288bf" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/admin/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/admin/public/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/admin/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/src/components/manager/manager.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/components/manager/manager.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/src/components/parking/parking.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/components/parking/parking.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/src/components/user/user.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/components/user/user.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/src/nav/nav.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/nav/nav.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/yarn.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/routes/admin/db.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/routes/admin/db.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/routes/admin/detail.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/routes/admin/detail.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/routes/manager/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/routes/manager/auth.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/routes/manager/db.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/routes/manager/db.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manager/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/manager/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/booking/booking.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/booking/booking.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/map/map.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/map/map.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manager/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/manager/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manager/src/components/accountBox/loginForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/manager/src/components/accountBox/loginForm.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -129,7 +129,7 @@
       <workItem from="1616691939097" duration="608000" />
       <workItem from="1616864242716" duration="1239000" />
       <workItem from="1616943568696" duration="1708000" />
-      <workItem from="1617182242487" duration="8199000" />
+      <workItem from="1617182242487" duration="10847000" />
     </task>
     <servers />
   </component>

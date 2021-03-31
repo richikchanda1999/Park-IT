@@ -107,7 +107,7 @@ function Booking(props) {
                     headers: {'Content-Type': 'application/json'},
                     body: JSON.stringify(_data),
                 };
-                const result = await fetch('http://localhost:9000/payment/success', requestOption);
+                const result = await fetch(`${REACT_APP_API_BACKEND}/payment/success`, requestOption);
                 const ar = await result.json();
                 console.log("here:", ar.msg);
                 if (ar.msg === "success") {
@@ -166,11 +166,11 @@ function Booking(props) {
         console.log("event: \n", event.target);
         if (name === "vehicleType") {
             if (value === "bike")
-                setAmount(10);
+                setAmount(rateChart['bike']);
             if (value === "car")
-                setAmount(20);
+                setAmount(rateChart['car']);
             if (value === "truck")
-                setAmount(30);
+                setAmount(rateChart['truck']);
 
         }
 
@@ -232,7 +232,7 @@ function Booking(props) {
                     <br/><br/>
                     <h1>You Need To pay {amount} for first hour of booking</h1>
                 </form>
-                <button onClick={displayRazorpay}>Proceed To Payment</button>
+                <button onClick={displayRazorpay}>Proceed to Payment</button>
 
             </div>
         </div>
