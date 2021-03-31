@@ -6,7 +6,6 @@ const {REACT_APP_API_BACKEND} = process.env;
 
 
 function ManagerHistory(){
-
   let email = "apple@gmail.com";
   let statusFetched = false;
   const [userStatus, setUserStatus] = useState([]);
@@ -30,7 +29,9 @@ function ManagerHistory(){
 
 useLayoutEffect(()=>{getHistory()}, userStatus);
 
-  
+    const [data, setData] = useState([]);
+
+    const getParkingStatus = useCallback(() => {}, []);
     const column = [
         { title: 'Vehicle No.', field: 'vehicle',
           cellStyle: {
