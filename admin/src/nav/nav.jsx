@@ -16,27 +16,47 @@ function NavBar() {
     }
 
     const gotoManager = useCallback(() => {
-        if (page !== "/") {
-            setPage("/");
-            navigate("/");
-        }
+        console.log("Called, Current page now: ", page);
+        // if (page !== "/") {
+        //     console.log("1");
+        //     setPage("/");
+        //     console.log("2");
+        //     navigate("/");
+        // }
+        console.log("3");
+        navigate("/");
         setNav(false);
+        console.log("4");
     }, []);
 
     const gotoUser = useCallback(() => {
-        if (page !== "/user") {
-            setPage("/user");
-            navigate("/user");
-        }
+        console.log("Called, Current page now: ", page);
+        // if (page !== "/user") {
+        //     console.log("5");
+        //     setPage("/user");
+        //     console.log("6");
+        //     navigate("/user");
+        //     console.log("7");
+        // }
+        console.log("8");
+        navigate("/user");
         setNav(false);
+        console.log("9");
     }, []);
 
     const gotoParking = useCallback(() => {
-        if (page !== "/parking") {
-            setPage("/parking");
-            navigate("/parking");
-        }
+        console.log("Called, Current page now: ", page);
+        // if (page !== "/parking") {
+        //     console.log("10");
+        //     setPage("/parking");
+        //     console.log("11");
+        //     navigate("/parking");
+        //     console.log("12");
+        // }
+        console.log("13");
+        navigate("/parking");
         setNav(false);
+        console.log("14");
     }, []);
 
 
