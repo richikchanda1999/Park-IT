@@ -14,6 +14,8 @@ let managerAuthRouter = require('./routes/manager/auth')
 let managerParking = require('./routes/manager/parking')
 let db = require('./routes/db');
 let managerDB = require('./routes/manager/db');
+let adminDB = require('./routes/admin/db');
+let detailRouter = require('./routes/admin/detail');
 
 let app = express();
 
@@ -24,6 +26,11 @@ db.init().then(err => {
 
 managerDB.init().then(err => {
   console.log("Manager DB Connected!");
+  // console.log(db.getNearbyParkingLots());
+});
+
+adminDB.init().then(err => {
+  console.log("Admin DB Connected!");
   // console.log(db.getNearbyParkingLots());
 });
 
@@ -46,6 +53,7 @@ app.use('/map', mapRouter);
 app.use('/payment', paymentRouter);
 app.use('/manager/auth', managerAuthRouter);
 app.use('/manager/parking', managerParking);
+app.use('/admin/detail', detailRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

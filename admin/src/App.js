@@ -1,25 +1,32 @@
-import logo from './logo.svg';
+import React, {useState, useContext, useEffect} from "react";
 import './App.css';
+import styled from "styled-components";
+import {usePath, useRoutes} from "hookrouter";
+import NavBar from "./nav/nav";
+import MyParking from "./components/parking/parking";
+import MyUser from "./components/user/user";
+import MyManager from "./components/manager/manager";
+import 'react-toastify/dist/ReactToastify.css';
+
+
+const routes = {
+  '/': () => <MyManager/>,
+  '/parking': () => <MyParking/>,
+  '/user': () => <MyUser/>
+};
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+  const path = usePath();
+
+  useEffect(() => {
+    console.log("Path changed to: ", path)
+  }, [path])
+
+  return <div style={{ width: "100vw", height: "100vh", background: 'rgb(31, 138, 112)'}}>
+      {<NavBar />}
+      {useRoutes(routes)}
     </div>
-  );
 }
 
 export default App;
