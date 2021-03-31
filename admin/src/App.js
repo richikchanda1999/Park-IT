@@ -27,7 +27,6 @@ function App() {
       {<NavBar />}
       {useRoutes(routes)}
     </div>
-  
 }
 
 export default App;
