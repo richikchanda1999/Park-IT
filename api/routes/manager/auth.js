@@ -42,7 +42,7 @@ router.post('/sign_up', async function (req, res) {
     if (present_earlier === false) {
         if (con_pass === password) {
             console.log(first_name + " " + last_name + " " + email + " " + con_pass + " " + pass);
-            let ret = await db.signUp(first_name, last_name, email, pass, '', rating);
+            let ret = await db.signUp(first_name, last_name, email, pass, '', rating, false);
             if (ret) res.status(200).send('');
             else res.status(599).send('DB Error');
         }
@@ -96,7 +96,7 @@ router.post('/otp/verify', async function(req, res) {
             .create({to: `${countryCode}${number}`, code: req.body.code});
         console.log(check.status);
         if (check.status === "approved") {
-            let ret = await db.signUp('', '', '', '', '', 5);
+            let ret = await db.signUp('', '', '', '', '', 5, false);
             if (ret) res.status(200).send('Success');
             else res.status(599).send('DB Error');
         }

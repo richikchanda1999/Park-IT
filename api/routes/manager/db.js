@@ -12,22 +12,22 @@ async function getPassword(email) {
     return doc != null ? doc: null;
 }
 
-async function signUp(first_name, last_name, email, pass, number, rating) {
+async function signUp(first_name, last_name, email, pass, number, rating, isApproved) {
     let db = client.db();
-    let ret = await (await db.collection('managers')).insertOne({ firstName: first_name, lastName: last_name, email: email, pass: pass, number: number, rating: rating });
+    let ret = await (await db.collection('managers')).insertOne({ firstName: first_name, lastName: last_name, email: email, pass: pass, number: number, rating: rating, is_approved: isApproved });
     return ret.insertedCount === 1;
 }
 
 async function checkEmail(email) {
     let db = client.db();
-    let check = await (await db.collection('managers')).findOne({ 'email': email });
+    let check = await (await db.collection('managers')).findOne({ 'email': email});
     console.log(`User present: ${check != null}`);
     return check != null;
 }
 
 async function getParkingLotId(email){
     var db = client.db();
-    var parking = await (await db.collection('parking_manager')).findOne({ 'email': email });
+    var parking = await (await db.collection('managers')).findOne({ 'email': email, 'is_approved': true });
     return parking['parking_id'];
 }
 
