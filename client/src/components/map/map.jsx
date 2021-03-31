@@ -104,8 +104,10 @@ function MyMap(props) {
     const handleSelect = async value => {
         const results = await geocodeByAddress(value);
         const latLng = await getLatLng(results[0]);
+        // console.log(latLng);
         setAddress(value);
         setMapCenter(latLng);
+        await getParkingLots(latLng['lat'], latLng['lng']);
     }
 
     const {isLoaded} = useJsApiLoader({
