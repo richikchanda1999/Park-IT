@@ -106,7 +106,7 @@ function MyMap(props) {
 
     async function booking_nav() {
         console.log(selectedPark);
-        if (selectedParkCAP < selectedParkTPS) {
+        if (selectedParkCAP > 0) {
             navigate('/booking', false, {selectedPark: selectedPark});
         }
         else {
@@ -188,11 +188,6 @@ function MyMap(props) {
         );
     }
 
-    // useEffect(() => {
-    //     getParkingLots();
-    // }, [getParkingLots]);
-
-    // return isLoaded ? autoComplete() : <></>
     return isLoaded ? (
         <div>
             <GoogleMap

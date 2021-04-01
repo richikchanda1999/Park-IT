@@ -69,6 +69,10 @@ function Booking(props) {
         });
     }
 
+    // async function bookAndPay() {
+    //     let res
+    // }
+
     async function displayRazorpay() {
         const res = await loadScript(
             "https://checkout.razorpay.com/v1/checkout.js"
