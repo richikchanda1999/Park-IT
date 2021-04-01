@@ -55,7 +55,7 @@ async function getParking() {
 async function getUser() {
     let db = client.db();
     let Users = await (await db.collection('users')).find();
-    var status = [];
+    let status = [];
     await Users.forEach((history) => {
         status.push({
             'FirstName': history['FirstName'],
@@ -68,11 +68,11 @@ async function getUser() {
     return status;
 }
 
-async function getApproved(email) {
+async function getApproved(email, value) {
     let db = client.db();
     console.log(email);
 
-    let ret = await (await db.collection('managers')).updateOne({'email': email}, {$set: {'is_approved': true}});
+    let ret = await (await db.collection('managers')).updateOne({'email': email}, {$set: {'is_approved': value}});
     return ret.result.nModified === 1;
 }
 

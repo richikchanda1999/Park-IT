@@ -4,7 +4,7 @@ import {usePath, useRoutes} from "hookrouter";
 import NavBar from "./nav/nav";
 import MyParking from "./components/parking/parking";
 import MyUser from "./components/user/user";
-import MyManager from "./components/manager/managerNew";
+import MyManager from "./components/manager/manager";
 import 'react-toastify/dist/ReactToastify.css';
 
 const routes = {

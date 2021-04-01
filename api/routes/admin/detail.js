@@ -20,9 +20,10 @@ router.post('/get_user', async function (req, res) {
     res.status(200).send(JSON.stringify(result));
 });
 
-router.post('/get_approved', async function (req, res) {
+router.post('/set_approved', async function (req, res) {
     let email = req.body.email;
-    let result = await db.getApproved(email);
+    let value = req.body.value;
+    let result = await db.getApproved(email, value);
     console.log(result);
     res.status(200).send(JSON.stringify(result));
 });
