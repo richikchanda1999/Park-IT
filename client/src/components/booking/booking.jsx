@@ -7,6 +7,7 @@ import {
 } from "./common";
 import Session from "react-session-api";
 import {navigate, useQueryParams} from "hookrouter";
+import {toast} from "react-toastify";
 
 
 const {REACT_APP_API_BACKEND} = process.env;
@@ -50,7 +51,9 @@ function Booking(props) {
         }
     }, []);
 
-    useLayoutEffect(()=>{getStatus()}, []);
+    useLayoutEffect(() => {
+        getStatus()
+    }, []);
 
     function loadScript(src) {
         return new Promise((resolve) => {
@@ -80,7 +83,7 @@ function Booking(props) {
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({'amount': amount})
         }
-        const result = await fetch('http://localhost:9000/payment/order', tran);
+        const result = await fetch(`${REACT_APP_API_BACKEND}/payment/order`, tran);
         //console.log(result);
         // const { amount, id: order_id, currency } = result.data;
         const data = await result.json();
@@ -111,9 +114,10 @@ function Booking(props) {
                 const ar = await result.json();
                 console.log("here:", ar.msg);
                 if (ar.msg === "success") {
-                    var today = new Date();
-                    var time = today.getHours() + ":" + today.getMinutes();
-                    var date = today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear();
+                    toast.success('Payment successful!');
+                    let today = new Date();
+                    let time = today.getHours() + ":" + today.getMinutes();
+                    let date = today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear();
                     let requestOption = {
                         method: "POST",
                         headers: {'Content-Type': 'application/json'},
@@ -127,17 +131,20 @@ function Booking(props) {
                         })
                     }
                     console.log(requestOption);
-                    const booked = await fetch('http://localhost:9000/payment/booked', requestOption);
+                    const booked = await fetch(`${REACT_APP_API_BACKEND}/payment/booked`, requestOption);
                     if (booked.status === 200) {
-                            //navigate('/navigateToLoc',false,{coordinate:coordinates});
+                        toast.success('Booking successful!');
+                        setVehicleNum("");
+                        setVehicleType("");
                     }
-
+                    else toast.error('Could not book!');
+                } else {
+                    toast.error('Payment incomplete!');
                 }
             },
             prefill: {
                 name: Session.get("name"),//this.name
                 email: Session.get("email"),//this.email.id
-                contact: "9831665180",//this.contact
             },
             notes: {
                 address: "Park It",
@@ -156,8 +163,6 @@ function Booking(props) {
         const value = event.target.value;
         const name = event.target.name;
 
-        // setVehicleType(name);
-        // setVehicleNum(value);
         if (name === "vehicleType") {
             setVehicleType(value);
         } else if (name === "vehicleNum") {

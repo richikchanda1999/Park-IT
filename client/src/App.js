@@ -31,7 +31,6 @@ const AppContainer = styled.div`
   justify-content: center;
 `;
 
-
 function App() {
     const [isSignedIn, setSignIn] = useState(false);
     const path = usePath();

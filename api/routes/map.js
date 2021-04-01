@@ -12,12 +12,14 @@ router.post('/get_live_status', async function (req, res) {
 router.post('/nearby_coordinates', async function (req, res) {
     console.log(req.body.latitude);
     console.log(req.body.longitude);
+    console.log(req.body.radius);
 
     let latitude = req.body.latitude;
     let longitude = req.body.longitude;
-    let radius = 2;
+    let radius = req.body.radius;
 
     let parkingLots = await db.getNearbyParkingLots(latitude, longitude, radius);
+    console.log(parkingLots.length);
     res.status(200).send(JSON.stringify({ 'parking_lots': parkingLots }));
 });
 

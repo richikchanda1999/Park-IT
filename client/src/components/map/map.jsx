@@ -26,6 +26,7 @@ function MyMap(props) {
     const [map, setMap] = useState(null);
     const [center, setMapCenter] = useState({lat: 22.572645, lng: 88.363892});
     const [address, setAddress] = useState("");
+    const [radius, setRadius] = useState(2.0);
     let lotsFetched = false;
     let statusFetched = false;
     let markersMap = new Map();
@@ -42,16 +43,23 @@ function MyMap(props) {
 
     const onUnmount = useCallback(function callback(map) {
         setMap(null)
-    }, [])
+    }, []);
 
-    const getParkingLots = useCallback(async (latitude, longitude) => {
+    useEffect(() => {
+        console.log("Map center changed to: ", center);
+        getParkingLots();
+    }, [center]);
+
+    useEffect(() => {}, []);
+
+    async function getParkingLots() {
         if (!lotsFetched) {
             lotsFetched = true;
 
             let requestOption = {
                 method: "POST",
                 headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({'latitude': latitude, 'longitude': longitude}),
+                body: JSON.stringify({'latitude': center['lat'], 'longitude': center['lng'], 'radius': radius}),
             };
             console.log(requestOption);
             let res = await fetch(`${REACT_APP_API_BACKEND}/map/nearby_coordinates`, requestOption);
@@ -69,7 +77,7 @@ function MyMap(props) {
             }
             lotsFetched = false;
         }
-    }, []);
+    }
 
     async function getStatus(place_id) {
         if (!statusFetched) {
@@ -94,7 +102,6 @@ function MyMap(props) {
         let center = map.getCenter();
         setMapCenter({lat: center.lat(), lng: center.lng()});
         console.log(center.lat(), center.lng());
-        await getParkingLots(center.lat(), center.lng());
     }
 
     async function booking_nav() {
@@ -113,7 +120,7 @@ function MyMap(props) {
         // console.log(latLng);
         setAddress(value);
         setMapCenter(latLng);
-        await getParkingLots(latLng['lat'], latLng['lng']);
+        await getParkingLots();
     }
 
     const {isLoaded} = useJsApiLoader({
@@ -125,65 +132,65 @@ function MyMap(props) {
     function autoComplete() {
         console.log("HERE!");
         return (
-                <PlacesAutocomplete
-                    onChange={setAddress}
-                    value={address}
-                    onSelect={handleSelect}
-                    shouldFetchSuggestions={address.length > 2}
-                >
-                    {({ getInputProps, suggestions, getSuggestionItemProps }) => {
-                        return (
-                            <div className="Demo__search-bar-container">
-                                <div className="Demo__search-input-container">
-                                    <input
-                                        {...getInputProps({
-                                            placeholder: 'Type Address...',
-                                            className: 'Demo__search-input',
-                                        })}
-                                    />
-                                </div>
-                                {suggestions.length > 0 && (
-                                    <div className="Demo__autocomplete-container">
-                                        {suggestions.map(suggestion => {
-                                            const className = classnames('Demo__suggestion-item', {
-                                                'Demo__suggestion-item--active': suggestion.active,
-                                            });
+            <PlacesAutocomplete
+                onChange={setAddress}
+                value={address}
+                onSelect={handleSelect}
+                shouldFetchSuggestions={address.length > 2}
+            >
+                {({ getInputProps, suggestions, getSuggestionItemProps }) => {
+                    return (
+                        <div className="Demo__search-bar-container">
+                            <div className="Demo__search-input-container">
+                                <input
+                                    {...getInputProps({
+                                        placeholder: 'Type Address...',
+                                        className: 'Demo__search-input',
+                                    })}
+                                />
+                            </div>
+                            {suggestions.length > 0 && (
+                                <div className="Demo__autocomplete-container">
+                                    {suggestions.map(suggestion => {
+                                        const className = classnames('Demo__suggestion-item', {
+                                            'Demo__suggestion-item--active': suggestion.active,
+                                        });
 
-                                            return (
-                                                /* eslint-disable react/jsx-key */
-                                                <div
-                                                    {...getSuggestionItemProps(suggestion, { className })}
-                                                >
-                                                    <strong>
-                                                        {suggestion.formattedSuggestion.mainText}
-                                                    </strong>{' '}
-                                                    <small>
-                                                        {suggestion.formattedSuggestion.secondaryText}
-                                                    </small>
-                                                </div>
-                                            );
-                                            /* eslint-enable react/jsx-key */
-                                        })}
-                                        <div className="Demo__dropdown-footer">
-                                            <div>
-                                                <img
-                                                    src={require('./powered_by_google_default.png')}
-                                                    className="Demo__dropdown-footer-image"
-                                                />
+                                        return (
+                                            /* eslint-disable react/jsx-key */
+                                            <div
+                                                {...getSuggestionItemProps(suggestion, { className })}
+                                            >
+                                                <strong>
+                                                    {suggestion.formattedSuggestion.mainText}
+                                                </strong>{' '}
+                                                <small>
+                                                    {suggestion.formattedSuggestion.secondaryText}
+                                                </small>
                                             </div>
+                                        );
+                                        /* eslint-enable react/jsx-key */
+                                    })}
+                                    <div className="Demo__dropdown-footer">
+                                        <div>
+                                            <img
+                                                src={require('./powered_by_google_default.png')}
+                                                className="Demo__dropdown-footer-image"
+                                            />
                                         </div>
                                     </div>
-                                )}
-                            </div>
-                        );
-                    }}
-                </PlacesAutocomplete>
+                                </div>
+                            )}
+                        </div>
+                    );
+                }}
+            </PlacesAutocomplete>
         );
     }
 
-    useEffect(() => {
-        getParkingLots(22.572645, 88.363892);
-    }, [getParkingLots]);
+    // useEffect(() => {
+    //     getParkingLots();
+    // }, [getParkingLots]);
 
     // return isLoaded ? autoComplete() : <></>
     return isLoaded ? (

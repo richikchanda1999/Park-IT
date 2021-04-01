@@ -56,6 +56,7 @@ function LoginForm(props) {
             Session.set("email", data.email);
             Session.set("user_id", data._id);
             Session.set("name", data.firstName + " " + data.lastName);
+            Session.set("parking_id", data['parking_id']);
             setEmail("");
             setPassword("");
             authUpdate(true);

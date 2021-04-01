@@ -14,7 +14,7 @@ function MyParking() {
             headers: {'Content-Type': 'application/json'},
         };
         console.log(requestOption);
-        let res = await fetch(`http://localhost:9000/admin/detail/get_parking`, requestOption);
+        let res = await fetch(`${REACT_APP_API_BACKEND}/admin/detail/get_parking`, requestOption);
         console.log(res);
         if (res.status === 200) {
             let val = await res.json();
