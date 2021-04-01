@@ -37,7 +37,7 @@ adminDB.init().then(err => {
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('view engine', 'ejs');
 
 app.use(cors());
 app.use(logger('dev'));
@@ -68,7 +68,7 @@ app.use(function (err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.render('index');
 });
 
 module.exports = app;

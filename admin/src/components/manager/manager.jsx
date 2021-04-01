@@ -68,7 +68,7 @@ function MyManager() {
 
     return (
         <div>
-            <MaterialTable title="Current Parking Status"
+            <MaterialTable title="Manager Status"
                            data={managerStatus}
                            columns={column}
                            options={{

@@ -13,6 +13,7 @@
     "framer-motion": "^4.0.2",
     "hookrouter": "^1.2.5",
     "material-table": "^1.69.2",
+    "netlify-cli": "^3.13.10",
     "npm-upgrade": "^3.0.0",
     "react": "^16.14.0",
     "react-awesome-button": "^6.5.1",
