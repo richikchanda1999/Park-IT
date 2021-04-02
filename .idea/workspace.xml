@@ -5,20 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a9f1fbb8-c7e2-40d0-a191-02e1008288bf" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/src/components/user/user.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/components/user/user.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/routes/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/routes/auth.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/.env" beforeDir="false" afterPath="$PROJECT_DIR$/client/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/build/asset-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/build/asset-manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/build/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/build/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/build/static/js/2.74dc2aab.chunk.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/build/static/js/2.74dc2aab.chunk.js.LICENSE.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/build/static/js/2.74dc2aab.chunk.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/build/static/js/main.a288c2bd.chunk.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/build/static/js/main.a288c2bd.chunk.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/accountBox/otp.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/accountBox/otp.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/booking/booking.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/booking/booking.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/map/map.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/map/map.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/client/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -124,7 +114,7 @@
       <workItem from="1617182242487" duration="11570000" />
       <workItem from="1617251243354" duration="58000" />
       <workItem from="1617251310204" duration="19540000" />
-      <workItem from="1617384549436" duration="2129000" />
+      <workItem from="1617384549436" duration="3016000" />
     </task>
     <servers />
   </component>
