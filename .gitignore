@@ -6,3 +6,12 @@ manager/node_modules/
 manager/.netlify/
 admin/node_modules/
 admin/.netlify/
+client/package-lock.json
+admin/package-lock.json
+manager/package-lock.json
+client/yarn.lock
+client/yarn-error.log
+admin/yarn.lock
+admin/yarn-error.log
+manager/yarn.lock
+manager/yarn-error.log

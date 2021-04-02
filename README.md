@@ -6,3 +6,4 @@
 5. Build the simulation for testing
 6. Assign parking lots to managers by admin
 7. Fix react reload issue
+8. Meet Auth page expectations
