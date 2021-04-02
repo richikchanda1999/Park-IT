@@ -216,7 +216,7 @@ function Booking(props) {
                     })}
                     </tbody>
                 </Table>
-                <h1>Current Status:{current}/{tot}</h1>
+                <h1>Current Status: {Math.max(tot - current, 0)}/{tot}</h1>
             </div>
             <div>
                 <form>

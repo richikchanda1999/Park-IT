@@ -33,8 +33,8 @@ function MyUser() {
 
 
     const column = [
-        {title: 'First Name', field: 'FirstName'},
-        {title: 'Last Name', field: 'LastName'},
+        {title: 'First Name', field: 'firstName'},
+        {title: 'Last Name', field: 'lastName'},
         {title: 'Email', field: 'email'},
         {title: 'Rating', field: 'rating'}
     ]

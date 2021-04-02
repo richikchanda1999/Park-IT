@@ -10,6 +10,10 @@ import {
 import Marginer from "../marginer";
 import { AccountContext } from "./accountContext";
 import {useContext} from "react/cjs/react.production.min";
+import {navigate} from 'hookrouter';
+import {AuthContext} from "../../authContext";
+import {toast} from "react-toastify";
+
 const { REACT_APP_API_BACKEND } = process.env;
 
 function OTPForm() {
@@ -18,6 +22,10 @@ function OTPForm() {
     const [submitEnable, setEnabled] = useState(false);
     const [screen, setScreen] = useState("send");
     const [code, setCode] = useState("");
+
+    const {authUpdate} = useContext(AuthContext);
+
+    const success = () => toast.success("Login Successful !");
 
     function onCountryChange(c) {
         let val = c.target.value;
@@ -66,8 +74,10 @@ function OTPForm() {
         let res = await fetch(`${REACT_APP_API_BACKEND}/auth/otp/verify`, requestOptions);
         console.log(res.status);
         if (res.status === 200) {
+            success();
             setCode("");
-            this.props.history.push("/map");
+            authUpdate(true);
+            navigate("/map", true);
         }
     }
 

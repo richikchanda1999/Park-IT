@@ -226,7 +226,7 @@ function MyMap(props) {
                     >
                         <div>
                             <h4>{selectedPark['name']}</h4>
-                            <p>Current status: {selectedParkCAP} / {selectedParkTPS}</p>
+                            <p>Current status: {Math.max(selectedParkTPS - selectedParkCAP, 0)} / {selectedParkTPS}</p>
                             <BookButton type="submit" onClick={booking_nav}>BOOK</BookButton>
                         </div>
                     </InfoWindow>

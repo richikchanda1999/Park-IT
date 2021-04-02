@@ -58,8 +58,8 @@ async function getUser() {
     let status = [];
     await Users.forEach((history) => {
         status.push({
-            'FirstName': history['FirstName'],
-            'LastName': history['LastName'],
+            'FirstName': history['firstName'],
+            'LastName': history['lastName'],
             'email': history['email'],
             'rating': history['rating']
         })

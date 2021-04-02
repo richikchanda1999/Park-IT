@@ -19,7 +19,6 @@ router.post('/sign_in', async function (req, res) {
         console.log(isEqual);
         console.log(info);
         if (isEqual) {
-
             res.status(200).send(JSON.stringify(info));
         } else {
             res.status(599).send("Password incorrect\n");
@@ -95,7 +94,7 @@ router.post('/otp/verify', async function(req, res) {
             .create({to: `${countryCode}${number}`, code: req.body.code});
         console.log(check.status);
         if (check.status === "approved") {
-            let ret = await db.signUp('', '', '', '', '', 5);
+            let ret = await db.signUp('', '', '', '', number, 5);
             if (ret) res.status(200).send('Success');
             else res.status(599).send('DB Error');
         }
