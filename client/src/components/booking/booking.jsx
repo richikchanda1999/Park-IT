@@ -8,10 +8,22 @@ import {
 import Session from "react-session-api";
 import {navigate, useQueryParams} from "hookrouter";
 import {toast} from "react-toastify";
-
+import styled from "styled-components";
 
 const {REACT_APP_API_BACKEND} = process.env;
-
+const BoxContainer = styled.div`
+  width: 50%;
+  height: auto;
+  display: flex;
+  align: center;
+  margin: auto;
+  padding: 20px;
+  flex-direction: column;
+  border-radius: 19px;
+  box-shadow: 0 0 2px rgb(15, 15, 15);
+  position: relative;
+  overflow: hidden;
+`;
 function Booking(props) {
     const [queryParams] = useQueryParams();
 
@@ -196,7 +208,7 @@ function Booking(props) {
     return (
         <body style={{background: "rgb(31, 138, 112)"}}>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
-        <div style={myStyle}>
+        <BoxContainer>
             <div>
                 <h1>The Rate chart of {name} is:</h1>
                 <Table>
@@ -218,7 +230,7 @@ function Booking(props) {
                 </Table>
                 <h1>Current Status: {Math.max(tot - current, 0)}/{tot}</h1>
             </div>
-            <div>
+            <div styles={myStyle}>
                 <form>
                     <label>
                         <h3>Please Enter Your vehicle Number:</h3>
@@ -244,7 +256,8 @@ function Booking(props) {
                 <button onClick={displayRazorpay}>Proceed to Payment</button>
 
             </div>
-        </div>
+            </BoxContainer>
+        {/* </div> */}
         </body>
     );
 
