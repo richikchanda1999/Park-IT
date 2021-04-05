@@ -74,7 +74,7 @@ function NavBar() {
                 ]}
                 titleStyle     =  {{backgroundColor: 'rgba(31, 138, 112, 1)'}}
                 itemStyle      =  {{backgroundColor: '#fff', listStyleType:'none'}}
-                itemHoverStyle =  {{backgroundColor: 'rgba(70, 64, 253, 1)'}}
+                itemHoverStyle =  {{backgroundColor: 'rgba(70, 64, 253, 1)',borderRadius: '60px 0px 0px 60px'}}
             />
         </>
     );
