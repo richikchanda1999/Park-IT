@@ -9,6 +9,7 @@ import {
 } from "./common";
 import Marginer from "../marginer";
 import {AccountContext} from "./accountContext";
+import {toast} from "react-toastify";
 
 const { REACT_APP_API_BACKEND } = process.env;
 
@@ -59,15 +60,26 @@ function SignUpForm() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ 'firstName': firstName, 'lastName': lastName, 'email': email, 'password': password, 'confirmPassword': confirmPassword }),
     };
-    let res = await fetch(`${REACT_APP_API_BACKEND}/auth/sign_up`, requestOption);
+    let res = await fetch(`${REACT_APP_API_BACKEND}/auth/sign_up`,{mode: 'no-cors'}, requestOption);
     console.log(res.status);
     console.log(res.body);
     if (res.status === 200) {
+      toast.success("Successfuly created Account!");
+      toast.success("Please Log In Now!");
       setFirstName("");
       setLastName("");
       setEmail("");
       setPassword("");
       setConfirmPassword("");
+    }
+    if(res.status === 499)
+    {
+      toast.error("Password and Confirm Password not same!");
+    }
+    if(res.status === 498)
+    {
+      toast.error("User Already present!");
+      toast.error("Please Sign In!");
     }
   }
 
