@@ -34,7 +34,7 @@ router.post('/sign_up', async function (req, res) {
     let con_pass = req.body.confirmPassword;
     let rating = 5;
 
-    let pass = await bcrypt.hash(req.body.Password, 12);
+    let pass = await bcrypt.hash(req.body.password, 12);
     let present_earlier = await db.checkEmail(email);
 
     if (present_earlier === false) {
