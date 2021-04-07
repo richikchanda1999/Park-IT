@@ -69,7 +69,11 @@ function LoginForm(props) {
         }else if(res.status=== 590)
         {
             managerNotApproved();
+        }else if(res.status === 420)
+        {
+          toast.error("Enter a valid Email Id");
         }
+        
         authUpdate(false);
         return false;
     }

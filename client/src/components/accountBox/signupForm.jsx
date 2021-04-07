@@ -60,7 +60,7 @@ function SignUpForm() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ 'firstName': firstName, 'lastName': lastName, 'email': email, 'password': password, 'confirmPassword': confirmPassword }),
     };
-    let res = await fetch(`${REACT_APP_API_BACKEND}/auth/sign_up`,{mode: 'no-cors'}, requestOption);
+    let res = await fetch(`${REACT_APP_API_BACKEND}/auth/sign_up`, requestOption);
     console.log(res.status);
     console.log(res.body);
     if (res.status === 200) {
@@ -80,6 +80,10 @@ function SignUpForm() {
     {
       toast.error("User Already present!");
       toast.error("Please Sign In!");
+    }
+    if(res.status === 420)
+    {
+      toast.error("Enter a valid Email Id");
     }
   }
 

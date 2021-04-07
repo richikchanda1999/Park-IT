@@ -10,8 +10,9 @@ let countryCode, number, verificationID, service;
 router.post('/sign_in', async function (req, res) {
     let email = req.body.email;
     let password = req.body.password;
-
-    let info = await db.getPassword(email);
+    var mailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    if(email.match(mailformat)){
+          let info = await db.getPassword(email);
     if (info == null) res.status(598).send("Email does not exist!\n");
     else {
         let isEqual = await bcrypt.compare(password, info['pass']);
@@ -24,6 +25,11 @@ router.post('/sign_in', async function (req, res) {
             res.status(599).send("Password incorrect\n");
         }
     }
+    }
+    else{
+        res.status(420).send('enter a valid email id!');       
+    }
+    
 });
 
 router.post('/sign_up', async function (req, res) {
@@ -34,19 +40,25 @@ router.post('/sign_up', async function (req, res) {
     let con_pass = req.body.confirmPassword;
     let rating = 5;
 
-    let pass = await bcrypt.hash(req.body.Password, 12);
+    let pass = await bcrypt.hash(req.body.password, 12);
     let present_earlier = await db.checkEmail(email);
-
-    if (present_earlier === false) {
-        if (con_pass === password) {
-            console.log(first_name + " " + last_name + " " + email + " " + con_pass + " " + pass);
-            let ret = await db.signUp(first_name, last_name, email, pass, '', rating);
-            if (ret) res.status(200).send('');
-            else res.status(599).send('DB Error');
+    var mailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    if(email.match(mailformat)){
+        if (present_earlier === false) {
+            if (con_pass === password) {
+                console.log(first_name + " " + last_name + " " + email + " " + con_pass + " " + pass);
+                let ret = await db.signUp(first_name, last_name, email, pass, '', rating);
+                if (ret) res.status(200).send('');
+                else res.status(599).send('DB Error');
+            }
+            else res.status(499).send('Password does not match');
         }
-        else res.status(499).send('Password does not match');
+        else res.status(498).send('User already present!');
     }
-    else res.status(498).send('User already present!');
+    else{
+        res.status(420).send('enter a valid email id!');       
+    }
+    
 });
 
 router.post('/otp/send', async function (req, res) {
