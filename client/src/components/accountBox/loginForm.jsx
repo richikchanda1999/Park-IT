@@ -22,6 +22,7 @@ function LoginForm(props) {
   const [submitEnable, setEnabled] = useState(false);
   const { switchToSignup, switchToOTP } = useContext(AccountContext);
   const {authUpdate} = useContext(AuthContext);
+  //function email
 
   function onEmailChange(e) {
     let val = e.target.value;
@@ -65,6 +66,9 @@ function LoginForm(props) {
       emailNotPresent();
     } else if (res.status === 599) {
       passwordIncorrect();
+    }else if(res.status === 420)
+    {
+      toast.error("Enter a valid Email Id");
     }
     authUpdate(false);
     return false;

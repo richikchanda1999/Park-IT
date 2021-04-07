@@ -80,6 +80,10 @@ function SignUpForm() {
       toast.error("User Already present!");
       toast.error("Please Sign In!");
     }
+    else if(res.status === 420)
+    {
+      toast.error("Enter a valid Email Id");
+    }
   }
 
   return (

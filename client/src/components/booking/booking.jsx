@@ -133,14 +133,14 @@ function Booking(props) {
                     toast.success('Payment successful!');
                     let today = new Date();
                     let time = today.getHours() + ":" + today.getMinutes();
-                    let date = today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear();
+                    let date =  (today.getMonth() + 1) +'/' +today.getDate() + '/' + today.getFullYear();
                     let requestOption = {
                         method: "POST",
                         headers: {'Content-Type': 'application/json'},
                         body: JSON.stringify({
                             'email': Session.get("email"),
                             'parking_lot': selectedPark['place_id'],
-                            'entry_time': time + " " + date,
+                            'entry_time': date+" "+time,
                             'vehicle': vehicleNum,
                             'cost': amount,
                             'status': 'booked',

@@ -10,7 +10,13 @@ let countryCode, number, verificationID, service;
 router.post('/sign_in', async function (req, res) {
     let email = req.body.email;
     let password = req.body.password;
-
+    var mailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    if(email.match(mailformat)){
+         //do nothing
+    }
+    else{
+        res.status(420).send('enter a valid email id!');       
+    }
     let info = await db.getPassword(email);
     let approved = await db.isApproved(email);
     if (info == null) res.status(598).send("Email does not exist!\n");
@@ -41,7 +47,13 @@ router.post('/sign_up', async function (req, res) {
 
     let pass = await bcrypt.hash(password, 12);
     let present_earlier = await db.checkEmail(email);
-
+    var mailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    if(email.match(mailformat)){
+          //do nothing
+    }
+    else{
+        res.status(420).send('enter a valid email id!');       
+    }
     console.log(first_name, last_name, email, password, con_pass, pass, rating);
     if (present_earlier === false) {
         if (con_pass === password) {
