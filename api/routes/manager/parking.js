@@ -16,7 +16,8 @@ router.post('/vehicle_exit', async function (req, res) {
     let parking_lot = req.body.parking_lot;
     let vehicle = req.body.vehicle;
     let exit_time = req.body.exit_time;
-    let result = await db.vehicleExit(parking_lot, vehicle, exit_time);
+    let ratingManager = req.body.ratingManager;
+    let result = await db.vehicleExit(parking_lot, vehicle, exit_time, ratingManager);
     console.log(result);
     res.status(200).send(JSON.stringify(result));
 });
