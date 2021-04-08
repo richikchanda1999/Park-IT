@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Table =styled.table`
         width: 80%;
-        margin: 30px auto;
+        margin: 1px auto;
         border-collapse: collapse;
 `;
 export const Th =styled.th`
