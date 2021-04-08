@@ -10,12 +10,15 @@ import NavBar from "./components/nav/nav";
 import {AuthContext} from "./authContext";
 import {ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import RecipeReviewCard from "./components/auth/login";
+import {Container} from "reactstrap";
+import MediaControlCard from "./components/auth/login";
 
 const routes = {
-    '/': () => <AppContainer><AccountBox /></AppContainer>,
-    '/map': () => <MyMap />,
-    '/history': () => <MyHistory />,
-    '/booking': () => <Booking />
+    '/': () => <AppContainer><AccountBox/></AppContainer>,
+    '/map': () => <MyMap/>,
+    '/history': () => <MyHistory/>,
+    '/booking': () => <Booking/>
 };
 
 const AppContainer = styled.div`
@@ -23,6 +26,7 @@ const AppContainer = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
+  // background-color: 'rgba(227, 224, 219, 1)';
   background-image: url("/images/4.jpg");
   background-position: center;
   background-repeat: no-repeat;
@@ -56,5 +60,25 @@ function App() {
                 </div>
             </AuthContext.Provider>
 }
+
+// function App() {
+//     return <Container style={{
+//         width: '100%',
+//         height: '100%',
+//         display: 'flex',
+//         flexDirection: 'column',
+//         // backgroundColor: 'rgba(221, 210, 178, 1)',
+//         backgroundColor: 'rgb(167, 176, 124)',
+//         margin: '0%',
+//         padding: '0%',
+//         backgroundPosition: 'center',
+//         backgroundRepeat: 'no-repeat',
+//         backgroundSize: 'cover',
+//         alignItems: 'center',
+//         justifyContent: 'center'
+//     }
+//     }><MediaControlCard/></Container>
+//     // return <AppContainer><RecipeReviewCard /></AppContainer>
+// }
 
 export default App;

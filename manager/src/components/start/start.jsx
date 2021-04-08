@@ -47,12 +47,17 @@ function Content1() {
         autoClose: false,
         draggable: true
     });
+    const alreadyEntered = () => toast.info("Vehicle is Already in the Parking Lot", {
+        position: "top-center",
+        autoClose: false,
+        draggable: true
+    });
 
 
     async function onClick() {
         console.log(vehicle, vehicleType);
-        if (vehicle != "") {
-            if (vehicleType == "")
+        if (vehicle !== "") {
+            if (vehicleType === "")
                 setVehicleType("bike")
             var today = new Date();
             var time = today.getHours() + ":" + today.getMinutes();
@@ -75,8 +80,10 @@ function Content1() {
             if (res.status === 200) {
                 let val = await res.json();
                 console.log(val);
-                if (val == '-1')
+                if (val === '-1')
                     noSpace();
+                else if (val === '-2')
+                    alreadyEntered();
                 else
                     vehicleEnter();
                 setVehicleType(null);
