@@ -104,7 +104,7 @@ async function getParkingName(parking_id) {
     console.log(parking_id);
     var parking = await (await db.collection('parking_lots')).findOne({'place_id': parking_id});
     console.log(parking);
-    return parking['name'];
+    return parking!=null?parking['name']:"";
 }
 
 async function updateRating(email, entry_time, rating) {

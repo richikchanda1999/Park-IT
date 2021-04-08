@@ -8,22 +8,17 @@ import {
 import Session from "react-session-api";
 import {navigate, useQueryParams} from "hookrouter";
 import {toast} from "react-toastify";
-import styled from "styled-components";
+import FormHelperText from '@material-ui/core/FormHelperText';
+import Box from '@material-ui/core/Box';
+import Select from '@material-ui/core/Select';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import MenuItem from '@material-ui/core/MenuItem';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormControl from '@material-ui/core/FormControl';
+import { makeStyles } from '@material-ui/core/styles';
 
 const {REACT_APP_API_BACKEND} = process.env;
-const BoxContainer = styled.div`
-  width: 50%;
-  height: auto;
-  display: flex;
-  align: center;
-  margin: auto;
-  padding: 20px;
-  flex-direction: column;
-  border-radius: 19px;
-  box-shadow: 0 0 2px rgb(15, 15, 15);
-  position: relative;
-  overflow: hidden;
-`;
 function Booking(props) {
     const [queryParams] = useQueryParams();
 
@@ -39,9 +34,16 @@ function Booking(props) {
     let place_id = selectedPark['place_id'];
     let name = selectedPark['name'];
     let rateChart = selectedPark['rate_per_hour'];
-
+    const useStyles = makeStyles((theme) => ({
+        formControl: {
+          margin: theme.spacing(1),
+          minWidth: 120,
+        },
+        selectEmpty: {
+          marginTop: theme.spacing(2),
+        },
+      }));
     let statusFetched = false;
-
     const getStatus = useCallback(async () => {
         if (!statusFetched) {
             let requestOption = {
@@ -172,7 +174,27 @@ function Booking(props) {
         const paymentObject = new window.Razorpay(options);
         paymentObject.open();
     }
-
+    function checkValidity()
+    {
+            var vehicleformat = /^[A-Z]{2}[ -][0-9]{1,2}(?: [A-Z])?(?: [A-Z]*)? [0-9]{4}$/;
+            console.log(vehicleNum);
+            console.log(vehicleType);
+            if(vehicleNum.match(vehicleformat)){
+                console.log("matched!");
+                if(vehicleType.match("truck") || vehicleType.match("car") || vehicleType.match("bike") )
+                {
+                    displayRazorpay();
+                }
+                else
+                {
+                    toast.error('Please Select Your Vehicle Type!');
+                }
+            }
+            else
+            {
+                toast.error('Please Enter a valid Vehicle Number!');
+            }
+    }
     function handleChange(event) {
         console.log("called!");
         const target = event.target;
@@ -204,13 +226,52 @@ function Booking(props) {
         justifyContent: "center",
         alignItems: "center",
     }
-
+    const boxStyle={
+        width: "70%",
+        height: "auto",
+        display: "flex",
+        align: "center",
+        justifyContent: "flex-start",
+        // background:"rgb(102, 153, 102)",
+        margin: "100px auto",
+        padding: "20px",
+        flexDirection:"row",
+        borderRadius: "19px",
+        position: "relative",
+        overflow: "hidden",       
+    }
+    const boxStyle2={
+        width: "50%",
+        height: "auto",
+        display: "flex",
+        align: "center",
+        margin: "auto",
+        padding: "20px",
+        flexDirection: "column",
+        borderRadius: "19px",
+        position: "relative",
+        overflow: "hidden",
+    }
+    //background: "rgb(31, 138, 112)
+    const classes = useStyles();
     return (
-        <body style={{background: "rgb(31, 138, 112)"}}>
+        <body style={{background:"rgb(240, 240, 240)",fontFamily:"'Nunito', sans-serif"}}>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
-        <BoxContainer>
-            <div>
-                <h1>The Rate chart of {name} is:</h1>
+        <h1 style={{textAlign:"center"}}>The Rate chart of {name} :</h1>
+        <Box
+        boxShadow={6}
+        bgcolor="rgb(102, 153, 102)"
+          m={1}
+          p={1}
+         style={boxStyle}>
+        <Box
+        boxShadow={0}
+        bgcolor="rgb(102, 153, 102)"
+          m={1}
+          p={1}
+         style={boxStyle2}>
+            <div >
+                <h2>Rate Chart:</h2>
                 <Table>
                     <Tr>
                         <Th>Vehicle Type </Th>
@@ -230,16 +291,49 @@ function Booking(props) {
                 </Table>
                 <h1>Current Status: {Math.max(tot - current, 0)}/{tot}</h1>
             </div>
+            </Box>
+            <Box
+            boxShadow={0}
+            bgcolor="rgb(102, 153, 102)"
+            m={1}
+            p={1}
+            style={boxStyle2}>
             <div styles={myStyle}>
                 <form>
                     <label>
                         <h3>Please Enter Your vehicle Number:</h3>
-                        <input type="text" name="vehicleNum" value={value} onChange={handleChange}/>
+                        <div style={{backgroundColor:"rgb(240, 240, 240)",width:"50%"}}>
+                        <TextField
+                        required
+                         id="standard-required"
+                         label="Required"
+                         name="vehicleNum"
+                         placeholder="eg:AH 17 FT 2387"
+                         defaultValue=""
+                         variant="filled"
+                         onChange={handleChange}
+                        />
+                        </div>
+                        {/* <input type="text" placeholder="Vehicle Number"name="vehicleNum" value={value} onChange={handleChange}/> */}
                     </label>
                     <br/>
                     <label>
                         <h3>Please Choose your vehicle type:</h3>
-                        <select
+                        <FormControl className={classes.formControl}>
+                        <InputLabel id="demo-simple-select-helper-label">Vehicle Type</InputLabel>
+                        <Select
+                            labelId="demo-simple-select-helper-label"
+                            id="demo-simple-select-helper"
+                            value={vehicleType}
+                            name="vehicleType"
+                            onChange={handleChange}
+                            >
+                            <MenuItem value={"car"}>Car</MenuItem>
+                            <MenuItem value={"bike"}>Bike</MenuItem>
+                            <MenuItem value={"truck"}>Truck</MenuItem>
+                        </Select>
+                        </FormControl>
+                        {/* <select
                             value={vehicleType}
                             name="vehicleType"
                             onChange={handleChange}
@@ -248,15 +342,16 @@ function Booking(props) {
                             <option value="car">car</option>
                             <option value="bike">bike</option>
                             <option value="truck">truck</option>
-                        </select>
+                        </select> */}
                     </label>
                     <br/><br/>
-                    <h1>You Need To pay {amount} for first hour of booking</h1>
+                        {amount>0&&<h2>You Need To pay Rs.{amount} for first hour of booking</h2>}
                 </form>
-                <button onClick={displayRazorpay}>Proceed to Payment</button>
+                <Button onClick={checkValidity} variant="contained" color="primary" >Proceed to Payment</Button>
 
             </div>
-            </BoxContainer>
+            </Box>
+            </Box>
         {/* </div> */}
         </body>
     );
