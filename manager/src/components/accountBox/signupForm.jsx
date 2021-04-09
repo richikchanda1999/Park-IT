@@ -13,51 +13,51 @@ import {toast} from 'react-toastify';
 const { REACT_APP_API_BACKEND } = process.env;
 
 function SignUpForm() {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [submitEnable, setEnabled] = useState(false);
+  const [number ,setNumber]= useState("");
   const { switchToSignin } = useContext(AccountContext);
 
-  function onLastNameChange(ln) {
-    let val = ln.target.value;
-    setLastName(val);
-    setEnabled(password.length > 0 && firstName.length > 0 && email.length > 0 && confirmPassword.length > 0 && val.length > 0);
-  }
-
-  function onFirstNameChange(fn) {
+  function onNameChange(fn) {
     let val = fn.target.value;
-    setFirstName(val);
-    setEnabled(password.length > 0 && lastName.length > 0 && email.length > 0 && confirmPassword.length > 0 && val.length > 0);
+    setName(val);
+    setEnabled(password.length > 0  && email.length > 0 && confirmPassword.length > 0 && val.length > 0 && number.length>0);
   }
 
   function onEmailChange(e) {
     let val = e.target.value;
     setEmail(val);
-    setEnabled(password.length > 0 && firstName.length > 0 && lastName.length > 0 && confirmPassword.length > 0 && val.length > 0);
+    setEnabled(password.length > 0 && name.length > 0  && confirmPassword.length > 0 && val.length > 0 && number.length>0);
   }
 
   function onPasswordChange(p) {
     let val = p.target.value;
     setPassword(val);
-    setEnabled(firstName.length > 0 && lastName.length > 0 && email.length > 0 && confirmPassword.length > 0 && val.length > 0);
+    setEnabled(name.length > 0  && email.length > 0 && confirmPassword.length > 0 && val.length > 0 && number.length>0);
   }
 
   function onConfirmPasswordChange(p) {
     let val = p.target.value;
     setConfirmPassword(val);
-    setEnabled(password.length > 0 && firstName.length > 0 && lastName.length > 0 && email.length > 0 && val.length > 0);
+    setEnabled(password.length > 0 && name.length > 0  && email.length > 0 && val.length > 0 && number.length>0);
+  }
+
+  function onNumberChange(p) {
+    let val=p.target.value;
+    setNumber(val);
+    setEnabled(password.length>0 && name.length > 0  && email.length > 0 && val.length > 0 && confirmPassword.length>0);
   }
 
   async function onSignUp() {
     if (!submitEnable) return;
-    console.log(`FirstName: ${firstName},LastName: ${lastName}, Email: ${email}, Password: ${password}`);
+    console.log(`Name: ${name},Number:${number} Email: ${email}, Password: ${password}`);
     let requestOption = {
       method: "POST",
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ 'firstName': firstName, 'lastName': lastName, 'email': email, 'password': password, 'confirmPassword': confirmPassword }),
+      body: JSON.stringify({ 'name': name,'number':number, 'email': email, 'password': password, 'confirmPassword': confirmPassword }),
     };
     let res = await fetch(`${REACT_APP_API_BACKEND}/manager/auth/sign_up`, requestOption);
     console.log(res.status);
@@ -65,9 +65,9 @@ function SignUpForm() {
     if (res.status === 200) {
       toast.success("Successfuly created Account!");
       toast.success("Please Log In Now!");
-      setFirstName("");
-      setLastName("");
+      setName("");
       setEmail("");
+      setNumber("");
       setPassword("");
       setConfirmPassword("");
     }
@@ -89,8 +89,8 @@ function SignUpForm() {
   return (
       <BoxContainer>
         <FormContainer>
-          <Input value={firstName} type="text" placeholder="First Name" onChange={onFirstNameChange} />
-          <Input value={lastName} type="text" placeholder="Last Name" onChange={onLastNameChange} />
+          <Input value={name} type="text" placeholder="Name" onChange={onNameChange} />
+          <Input value={number} type="text" placeholder="Mobile No." onChange={onNumberChange} />
           <Input value={email} type="email" placeholder="Email" onChange={onEmailChange} />
           <Input value={password} type="password" placeholder="Password" onChange={onPasswordChange} />
           <Input value={confirmPassword} type="password" placeholder="Confirm Password" onChange={onConfirmPasswordChange} />
