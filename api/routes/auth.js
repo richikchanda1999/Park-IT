@@ -33,11 +33,11 @@ router.post('/sign_in', async function (req, res) {
 });
 
 router.post('/sign_up', async function (req, res) {
-    let first_name = req.body.firstName;
-    let last_name = req.body.lastName;
+    let name = req.body.name;
     let email = req.body.email;
     let password = req.body.password;
     let con_pass = req.body.confirmPassword;
+    let number =req.body.number;
     let rating = 5;
 
     let pass = await bcrypt.hash(req.body.password, 12);
@@ -46,8 +46,8 @@ router.post('/sign_up', async function (req, res) {
     if(email.match(mailformat)){
         if (present_earlier === false) {
             if (con_pass === password) {
-                console.log(first_name + " " + last_name + " " + email + " " + con_pass + " " + pass);
-                let ret = await db.signUp(first_name, last_name, email, pass, '', rating);
+                console.log(name + " " +number+" " + email + " " + con_pass + " " + pass);
+                let ret = await db.signUp(name , number , email , pass, rating);
                 if (ret) res.status(200).send('');
                 else res.status(599).send('DB Error');
             }

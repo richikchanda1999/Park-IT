@@ -38,9 +38,9 @@ router.post('/sign_in', async function (req, res) {
 });
 
 router.post('/sign_up', async function (req, res) {
-    let first_name = req.body.firstName;
-    let last_name = req.body.lastName;
+    let name = req.body.name;
     let email = req.body.email;
+    let number= req.body.number;
     let password = req.body.password;
     let con_pass = req.body.confirmPassword;
     let rating = 5;
@@ -49,20 +49,20 @@ router.post('/sign_up', async function (req, res) {
     let present_earlier = await db.checkEmail(email);
     var mailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
     if(email.match(mailformat)){
-          //do nothing
+        console.log(name, number, email, password, con_pass, pass, rating);
+        if (present_earlier === false) {
+            if (con_pass === password) {
+                console.log(name + " " + number+ " " + email + " " + con_pass + " " + pass);
+                let ret = await db.signUp(name, number, email, pass, rating, false);
+                if (ret) res.status(200).send('');
+                else res.status(599).send('DB Error');
+            } else res.status(499).send('Password does not match');
+        } else res.status(498).send('User already present!');
     }
     else{
         res.status(420).send('enter a valid email id!');       
     }
-    console.log(first_name, last_name, email, password, con_pass, pass, rating);
-    if (present_earlier === false) {
-        if (con_pass === password) {
-            console.log(first_name + " " + last_name + " " + email + " " + con_pass + " " + pass);
-            let ret = await db.signUp(first_name, last_name, email, pass, '', rating, false);
-            if (ret) res.status(200).send('');
-            else res.status(599).send('DB Error');
-        } else res.status(499).send('Password does not match');
-    } else res.status(498).send('User already present!');
+    
 });
 
 router.post('/otp/send', async function (req, res) {

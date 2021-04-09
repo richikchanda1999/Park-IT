@@ -15,14 +15,13 @@ async function getPassword(email) {
     return doc != null ? doc : null;
 }
 
-async function signUp(first_name, last_name, email, pass, number, rating) {
+async function signUp(name, number, email, pass, rating) {
     let db = client.db();
     let ret = await (await db.collection('users')).insertOne({
-        firstName: first_name,
-        lastName: last_name,
+        name: name,
+        number: number,
         email: email,
         pass: pass,
-        number: number,
         rating: rating
     });
     return ret.insertedCount === 1;
