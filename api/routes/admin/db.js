@@ -14,8 +14,8 @@ async function getManager() {
     let status = [];
     await Managers.forEach((history) => {
         status.push({
-            'firstName': history['firstName'],
-            'lastName': history['lastName'],
+            'Name': history['name'],
+            'Number': history['number'],
             'email': history['email'],
             'parking_id': history['parking_id'],
             'is_approved': history['is_approved']
@@ -58,8 +58,8 @@ async function getUser() {
     let status = [];
     await Users.forEach((history) => {
         status.push({
-            'firstName': history['firstName'],
-            'lastName': history['lastName'],
+            'Name': history['name'],
+            'Number': history['number'],
             'email': history['email'],
             'rating': history['rating']
         })
