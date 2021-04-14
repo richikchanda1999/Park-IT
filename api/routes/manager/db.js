@@ -13,6 +13,8 @@ async function init() {
 async function getPassword(email) {
     let db = client.db();
     let doc = await (await db.collection('managers')).findOne({'email': email});
+    let parking_name = await (await db.collection('parking_lots')).findOne({'place_id': doc['parking_id']});
+    doc['parking_name'] = parking_name['name'];
     return doc != null ? doc : null;
 }
 

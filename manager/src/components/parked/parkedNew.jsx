@@ -7,6 +7,7 @@ const {REACT_APP_API_BACKEND} = process.env;
 function ManagerHistory() {
     let email = Session.get('email');
     const [userStatus, setUserStatus] = useState([]);
+    let parkingName = "Current Parking Status ["+Session.get('parking_name')+"]";
 
     const getHistory = useCallback(async () => {
         let requestOption = {
@@ -48,7 +49,7 @@ function ManagerHistory() {
 
     return (
         <div>
-            <MaterialTable title="Current Parking Status"
+            <MaterialTable title={parkingName}
                            data={userStatus}
                            columns={column}
                            options={{

@@ -207,6 +207,7 @@ const StartContainer = styled.div`
 function MyStart() {
   return (
     <StartContainer style={{backgroundColor: 'white'}}>
+      <h2>{Session.get('parking_name')}</h2>
     <BoxContainer >
       <Tabs activeTab="1" className="" ulClassName="" activityClassName="bg-success" onClick={(event, tab) => console.log(event, tab)}>
             <Tab title=" ENTRY " className="mr-3" >
