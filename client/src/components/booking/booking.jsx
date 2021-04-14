@@ -122,6 +122,7 @@ function Booking(props) {
                     razorpayPaymentId: response.razorpay_payment_id,
                     razorpayOrderId: response.razorpay_order_id,
                     razorpaySignature: response.razorpay_signature,
+                    user:Session.get("user_id")
                 };
                 let requestOption = {
                     method: "POST",
@@ -130,7 +131,9 @@ function Booking(props) {
                 };
                 const result = await fetch(`${REACT_APP_API_BACKEND}/payment/success`, requestOption);
                 const ar = await result.json();
-                console.log("here:", ar.msg);
+                console.log("here:", ar.msg," PaymentId:",ar.paymentId);
+                const payment_id=ar.paymentId;
+                console.log(Session.get("user_id"));
                 if (ar.msg === "success") {
                     toast.success('Payment successful!');
                     let today = new Date();
@@ -141,11 +144,14 @@ function Booking(props) {
                         headers: {'Content-Type': 'application/json'},
                         body: JSON.stringify({
                             'email': Session.get("email"),
+                            'id': Session.get("user_id"),
                             'parking_lot': selectedPark['place_id'],
                             'entry_time': date+" "+time,
                             'vehicle': vehicleNum,
                             'cost': amount,
                             'status': 'booked',
+                            'payment_id':payment_id,
+                            'place_id':place_id,
                         })
                     }
                     console.log(requestOption);
@@ -155,7 +161,9 @@ function Booking(props) {
                         setVehicleNum("");
                         setVehicleType("");
                     }
-                    else toast.error('Could not book!');
+                    else if(booked.status ===501){toast.error('Invalid booking!');}
+                    else if(booked.status === 500){toast.error('Booking Failed!'); }
+
                 } else {
                     toast.error('Payment incomplete!');
                 }
@@ -183,7 +191,14 @@ function Booking(props) {
                 console.log("matched!");
                 if(vehicleType.match("truck") || vehicleType.match("car") || vehicleType.match("bike") )
                 {
+                    if(current<tot)
+                    {
                     displayRazorpay();
+                    }
+                    else{
+                        toast.error('Booking full!!');
+                        toast.error('Please choose some other parking space.');
+                    }
                 }
                 else
                 {
