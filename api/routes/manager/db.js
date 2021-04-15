@@ -52,10 +52,9 @@ async function getParkingLotId(email) {
 
 async function getCurrentParking(parkingId) {
     let db = client.db();
-    let currParking = await (await db.collection('parking_status')).find({'parking_lot': parkingId});
+    let currParking = await (await db.collection('parking_status')).find({'parking_lot': parkingId, 'status':{ "$in": ["booked", "parked"] }});
     let status = [];
     await currParking.forEach((history) => {
-        if (history['exit_time'] == "")
             status.push({
                 'vehicle': history['vehicle'],
                 'parking_lot': history['parking_lot'],
@@ -63,6 +62,7 @@ async function getCurrentParking(parkingId) {
                 'status': history['status']
             })
     });
+    console.log(status);
     return status;
 }
 

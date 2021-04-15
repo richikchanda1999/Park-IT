@@ -51,7 +51,12 @@ function MyManager() {
     }, []);
 
     const column = [
-        {title: 'Name', field: 'Name'},
+        {title: 'Name', field: 'Name',
+            cellStyle: {
+                backgroundColor: '#039be5',
+                color: '#FFF'
+            },
+        },
         {title: 'Number', field: 'Number'},
         {title: 'Email', field: 'email'},
         {title: 'Parking Lot', field: 'parking_id'},
