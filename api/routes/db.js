@@ -15,26 +15,44 @@ async function getPassword(email) {
     return doc != null ? doc : null;
 }
 
-async function signUp(first_name, last_name, email, pass, number, rating) {
+async function signUp(name, number, email, pass, rating) {
     let db = client.db();
     let ret = await (await db.collection('users')).insertOne({
-        firstName: first_name,
-        lastName: last_name,
+        name: name,
+        number: number,
         email: email,
         pass: pass,
-        number: number,
         rating: rating
     });
     return ret.insertedCount === 1;
 }
-
+async function order_done(user_id,razorpayPaymentId)
+{
+    let db=client.db();
+    let ret =await (await db.collection('order_successful')).insertOne({
+        user:user_id,
+        order_id:razorpayPaymentId
+    });
+    return true;
+}
+async function validate_booking(user_id,paymentId)
+{
+    let db=client.db();
+    let ret =await (await db.collection('order_successful')).findOne({user:user_id,order_id:paymentId});
+    return ret!=null;
+}
 async function checkEmail(email) {
     let db = client.db();
     let check = await (await db.collection('users')).findOne({'email': email});
     console.log(`User present: ${check != null}`);
     return check != null;
 }
-
+async function update_occupancy(place_id)
+{
+    let db=client.db();
+    await (await db.collection('parking_curr_data')).updateOne({'place_id': place_id}, {$inc: {'CAP': 1}});
+    return true;
+}
 async function getNearbyParkingLots(lat, lon, rad) {
     let db = client.db();
     let parkingLotsCursor = await (await db.collection('parking_lots')).find();
@@ -128,3 +146,6 @@ module.exports.getUserHistory = getUserHistory;
 module.exports.booking_complete = booking_complete;
 module.exports.getParkingName = getParkingName;
 module.exports.updateRating = updateRating;
+module.exports.order_done=order_done;
+module.exports.validate_booking=validate_booking;
+module.exports.update_occupancy=update_occupancy;
