@@ -43,6 +43,7 @@ router.post('/sign_up', async function (req, res) {
     let number= req.body.number;
     let password = req.body.password;
     let con_pass = req.body.confirmPassword;
+    let parkingLot = req.body.parkingLot;
     let rating = 5;
 
     let pass = await bcrypt.hash(password, 12);
@@ -53,7 +54,7 @@ router.post('/sign_up', async function (req, res) {
         if (present_earlier === false) {
             if (con_pass === password) {
                 console.log(name + " " + number+ " " + email + " " + con_pass + " " + pass);
-                let ret = await db.signUp(name, number, email, pass, rating, false);
+                let ret = await db.signUp(name, number, email, pass, parkingLot, rating, false);
                 if (ret) res.status(200).send('');
                 else res.status(599).send('DB Error');
             } else res.status(499).send('Password does not match');

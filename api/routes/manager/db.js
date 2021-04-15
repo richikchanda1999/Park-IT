@@ -18,13 +18,14 @@ async function getPassword(email) {
     return doc != null ? doc : null;
 }
 
-async function signUp(name, number, email, pass, rating, isApproved) {
+async function signUp(name, number, email, pass, parking_lot, rating, isApproved) {
     let db = client.db();
     let ret = await (await db.collection('managers')).insertOne({
         name: name,
         number:number,
         email: email,
         pass: pass,
+        parking_lot: parking_lot,
         rating: rating,
         is_approved: isApproved
     });
