@@ -47,7 +47,7 @@ function LoginForm(props) {
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({'email': email, 'password': password}),
         };
-        let res = await fetch(`${REACT_APP_API_BACKEND}/manager/auth/sign_in`, requestOptions);
+        let res = await fetch(`http://localhost:9000/manager/auth/sign_in`, requestOptions);
         console.log(res.status);
         if (res.status === 200) {
             success();
@@ -57,6 +57,7 @@ function LoginForm(props) {
             Session.set("user_id", data._id);
             Session.set("name", data.firstName + " " + data.lastName);
             Session.set("parking_id", data['parking_id']);
+            Session.set("parking_name", data['parking_name']);
             setEmail("");
             setPassword("");
             authUpdate(true);

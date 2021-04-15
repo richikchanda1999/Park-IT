@@ -51,8 +51,8 @@ function MyManager() {
     }, []);
 
     const column = [
-        {title: 'First Name', field: 'firstName'},
-        {title: 'Last Name', field: 'lastName'},
+        {title: 'Name', field: 'Name'},
+        {title: 'Number', field: 'Number'},
         {title: 'Email', field: 'email'},
         {title: 'Parking Lot', field: 'parking_id'},
         {title: 'Approved', field: 'is_approved', render: rowData => <ToggleButton

@@ -13,6 +13,8 @@ async function init() {
 async function getPassword(email) {
     let db = client.db();
     let doc = await (await db.collection('managers')).findOne({'email': email});
+    let parking_name = await (await db.collection('parking_lots')).findOne({'place_id': doc['parking_id']});
+    doc['parking_name'] = parking_name['name'];
     return doc != null ? doc : null;
 }
 
@@ -83,7 +85,6 @@ async function vehicleEnter(parking_lot, vehicle, vehicleType, entry_time) {
     if (park['CAP'] === park['TPS']) {
         return -1;
     }
-    await (await db.collection('parking_curr_data')).updateOne({'place_id': parking_lot}, {$inc: {'CAP': 1}});
     if (book != null) {
         let ret = await (await db.collection('parking_status')).updateOne({
             'vehicle': vehicle,
@@ -101,33 +102,25 @@ async function vehicleEnter(parking_lot, vehicle, vehicleType, entry_time) {
             'entry_time': entry_time,
             'status': "parked"
         });
+        await (await db.collection('parking_curr_data')).updateOne({'place_id': parking_lot}, {$inc: {'CAP': 1}});
         return ret.insertedCount === 1;
     }
 }
 
 
-async function vehicleExit(parking_lot, vehicle, exit_time) {
-    let db = client.db();
-    let book = await (await db.collection('parking_status')).findOne({
-        'vehicle': vehicle,
-        'parking_lot': parking_lot,
-        'status': "parked"
-    });
-    let park = await (await db.collection('parking_curr_data')).findOne({'place_id': parking_lot});
-    if (park['CAP'] === 0) {
+async function vehicleExit(parking_lot, vehicle, exit_time, ratingManager){
+    var db = client.db();
+    var book = await (await db.collection('parking_status')).findOne({'vehicle': vehicle, 'parking_lot': parking_lot, 'status': "parked" });
+    var park = await (await db.collection('parking_curr_data')).findOne({'place_id': parking_lot });
+    if(park['CAP'] == 0){
         return -1;
     }
-    if (book == null) {
+    if(book == null){
         return -1;
     }
-    if (book['email'] === 'other') {
-        await (await db.collection('parking_curr_data')).updateOne({'place_id': parking_lot}, {$inc: {'CAP': -1}});
-        let ret = await (await db.collection('parking_status')).deleteOne({
-            'email': "other",
-            'vehicle': vehicle,
-            'parking_lot': parking_lot,
-            'status': "parked"
-        });
+    if(book['email'] == 'other'){
+        await (await db.collection('parking_curr_data')).updateOne({'place_id': parking_lot }, { $inc: {'CAP': -1}});
+        var ret = await (await db.collection('parking_status')).deleteOne({'email': "other", 'vehicle': vehicle, 'parking_lot': parking_lot, 'status': "parked" });
         const dateOneObj = new Date(book['entry_time']);
         console.log(dateOneObj);
         const dateTwoObj = new Date(exit_time);
@@ -135,14 +128,15 @@ async function vehicleExit(parking_lot, vehicle, exit_time) {
         const milliseconds = Math.abs(dateTwoObj - dateOneObj);
         const hours = milliseconds / 36e5;
 
-        let parking = await (await db.collection('parking_lots')).findOne({'place_id': parking_lot});
-        let rate = parking['rate_per_hour'][book['vehicleType']];
+        var parking = await (await db.collection('parking_lots')).findOne({'place_id': parking_lot });
+        var rate = parking['rate_per_hour'][book['vehicleType']];
         cost = (Math.ceil(hours)) * rate;
         console.log(cost);
 
         return cost;
-    } else {
-        await (await db.collection('parking_curr_data')).updateOne({'place_id': parking_lot}, {$inc: {'CAP': -1}});
+    }
+    else{
+        await (await db.collection('parking_curr_data')).updateOne({'place_id': parking_lot }, { $inc: {'CAP': -1}});
         const dateOneObj = new Date(book['entry_time']);
         console.log(dateOneObj);
         const dateTwoObj = new Date(exit_time);
@@ -150,17 +144,32 @@ async function vehicleExit(parking_lot, vehicle, exit_time) {
         const milliseconds = Math.abs(dateTwoObj - dateOneObj);
         const hours = milliseconds / 36e5;
 
-        let parking = await (await db.collection('parking_lots')).findOne({'place_id': parking_lot});
-        let rate = parking['rate_per_hour'][book['vehicleType']];
-        cost = (Math.ceil(hours) - 1) * rate;
+        var parking = await (await db.collection('parking_lots')).findOne({'place_id': parking_lot });
+        var rate = parking['rate_per_hour'][book['vehicleType']];
+        cost = (Math.ceil(hours)-1) * rate;
         console.log(cost);
 
-        let ret = await (await db.collection('parking_status')).updateOne({
-            'vehicle': vehicle,
-            'parking_lot': parking_lot,
-            'status': "parked"
-        }, {$set: {'exit_time': exit_time, 'status': "complete", 'cost': (cost + rate)}});
+        var ret = await (await db.collection('parking_status')).updateOne({
+             'vehicle': vehicle,
+             'parking_lot': parking_lot,
+             'status': "parked"},
+              { $set: {'exit_time':exit_time, 'status': "complete", 'cost': (cost+rate), 'ratingManager': ratingManager}});
 
+        console.log(book['email']);
+        let UserDetails = await (await db.collection('parking_status')).find({ 'email': book['email']});
+        let sum = 0;
+        let length = 0;
+        await UserDetails.forEach((UserDetail) => {
+            if(UserDetail['ratingManager'] > "0"){
+                sum += (parseInt(UserDetail['ratingManager']));
+                length++;
+            }
+        });
+        sum = sum/length;
+        console.log(sum);
+        let ret1 = await (await db.collection('users')).updateOne({
+             'email': book['email']}, { $set: {'rating': sum}});
+    
         return cost;
     }
 }
