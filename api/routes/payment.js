@@ -83,13 +83,12 @@ router.post("/booked",async (req,res)=>{
     let cost = req.body.cost;
     let status=req.body.status;
     let payment_id=req.body.payment_id;
-    let place_id=req.body.place_id;
     let validate_booking=await db.validate_booking(id,payment_id);
     if(validate_booking)
     {
         let booked= await db.booking_complete(email,parking_lot,entry_time,vehicleNum,cost,status);
         if(booked){
-            let update_occupancy =await db.update_occupancy(place_id);
+            let update_occupancy =await db.update_occupancy(parking_lot);
             res.status(200).send('booking_done');
         }
         else{
