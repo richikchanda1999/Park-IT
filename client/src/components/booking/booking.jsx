@@ -192,13 +192,10 @@ function Booking(props) {
                 if(vehicleType.match("truck") || vehicleType.match("car") || vehicleType.match("bike") )
                 {
                     if(current<tot)
-                    {
-                    displayRazorpay();
-                    }
-                    else{
-                        toast.error('Booking full!!');
-                        toast.error('Please choose some other parking space.');
-                    }
+                        displayRazorpay();
+                    else
+                        toast.error('Booking full!! Please choose some other parking space.');
+
                 }
                 else
                 {

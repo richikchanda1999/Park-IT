@@ -4,7 +4,7 @@ const Razorpay = require("razorpay");
 const shortid = require('shortid');
 const cors = require('cors')
 const router = express.Router();
-const crypto= require('crypto');
+const crypto = require('crypto');
 let db = require('./db');
 
 router.post("/order", async (req, res) => {
@@ -15,9 +15,9 @@ router.post("/order", async (req, res) => {
             key_secret: process.env.RAZORPAY_SECRET,
         });
         console.log(req.body);
-        const payment_capture=1;
+        const payment_capture = 1;
         const options = {
-            amount: req.body.amount*100, // amount in smallest currency unit
+            amount: req.body.amount * 100, // amount in smallest currency unit
             currency: "INR",
             receipt: shortid.generate(),
             payment_capture
@@ -45,7 +45,7 @@ router.post("/success", async (req, res) => {
             user,
         } = req.body;
         console.log(orderCreationId);
-        console.log("In success: userId",user); 
+        console.log("In success: userId", user);
         // Creating our own digest
         // The format should be like this:
         // digest = hmac_sha256(orderCreationId + "|" + razorpayPaymentId, secret);
@@ -57,11 +57,11 @@ router.post("/success", async (req, res) => {
 
         // comaparing our digest with the actual signature
         if (digest !== razorpaySignature)
-            return res.status(400).json({ msg: "Transaction not legit!" });
+            return res.status(400).json({msg: "Transaction not legit!"});
 
         // THE PAYMENT IS LEGIT & VERIFIED
         // YOU CAN SAVE THE DETAILS IN YOUR DATABASE IF YOU WANT
-        const enter=await db.order_done(user,razorpayPaymentId);
+        const enter = await db.order_done(user, razorpayPaymentId);
         res.json({
             msg: "success",
             orderId: razorpayOrderId,
@@ -73,31 +73,29 @@ router.post("/success", async (req, res) => {
     }
 });
 
-router.post("/booked",async (req,res)=>{
+router.post("/booked", async (req, res) => {
     console.log(req.body);
     let email = req.body.email;
-    let id= req.body.id;
+    let id = req.body.id;
     let parking_lot = req.body.parking_lot;
     let entry_time = req.body.entry_time;
     let vehicleNum = req.body.vehicle;
     let cost = req.body.cost;
-    let status=req.body.status;
-    let payment_id=req.body.payment_id;
-    let place_id=req.body.place_id;
-    let validate_booking=await db.validate_booking(id,payment_id);
-    if(validate_booking)
-    {
-        let booked= await db.booking_complete(email,parking_lot,entry_time,vehicleNum,cost,status);
-        if(booked){
-            let update_occupancy =await db.update_occupancy(place_id);
+    let status = req.body.status;
+    let payment_id = req.body.payment_id;
+    let place_id = req.body.place_id;
+    let validate_booking = await db.validate_booking(id, payment_id);
+    if (validate_booking) {
+        let booked = await db.booking_complete(email, parking_lot, entry_time, vehicleNum, cost, status);
+        if (booked) {
+            let update_occupancy = await db.update_occupancy(place_id);
             res.status(200).send('booking_done');
-        }
-        else{
-        res.status(500).send('booking_not_confirmed');
+        } else {
+            res.status(500).send('booking_not_confirmed');
         }
     } else {
         res.status(501).send('booking_not_validated');
     }
 });
 
-module.exports= router;
+module.exports = router;
