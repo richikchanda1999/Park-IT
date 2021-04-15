@@ -42,8 +42,10 @@ router.post("/success", async (req, res) => {
             razorpayPaymentId,
             razorpayOrderId,
             razorpaySignature,
+            user,
         } = req.body;
         console.log(orderCreationId);
+        console.log("In success: userId",user); 
         // Creating our own digest
         // The format should be like this:
         // digest = hmac_sha256(orderCreationId + "|" + razorpayPaymentId, secret);
@@ -59,7 +61,7 @@ router.post("/success", async (req, res) => {
 
         // THE PAYMENT IS LEGIT & VERIFIED
         // YOU CAN SAVE THE DETAILS IN YOUR DATABASE IF YOU WANT
-
+        const enter=await db.order_done(user,razorpayPaymentId);
         res.json({
             msg: "success",
             orderId: razorpayOrderId,
@@ -74,17 +76,27 @@ router.post("/success", async (req, res) => {
 router.post("/booked",async (req,res)=>{
     console.log(req.body);
     let email = req.body.email;
+    let id= req.body.id;
     let parking_lot = req.body.parking_lot;
     let entry_time = req.body.entry_time;
     let vehicleNum = req.body.vehicle;
     let cost = req.body.cost;
-    status=req.body.status;
-    let booked= await db.booking_complete(email,parking_lot,entry_time,vehicleNum,cost,status);
-    if(booked)
+    let status=req.body.status;
+    let payment_id=req.body.payment_id;
+    let place_id=req.body.place_id;
+    let validate_booking=await db.validate_booking(id,payment_id);
+    if(validate_booking)
     {
-        res.status(200).send('booking_done');
-    } else {
+        let booked= await db.booking_complete(email,parking_lot,entry_time,vehicleNum,cost,status);
+        if(booked){
+            let update_occupancy =await db.update_occupancy(place_id);
+            res.status(200).send('booking_done');
+        }
+        else{
         res.status(500).send('booking_not_confirmed');
+        }
+    } else {
+        res.status(501).send('booking_not_validated');
     }
 });
 

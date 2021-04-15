@@ -7,7 +7,7 @@ require('dotenv').config();
 
 let countryCode, number, verificationID, service;
 
-router.post('/sign_in', async function (req, res) {
+router.post('/sign_in', async function (req, res) { 
     let email = req.body.email;
     let password = req.body.password;
     var mailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
