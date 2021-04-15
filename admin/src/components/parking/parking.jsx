@@ -33,7 +33,12 @@ function MyParking() {
 
 
     const column = [
-        {title: 'Name', field: 'name'},
+        {title: 'Name', field: 'name',
+            cellStyle: {
+                backgroundColor: '#039be5',
+                color: '#FFF'
+            },
+        },
         {title: 'Latitude', field: 'latitude'},
         {title: 'Longitude', field: 'longitude'},
         {title: 'Current', field: 'CAP'},

@@ -42,7 +42,6 @@ function ManagerHistory() {
                 color: '#FFF'
             },
         },
-        {title: 'Parking Lot', field: 'parking_lot'},
         {title: 'Entry Time', field: 'entry_time'},
         {title: 'Status', field: 'status'}
     ]
