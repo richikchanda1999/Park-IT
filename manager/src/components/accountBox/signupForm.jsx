@@ -23,43 +23,43 @@ function SignUpForm() {
     const [parkingLotID, setparkingLotID] = useState("");
     const {switchToSignin} = useContext(AccountContext);
 
-    function onNameChange(fn) {
+    function onNameChange(fn) {                 // Changes name as it is typed
         let val = fn.target.value;
         setName(val);
         setEnabled(password.length > 0 && email.length > 0 && confirmPassword.length > 0 && parkingLotID > 0 && val.length > 0 && number.length > 0);
     }
 
-    function onEmailChange(e) {
+    function onEmailChange(e) {                 // Changes Email as it is typed
         let val = e.target.value;
         setEmail(val);
         setEnabled(password.length > 0 && name.length > 0 && confirmPassword.length > 0 && parkingLotID > 0 && val.length > 0 && number.length > 0);
     }
 
-    function onPasswordChange(p) {
+    function onPasswordChange(p) {                 // Changes password as it is typed
         let val = p.target.value;
         setPassword(val);
         setEnabled(name.length > 0 && email.length > 0 && confirmPassword.length > 0 && parkingLotID > 0 && val.length > 0 && number.length > 0);
     }
 
-    function onConfirmPasswordChange(p) {
+    function onConfirmPasswordChange(p) {                 // Changes comfirm Password as it is typed
         let val = p.target.value;
         setConfirmPassword(val);
         setEnabled(password.length > 0 && name.length > 0 && email.length > 0 && parkingLotID > 0 && val.length > 0 && number.length > 0);
     }
 
-    function onNumberChange(p) {
+    function onNumberChange(p) {                 // Changes Phone Number as it is typed
         let val = p.target.value;
         setNumber(val);
         setEnabled(password.length > 0 && name.length > 0 && email.length > 0 && parkingLotID > 0 && val.length > 0 && confirmPassword.length > 0);
     }
 
-    function onParkingLotIDChange(id) {
+    function onParkingLotIDChange(id) {                 // Changes Parking Lot ID as it is typed
         let val = id.target.value;
         setparkingLotID(val);
         setEnabled(password.length > 0 && name.length > 0 && email.length > 0 && number.length > 0 && val.length > 0 && confirmPassword.length > 0);
     }
 
-    async function onSignUp() {
+    async function onSignUp() {                 // Updating Details in the Data-Base
         if (!submitEnable) return;
         console.log(`Name: ${name},Number:${number} Email: ${email}, Password: ${password}`);
         let requestOption = {

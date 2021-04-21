@@ -48,7 +48,7 @@ function Content1(){
   const alreadyEntered = () => toast.info("Vehicle is Already in the Parking Lot", {position: "top-center",autoClose: false, draggable: true});
 
 
-  async function onClick(){
+  async function onClick(){                             //entering vehicle in the database
     console.log(vehicle, vehicleType);
     if(vehicle != ""){
       if(vehicleType == "")
@@ -84,13 +84,13 @@ function Content1(){
     }
   }
 
-  function onChange(e){
+  function onChange(e){                         //Storing Vehicle Type          
     let val = e.target.value;
     console.log(val);
     setVehicleType(val);
   }
 
-  function vehicleChange(fn){
+  function vehicleChange(fn){                   //Storing Vehicle Number
     let val = fn.target.value;
     console.log(val);
     setVehicle(val);
@@ -126,22 +126,22 @@ function Content2(){
   const parkCost = () => toast.info("Total Cost is Rs."+ cost1, {position: "top-center",autoClose: false, draggable: true});
   const noVehicle = () => toast.error("Vehicle Number Not Present!!!", {position: "top-center",autoClose: false, draggable: true});
 
-  function vehicleChange(fn){
+  function vehicleChange(fn){               //Storing Vehicle Number
     let val = fn.target.value;
     console.log(val);
     setVehicle(val);
   }
 
-  const onOpenModal = () => {
+  const onOpenModal = () => {              // Opening Modal
       setOpen(true);
   };
 
-  const onCloseModal = () => {
+  const onCloseModal = () => {              // Closing Modal
       setOpen(false);
       setValue(0);
   };
 
-  async function onClick(){
+  async function onClick(){                            //exiting vehicle from the database 
     console.log(vehicle);
     if(vehicle != ""){
       console.log(value);

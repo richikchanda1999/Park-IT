@@ -10,7 +10,7 @@ async function init() {
     await client.connect();
 }
 
-async function getPassword(email) {
+async function getPassword(email) {         // Fetching encrypted password from the DataBase
     let db = client.db();
     let doc = await (await db.collection('managers')).findOne({'email': email});
     let parking_name = await (await db.collection('parking_lots')).findOne({'place_id': doc['parking_id']});
@@ -18,7 +18,7 @@ async function getPassword(email) {
     return doc != null ? doc : null;
 }
 
-async function signUp(name, number, email, pass, parking_lot, rating, isApproved) {
+async function signUp(name, number, email, pass, parking_lot, rating, isApproved) { // Adding Details in the DataBase
     let db = client.db();
     let ret = await (await db.collection('managers')).insertOne({
         name: name,
@@ -32,26 +32,26 @@ async function signUp(name, number, email, pass, parking_lot, rating, isApproved
     return ret.insertedCount === 1;
 }
 
-async function isApproved(email) {
+async function isApproved(email) {              // Checking manager approval status
     let db = client.db();
     let app = await (await db.collection('managers')).findOne({'email': email});
     return app['is_approved'];
 }
 
-async function checkEmail(email) {
+async function checkEmail(email) {              // Checking if manager email is present or not
     let db = client.db();
     let check = await (await db.collection('managers')).findOne({'email': email});
     console.log(`User present: ${check != null}`);
     return check != null;
 }
 
-async function getParkingLotId(email) {
+async function getParkingLotId(email) {                     // Fetching Parking Lot ID 
     let db = client.db();
     let parking = await (await db.collection('managers')).findOne({'email': email, 'is_approved': true});
     return parking != null ? parking['parking_id'] : '';
 }
 
-async function getCurrentParking(parkingId) {
+async function getCurrentParking(parkingId) {               // Fetching current parking details
     let db = client.db();
     let currParking = await (await db.collection('parking_status')).find({'parking_lot': parkingId, 'status':{ "$in": ["booked", "parked"] }});
     let status = [];
@@ -67,7 +67,7 @@ async function getCurrentParking(parkingId) {
     return status;
 }
 
-async function vehicleEnter(parking_lot, vehicle, vehicleType, entry_time) {
+async function vehicleEnter(parking_lot, vehicle, vehicleType, entry_time) {    // Mark Vehicle Entry in the dataBase
     let db = client.db();
     let already_park = await (await db.collection('parking_status')).findOne({
         'vehicle': vehicle,
@@ -109,7 +109,7 @@ async function vehicleEnter(parking_lot, vehicle, vehicleType, entry_time) {
 }
 
 
-async function vehicleExit(parking_lot, vehicle, exit_time, ratingManager){
+async function vehicleExit(parking_lot, vehicle, exit_time, ratingManager){         // Update or Delete Vehicle from the dataBase as per requirement
     var db = client.db();
     var book = await (await db.collection('parking_status')).findOne({'vehicle': vehicle, 'parking_lot': parking_lot, 'status': "parked" });
     var park = await (await db.collection('parking_curr_data')).findOne({'place_id': parking_lot });

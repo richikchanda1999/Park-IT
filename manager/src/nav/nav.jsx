@@ -19,7 +19,7 @@ function NavBar() {
         setNav(!showNav);
     }
 
-    const gotoHome = useCallback(() => {
+    const gotoHome = useCallback(() => {                // Change to home page
         if (page !== "/start") {
             setPage("/start");
             navigate("/start");
@@ -27,7 +27,7 @@ function NavBar() {
         setNav(false);
     }, []);
 
-    const gotoStatus = useCallback(() => {
+    const gotoStatus = useCallback(() => {                // Change to Currrent Parking Status
         if (page !== "/parked") {
             setPage("/parked");
             navigate("/parked");
@@ -35,7 +35,7 @@ function NavBar() {
         setNav(false);
     }, []);
 
-    const logout = useCallback(() => {
+    const logout = useCallback(() => {                      // Logout Function
         Session.clear();
         setPage("/");
         navigate("/", true);

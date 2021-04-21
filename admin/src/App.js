@@ -7,7 +7,7 @@ import MyUser from "./components/user/user";
 import MyManager from "./components/manager/manager";
 import 'react-toastify/dist/ReactToastify.css';
 
-const routes = {
+const routes = {                            // Routes for Navigation bar
   '/': () => <MyManager/>,
   '/parking': () => <MyParking/>,
   '/user': () => <MyUser/>

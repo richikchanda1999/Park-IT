@@ -7,7 +7,7 @@ import {green, red} from "@material-ui/core/colors";
 
 const {REACT_APP_API_BACKEND} = process.env;
 
-function MyManager() {
+function MyManager() {                                  // To get Manager Details
     const [managerStatus, setManagerStatus] = useState([]);
 
     const getManagers = useCallback(async () => {
@@ -26,14 +26,14 @@ function MyManager() {
     }, []);
 
 
-    useEffect(() => {
+    useEffect(() => {                           // Single render of getManagers function
         async function getInitialManagerData() {
             await getManagers();
         }
         getInitialManagerData();
     }, []);
 
-    const onClick = useCallback(async (email, value) => {
+    const onClick = useCallback(async (email, value) => {       // Updating the approval status of Manager
         let requestOption = {
             method: "POST",
             headers: {'Content-Type': 'application/json'},

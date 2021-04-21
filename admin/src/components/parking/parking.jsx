@@ -8,7 +8,7 @@ function MyParking() {
 
     const [parkingStatus, setParkingStatus] = useState([]);
 
-    const getParking = useCallback(async () => {
+    const getParking = useCallback(async () => {                    // To get Parking lot Details
         let requestOption = {
             method: "POST",
             headers: {'Content-Type': 'application/json'},
@@ -24,7 +24,7 @@ function MyParking() {
     }, []);
 
 
-    useEffect(() => {
+    useEffect(() => {                           // Single render of getParking function
         async function getInitialParkingData() {
             await getParking();
         }
