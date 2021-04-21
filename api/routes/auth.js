@@ -7,10 +7,11 @@ require('dotenv').config();
 
 let countryCode, number, verificationID, service;
 
+//this is used to recieve a post request from the frontend from signin page
 router.post('/sign_in', async function (req, res) { 
     let email = req.body.email;
     let password = req.body.password;
-    var mailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    var mailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;//checks the validity of email using the regex
     if(email.match(mailformat)){
           let info = await db.getPassword(email);
     if (info == null) res.status(598).send("Email does not exist!\n");
@@ -31,7 +32,7 @@ router.post('/sign_in', async function (req, res) {
     }
     
 });
-
+//this is use to make a post request for signup page
 router.post('/sign_up', async function (req, res) {
     let name = req.body.name;
     let email = req.body.email;
@@ -61,6 +62,7 @@ router.post('/sign_up', async function (req, res) {
     
 });
 
+//this will process the post request for the otp request
 router.post('/otp/send', async function (req, res) {
     const accountSid = process.env.TWILIO_ACCOUNT_SID;
     const authToken = process.env.TWILIO_AUTH_TOKEN;

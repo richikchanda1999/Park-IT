@@ -20,6 +20,7 @@ const styles = {
 };
 
 class UserHistory extends Component{
+    //state variables for showing history page
     constructor(props) {
         super(props);
         this.state = { userStatus: null}
@@ -31,14 +32,17 @@ class UserHistory extends Component{
         this.getabc(Session.get("email"));
     }
 
+    //this function will open the pop up to display modal to the user
     onOpenModal = () => {
         this.setState({ open: true });
     };
 
+    // this function will cose the popup displayed to the user
     onCloseModal = () => {
         this.setState({ open: false, value: 0 });
     };
 
+    // this function will fetch the history of the user from the backend and will help to diplay it to them
     async getHistory(email) {
         if (!this.statusFetched) {
             console.log(Session.get("email"), Session.get("user_id"), Session.get("name"));
@@ -65,6 +69,7 @@ class UserHistory extends Component{
         console.log(this.state.userStatus);
     }
 
+    // this is used to render the rating button which will help the user to rate each and every parkinglot which they have visited
     renderButton(entry_time){
         const { open } = this.state;
         return(
@@ -79,6 +84,7 @@ class UserHistory extends Component{
         )
     }
 
+    //this will display the table
     renderTableData() {
         if(this.state.userStatus != null){
             return this.state.userStatus.map((history, index) => {
@@ -98,6 +104,7 @@ class UserHistory extends Component{
         }
     }
 
+    //this is used to click the  the rate button
     async onClick(entry_time) {
         let requestOption = {
             method: "POST",
@@ -116,6 +123,7 @@ class UserHistory extends Component{
         }
     }
 
+    //this is the used to render the table
     render(){
         return(
             <Customer >

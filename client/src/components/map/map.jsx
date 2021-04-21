@@ -19,6 +19,7 @@ const {REACT_APP_GOOGLE_MAP_KEY_PAID, REACT_APP_API_BACKEND} = process.env;
 const libraries = ["places"];
 
 function MyMap(props) {
+    //rendering the state variables to be used in the maps
     const [selectedPark, setSelectedPark] = useState(null);
     const [selectedParkCAP, setSelectedParkCAP] = useState(-1);
     const [selectedParkTPS, setSelectedParkTPS] = useState(-1);
@@ -36,15 +37,18 @@ function MyMap(props) {
         height: '100vh'
     };
 
+    // this function helps to bring the current location of the map and render the map arround that coordinate
     const onLoad = useCallback(function callback(map) {
         setMap(map);
         console.log(map.zoom);
     }, [])
 
+    //this is a lifecycle method of the react which will unmount the map 
     const onUnmount = useCallback(function callback(map) {
         setMap(null)
     }, []);
 
+    //this function is used to render the map initially when map renders
     useEffect(() => {
         console.log("Map center changed to: ", center);
         getParkingLots();
@@ -52,6 +56,7 @@ function MyMap(props) {
 
     useEffect(() => {}, []);
 
+    //this function helps to get the parking lots nearby the coordinates selected by the user in 2 km radius
     async function getParkingLots() {
         if (!lotsFetched) {
             lotsFetched = true;
@@ -79,6 +84,7 @@ function MyMap(props) {
         }
     }
 
+    // this function gets the current status of the parking lot i.e occupied parking lots/total parking lots
     async function getStatus(place_id) {
         if (!statusFetched) {
             let requestOption = {
@@ -98,12 +104,14 @@ function MyMap(props) {
         }
     }
 
+    //this will change the map's center point coordinate and would thus render the new sets of parking lot according to it
     async function handleDrag() {
         let center = map.getCenter();
         setMapCenter({lat: center.lat(), lng: center.lng()});
         console.log(center.lat(), center.lng());
     }
-
+    
+    //this function is used to navigate the website to the booking webpage and would carry forward the detail of the parking id which the user want to book it
     async function booking_nav() {
         console.log(selectedPark);
         if (selectedParkCAP > 0) {
@@ -114,6 +122,8 @@ function MyMap(props) {
         }
     }
 
+    //this is the function which changes the data according to the change in the location in location finder
+    // it will change the geocode Address according to the location selected
     const handleSelect = async value => {
         const results = await geocodeByAddress(value);
         const latLng = await getLatLng(results[0]);
@@ -129,6 +139,7 @@ function MyMap(props) {
         libraries: libraries
     })
 
+    //this function is use to do a autoComplete location finder which would find a specific location based on the the words entered it would recommend users about the location
     function autoComplete() {
         console.log("HERE!");
         return (
@@ -188,6 +199,7 @@ function MyMap(props) {
         );
     }
 
+    // loading the map
     return isLoaded ? (
         <div>
             <GoogleMap

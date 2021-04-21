@@ -30,10 +30,10 @@ function Booking(props) {
     const [amount, setAmount] = useState(0);
     const [value, setValue] = useState(null);
 
-    let selectedPark = queryParams.selectedPark;//doubt here
+    let selectedPark = queryParams.selectedPark;//this will bring the selected park Id which is passed from the map.jsx
     let place_id = selectedPark['place_id'];
-    let name = selectedPark['name'];
-    let rateChart = selectedPark['rate_per_hour'];
+    let name = selectedPark['name'];//name of the parking lot
+    let rateChart = selectedPark['rate_per_hour'];// rate chart of the parking lot
     const useStyles = makeStyles((theme) => ({
         formControl: {
           margin: theme.spacing(1),
@@ -44,6 +44,7 @@ function Booking(props) {
         },
       }));
     let statusFetched = false;
+    // getStatus function will be use to fetch data about the parking lot from the backend aboout the current space availability
     const getStatus = useCallback(async () => {
         if (!statusFetched) {
             let requestOption = {
@@ -64,12 +65,12 @@ function Booking(props) {
             statusFetched = false;
         }
     }, []);
-
+    //THIS is called when the booking page is rendered initally
     useLayoutEffect(() => {
         getStatus()
     }, []);
 
-    function loadScript(src) {
+    function loadScript(src) {  //loadscript is a function which is used to load the razorpay SDK at the frontend
         return new Promise((resolve) => {
             const script = document.createElement("script");
             script.src = src;
@@ -83,11 +84,7 @@ function Booking(props) {
         });
     }
 
-    // async function bookAndPay() {
-    //     let res
-    // }
-
-    async function displayRazorpay() {
+    async function displayRazorpay() { // this function is used to dispaly the razorpay payment platform when a user wants to pay 
         const res = await loadScript(
             "https://checkout.razorpay.com/v1/checkout.js"
         );
@@ -107,7 +104,7 @@ function Booking(props) {
         const data = await result.json();
         console.log(data);
 
-
+        //creating a order id for payment
         const options = {
             key: "rzp_test_qKd2HzzsfeAWn4", // Enter the Key ID generated from the Dashboard
             amount: data.amount,//.toString(),
@@ -133,6 +130,7 @@ function Booking(props) {
                 const ar = await result.json();
                 console.log("here:", ar.msg," PaymentId:",ar.paymentId);
                 const payment_id=ar.paymentId;
+                //if the payment is success then another post request is made to verify that a valid payment has been done against the particular userId
                 console.log(Session.get("user_id"));
                 if (ar.msg === "success") {
                     toast.success('Payment successful!');
@@ -155,6 +153,7 @@ function Booking(props) {
                         })
                     }
                     console.log(requestOption);
+                    //confirming the payment
                     const booked = await fetch(`${REACT_APP_API_BACKEND}/payment/booked`, requestOption);
                     if (booked.status === 200) {
                         toast.success('Booking successful!');
@@ -182,13 +181,16 @@ function Booking(props) {
         const paymentObject = new window.Razorpay(options);
         paymentObject.open();
     }
+    //this is the function to validate all the inputs taken during the booking
     function checkValidity()
     {
+            //checking the validity of vehicle number
             var vehicleformat = /^[A-Z]{2}[ -][0-9]{1,2}(?: [A-Z])?(?: [A-Z]*)? [0-9]{4}$/;
             console.log(vehicleNum);
             console.log(vehicleType);
             if(vehicleNum.match(vehicleformat)){
                 console.log("matched!");
+                //vaidating  whether a vehicle Type is selcted or not if not then have to select it first
                 if(vehicleType.match("truck") || vehicleType.match("car") || vehicleType.match("bike") )
                 {
                     if(current<tot)
@@ -210,6 +212,7 @@ function Booking(props) {
                 toast.error('Please Enter a valid Vehicle Number!');
             }
     }
+    //this function is called when there is a change in the value of the entered data
     function handleChange(event) {
         console.log("called!");
         const target = event.target;

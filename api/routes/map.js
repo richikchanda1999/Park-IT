@@ -2,6 +2,7 @@ let express = require('express');
 let db = require('./db');
 let router = express.Router();
 
+//this function recieves a post request from the function to get the live status of the parking lots and sends it to the frontend
 router.post('/get_live_status', async function (req, res) {
     let place_id = req.body.place_id;
 
@@ -9,6 +10,7 @@ router.post('/get_live_status', async function (req, res) {
     res.status(200).send(JSON.stringify(status));
 });
 
+// this function recives the post request to get the nearby coordinates of the coordinates and return the same to the frontend as requested
 router.post('/nearby_coordinates', async function (req, res) {
     console.log(req.body.latitude);
     console.log(req.body.longitude);

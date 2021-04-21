@@ -7,6 +7,7 @@ const router = express.Router();
 const crypto= require('crypto');
 let db = require('./db');
 
+//this function recives a post request to make a successful order of the payemnt which the user wants to make
 router.post("/order", async (req, res) => {
     console.log("Called");
     try {
@@ -34,6 +35,7 @@ router.post("/order", async (req, res) => {
     }
 });
 
+//this post request verifies whether the order has been successful which the user has done and to verify it
 router.post("/success", async (req, res) => {
     try {
         // getting the details back from our font-end
@@ -72,6 +74,8 @@ router.post("/success", async (req, res) => {
         res.status(500).send(error);
     }
 });
+
+//this is the final booking request to cross verify all the details the user and whether the payemnt done by the user is legit or not and if it is then reply the frontend with a successful request
 
 router.post("/booked",async (req,res)=>{
     console.log(req.body);
