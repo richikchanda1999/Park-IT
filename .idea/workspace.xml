@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a9f1fbb8-c7e2-40d0-a191-02e1008288bf" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/routes/manager/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/routes/manager/auth.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manager/src/components/accountBox/signupForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/manager/src/components/accountBox/signupForm.jsx" afterDir="false" />
-    </list>
+    <list default="true" id="a9f1fbb8-c7e2-40d0-a191-02e1008288bf" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
