@@ -6,14 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="a9f1fbb8-c7e2-40d0-a191-02e1008288bf" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/src/components/manager/manager.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/components/manager/manager.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/src/components/parking/parking.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/components/parking/parking.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/src/components/user/user.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/components/user/user.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/.env" beforeDir="false" afterPath="$PROJECT_DIR$/api/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/routes/manager/db.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/routes/manager/db.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/routes/payment.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/routes/payment.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manager/src/components/parked/parkedNew.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/manager/src/components/parked/parkedNew.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/.env" beforeDir="false" afterPath="$PROJECT_DIR$/admin/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/.env" beforeDir="false" afterPath="$PROJECT_DIR$/client/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/build/asset-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/build/asset-manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/build/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/build/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/build/static/js/main.0ff9fcda.chunk.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/build/static/js/main.0ff9fcda.chunk.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/manager/.env" beforeDir="false" afterPath="$PROJECT_DIR$/manager/.env" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -128,6 +127,8 @@
       <workItem from="1617820702600" duration="5554000" />
       <workItem from="1618464793991" duration="1564000" />
       <workItem from="1618477603308" duration="6278000" />
+      <workItem from="1618511329597" duration="124000" />
+      <workItem from="1618808616490" duration="971000" />
     </task>
     <servers />
   </component>
