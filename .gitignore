@@ -15,3 +15,9 @@ admin/yarn.lock
 admin/yarn-error.log
 manager/yarn.lock
 manager/yarn-error.log
+client/build/
+manager/build/
+admin/build/
+client/.env
+manager/.env
+admin/.env
