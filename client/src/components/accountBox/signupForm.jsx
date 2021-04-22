@@ -14,6 +14,7 @@ import {toast} from "react-toastify";
 const { REACT_APP_API_BACKEND } = process.env;
 
 function SignUpForm() {
+  //state variable declared for the signup page
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -22,36 +23,42 @@ function SignUpForm() {
   const [number ,setNumber]= useState("");
   const { switchToSignin } = useContext(AccountContext);
 
+  //this function is called when the name field is changed
   function onNameChange(fn) {
     let val = fn.target.value;
     setName(val);
     setEnabled(password.length > 0 && email.length > 0 && confirmPassword.length > 0 && val.length > 0 && number.length==10);
   }
 
+  //this function is called when the email field is changed 
   function onEmailChange(e) {
     let val = e.target.value;
     setEmail(val);
     setEnabled(password.length > 0 && name.length > 0  && confirmPassword.length > 0 && val.length > 0 && number.length==10);
   }
 
+  //this function is called when the password field is changed
   function onPasswordChange(p) {
     let val = p.target.value;
     setPassword(val);
     setEnabled(name.length > 0 &&  email.length > 0 && confirmPassword.length > 0 && val.length > 0 && number.length==10);
   }
 
+  //this function is called when the confirm password field is changed
   function onConfirmPasswordChange(p) {
     let val = p.target.value;
     setConfirmPassword(val);
     setEnabled(password.length > 0 && name.length > 0  && email.length > 0 && val.length > 0 && number.length==10);
   }
 
+  //this function is called when the number field is changed
   function onNumberChange(p) {
     let val=p.target.value;
     setNumber(val);
     setEnabled(password.length>0 && name.length > 0 && email.length > 0 && val.length > 0 && confirmPassword.length>0);
   }
 
+  //this function is called to make a post request to the backend  to verify all the details and enter the ew user
   async function onSignUp() {
     if (!submitEnable) return;
     console.log(`Name: ${name},Number: ${number}, Email: ${email}, Password: ${password}`);
@@ -87,6 +94,7 @@ function SignUpForm() {
     }
   }
 
+  //method to make render the sign up function
   return (
       <BoxContainer>
         <FormContainer>

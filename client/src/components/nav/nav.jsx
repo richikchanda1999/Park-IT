@@ -5,7 +5,10 @@ import {navigate} from "hookrouter";
 import {toast} from "react-toastify";
 import {AuthContext} from "../../authContext";
 
+//navBar is used to show the contents where user can go to 
+
 function NavBar() {
+    //state variables declares for the Nav bar
     const [showNav, setNav] = useState(false);
     const [page, setPage] = useState("/");
 
@@ -19,6 +22,7 @@ function NavBar() {
         setNav(!showNav);
     }
 
+    // this callback function will set the navigation page to home when gotoHome is called
     const gotoHome = useCallback(() => {
         if (page !== "/map") {
             setPage("/map");
@@ -27,6 +31,7 @@ function NavBar() {
         setNav(false);
     }, []);
 
+    //this callback function will set the navigation page to history when the history button is pressed
     const gotoHistory = useCallback(() => {
         if (page !== "/history") {
             setPage("/history");
@@ -35,6 +40,7 @@ function NavBar() {
         setNav(false);
     }, []);
 
+    //this callback function will set the navigation page to sign in page and user's session will be lushed out
     const logout = useCallback(() => {
         Session.clear();
         setPage("/");

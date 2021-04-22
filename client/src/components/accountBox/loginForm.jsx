@@ -14,22 +14,24 @@ import Session from "react-session-api";
 import {AuthContext} from "../../authContext";
 import {toast} from "react-toastify";
 
-const { REACT_APP_API_BACKEND } = process.env;
+const { REACT_APP_API_BACKEND } = process.env;// this will bring data from the env file this is used so that our authentication details would not be able 
 
 function LoginForm(props) {
+  //declaring state variables
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [submitEnable, setEnabled] = useState(false);
   const { switchToSignup, switchToOTP } = useContext(AccountContext);
   const {authUpdate} = useContext(AuthContext);
   //function email
-
+  //this function is called when the email is changed
   function onEmailChange(e) {
     let val = e.target.value;
     setEmail(val);
     setEnabled(password.length > 0 && val.length > 0);
   }
 
+  //this function is called when the password is changed
   function onPasswordChange(p) {
     let val = p.target.value;
     setPassword(val);
@@ -40,6 +42,7 @@ function LoginForm(props) {
   const emailNotPresent = () => toast.error("Email ID not present! Please sign up");
   const passwordIncorrect = () => toast.error("Password Incorrect!");
 
+  //this function is used to send a post request to backend and check the validity of the credentials entered by the user
   async function onLogin(authUpdate) {
     if (!submitEnable) return;
     console.log(`Email: ${email}, Password: ${password}`);
@@ -51,6 +54,7 @@ function LoginForm(props) {
     let res = await fetch(`${REACT_APP_API_BACKEND}/auth/sign_in`, requestOptions);
     console.log(res.status);
     if (res.status === 200) {
+      //if all the details are correct then a session storage is made where a user's data is kept to efficiently use the data all over the sessions
       success();
       const data= await res.json();
       console.log(data);
@@ -60,7 +64,7 @@ function LoginForm(props) {
       setEmail("");
       setPassword("");
       authUpdate(true);
-      navigate('/map', true);
+      navigate('/map', true);//after login the user navigates to map page
       return true;
     } else if (res.status === 598) {
       emailNotPresent();
@@ -73,7 +77,7 @@ function LoginForm(props) {
     authUpdate(false);
     return false;
   }
-
+  //login form 
   return <BoxContainer>
     <FormContainer>
       <Input value={email} type="email" placeholder="Email" onChange={onEmailChange} />

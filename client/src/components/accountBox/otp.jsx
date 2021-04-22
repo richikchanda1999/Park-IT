@@ -17,6 +17,7 @@ import {toast} from "react-toastify";
 const { REACT_APP_API_BACKEND } = process.env;
 
 function OTPForm() {
+    //state variables declared for otp generation
     const [country, setCountry] = useState("");
     const [number, setNumber] = useState("");
     const [submitEnable, setEnabled] = useState(false);
@@ -27,19 +28,20 @@ function OTPForm() {
 
     const success = () => toast.success("Login Successful !");
 
+    //this function is called when user updates the 
     function onCountryChange(c) {
         let val = c.target.value;
         console.log('Country code changed: ${val}');
         setCountry(val);
         setEnabled(val.length > 0 && number.length > 0);
     }
-
+    //when user enters the number this function is called
     function onNumberChange(n) {
         let val = n.target.value;
         setNumber(val);
         setEnabled(val.length > 0 && country.length > 0);
     }
-
+    //when the country code changes this function is called
     function onCodeChanged(c) {
         let val = c.target.value;
         console.log(val);
@@ -47,6 +49,7 @@ function OTPForm() {
         setEnabled(val.length > 0);
     }
 
+    //this function is used to send OTP to the users who has requested to
     async function onSendOTP() {
         if (!submitEnable) return;
         console.log(`Country Code: ${country}, Number: ${number}`);
@@ -63,7 +66,7 @@ function OTPForm() {
             setScreen("verify");
         }
     }
-
+    //this function will verify the otp entered by the user
     async function onVerifyOTP() {
         console.log(`Code: ${code}`);
         let requestOptions = {
@@ -82,7 +85,7 @@ function OTPForm() {
     }
 
     const {switchToSignin, switchToSignUp} = useContext(AccountContext);
-
+    //method to render the otp box
     return (
         <BoxContainer>
             {screen === "send" && (
