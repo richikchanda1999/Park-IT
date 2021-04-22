@@ -15,7 +15,7 @@ function NavBar() {
         setNav(!showNav);
     }
 
-    const gotoManager = useCallback(() => {
+    const gotoManager = useCallback(() => {                     // Change to Details of Manager
         console.log("Called, Current page now: ", page);
         // if (page !== "/") {
         //     console.log("1");
@@ -29,7 +29,7 @@ function NavBar() {
         console.log("4");
     }, []);
 
-    const gotoUser = useCallback(() => {
+    const gotoUser = useCallback(() => {                        // Change to Details of users
         console.log("Called, Current page now: ", page);
         // if (page !== "/user") {
         //     console.log("5");
@@ -44,7 +44,7 @@ function NavBar() {
         console.log("9");
     }, []);
 
-    const gotoParking = useCallback(() => {
+    const gotoParking = useCallback(() => {                      // Change to all parking lot status
         console.log("Called, Current page now: ", page);
         // if (page !== "/parking") {
         //     console.log("10");

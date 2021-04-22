@@ -105,28 +105,28 @@ function AccountBox() {
     stiffness: 30,
   };
 
-  function playExpandingAnimation() {
+  function playExpandingAnimation() {                    // To Play Animation
     setExpanded(true);
     setTimeout(() => {
       setExpanded(false);
     }, expandingTransition.duration * 1000 - 1500);
   }
 
-  function switchToSignup() {
+  function switchToSignup() {                    // Changes to SignUp screen
     playExpandingAnimation();
     setTimeout(() => {
       setActive("signup");
     }, 400);
   }
 
-  function switchToSignin() {
+  function switchToSignin() {                    // Changes to SignIn screen
     playExpandingAnimation();
     setTimeout(() => {
       setActive("signin");
     }, 400);
   }
 
-  function switchToOTP() {
+  function switchToOTP() {                    // Changes to OTP screen
     playExpandingAnimation();
     setTimeout(() => {
       setActive("otp");

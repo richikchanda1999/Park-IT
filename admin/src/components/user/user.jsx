@@ -8,7 +8,7 @@ function MyUser() {
 
     const [userStatus, setUserStatus] = useState([]);
 
-    const getUsers = useCallback(async () => {
+    const getUsers = useCallback(async () => {                          // To get User Details
         let requestOption = {
             method: "POST",
             headers: {'Content-Type': 'application/json'},
@@ -24,7 +24,7 @@ function MyUser() {
     }, []);
 
 
-    useEffect(() => {
+    useEffect(() => {                           // Single render of getUsers function
         async function getInitialUserData() {
             await getUsers();
         }
