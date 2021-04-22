@@ -8,7 +8,7 @@ async function init() {
     await client.connect();
 }
 
-async function getManager() {
+async function getManager() {           // To get Manager Details
     let db = client.db();
     let Managers = await (await db.collection('managers')).find();
     let status = [];
@@ -25,7 +25,7 @@ async function getManager() {
     return status;
 }
 
-async function getParking() {
+async function getParking() {           // To get Current Parking Lot Details
     let db = client.db();
     let Parkings = await (await db.collection('parking_lots')).aggregate([{
         $lookup: {
@@ -52,7 +52,7 @@ async function getParking() {
     return status;
 }
 
-async function getUser() {
+async function getUser() {           // To get User Details
     let db = client.db();
     let Users = await (await db.collection('users')).find();
     let status = [];
@@ -68,7 +68,7 @@ async function getUser() {
     return status;
 }
 
-async function getApproved(email, value) {
+async function getApproved(email, value) {          // To Approve manager
     let db = client.db();
     console.log(email);
 

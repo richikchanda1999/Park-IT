@@ -7,7 +7,7 @@ require('dotenv').config();
 
 let countryCode, number, verificationID, service;
 
-router.post('/sign_in', async function (req, res) {
+router.post('/sign_in', async function (req, res) {     // Checking if credentials are correct or not
     let email = req.body.email;
     let password = req.body.password;
     var mailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -37,12 +37,13 @@ router.post('/sign_in', async function (req, res) {
     }
 });
 
-router.post('/sign_up', async function (req, res) {
+router.post('/sign_up', async function (req, res) {             // Providing signup details to db.js
     let name = req.body.name;
     let email = req.body.email;
     let number= req.body.number;
     let password = req.body.password;
     let con_pass = req.body.confirmPassword;
+    let parkingLot = req.body.parkingLot;
     let rating = 5;
 
     let pass = await bcrypt.hash(password, 12);
@@ -53,7 +54,7 @@ router.post('/sign_up', async function (req, res) {
         if (present_earlier === false) {
             if (con_pass === password) {
                 console.log(name + " " + number+ " " + email + " " + con_pass + " " + pass);
-                let ret = await db.signUp(name, number, email, pass, rating, false);
+                let ret = await db.signUp(name, number, email, pass, parkingLot, rating, false);
                 if (ret) res.status(200).send('');
                 else res.status(599).send('DB Error');
             } else res.status(499).send('Password does not match');
@@ -65,7 +66,7 @@ router.post('/sign_up', async function (req, res) {
     
 });
 
-router.post('/otp/send', async function (req, res) {
+router.post('/otp/send', async function (req, res) {        // sending otp
     const accountSid = process.env.TWILIO_ACCOUNT_SID;
     const authToken = process.env.TWILIO_AUTH_TOKEN;
     console.log(accountSid);
@@ -99,7 +100,7 @@ router.post('/otp/send', async function (req, res) {
 
 });
 
-router.post('/otp/verify', async function (req, res) {
+router.post('/otp/verify', async function (req, res) {              // verifying otp
     const accountSid = process.env.TWILIO_ACCOUNT_SID;
     const authToken = process.env.TWILIO_AUTH_TOKEN;
     const client = twilio(accountSid, authToken);
@@ -120,7 +121,7 @@ router.post('/otp/verify', async function (req, res) {
     }
 });
 
-async function createServiceForOTP(client) {
+async function createServiceForOTP(client) {            // Creating OTP Service
     console.log("Creating OTP Service");
     try {
         return await client.verify.services.create({'friendlyName': process.env.OTP_SERVICE_NAME});
@@ -130,7 +131,7 @@ async function createServiceForOTP(client) {
     }
 }
 
-async function sendOTP(client, service, to) {
+async function sendOTP(client, service, to) {           // Sending OTP
     console.log("Sending OTP");
     if (service != null) {
         console.log(service.sid);

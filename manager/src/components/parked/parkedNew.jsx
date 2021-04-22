@@ -4,7 +4,7 @@ import Session from "react-session-api";
 
 const {REACT_APP_API_BACKEND} = process.env;
 
-function ManagerHistory() {
+function ManagerHistory() {                             // To get current vehicle details in the parking lot
     let email = Session.get('email');
     const [userStatus, setUserStatus] = useState([]);
     let parkingName = "Current Parking Status ["+Session.get('parking_name')+"]";
@@ -26,7 +26,7 @@ function ManagerHistory() {
     }, []);
 
 
-    useLayoutEffect(() => {
+    useLayoutEffect(() => {             // rendering the getHistory function
         getHistory()
     }, userStatus);
 
@@ -42,7 +42,6 @@ function ManagerHistory() {
                 color: '#FFF'
             },
         },
-        {title: 'Parking Lot', field: 'parking_lot'},
         {title: 'Entry Time', field: 'entry_time'},
         {title: 'Status', field: 'status'}
     ]

@@ -2,7 +2,7 @@ let express = require('express');
 let router = express.Router();
 let db = require('./db');
 
-router.post('/vehicle_enter', async function (req, res) {
+router.post('/vehicle_enter', async function (req, res) {           // Mark Entry of Vehicle in the dataBase
     let parking_lot = req.body.parking_lot;
     let vehicle = req.body.vehicle;
     let vehicleType = req.body.vehicleType;
@@ -12,7 +12,7 @@ router.post('/vehicle_enter', async function (req, res) {
     res.status(200).send(JSON.stringify(result));
 });
 
-router.post('/vehicle_exit', async function (req, res) {
+router.post('/vehicle_exit', async function (req, res) {           // Mark Exit of Vehicle in the dataBase
     let parking_lot = req.body.parking_lot;
     let vehicle = req.body.vehicle;
     let exit_time = req.body.exit_time;
@@ -22,7 +22,7 @@ router.post('/vehicle_exit', async function (req, res) {
     res.status(200).send(JSON.stringify(result));
 });
 
-router.post('/get_current_parking', async function (req, res) {
+router.post('/get_current_parking', async function (req, res) {           // Fetch Current Parking Details of the Parking Lot
     let email = req.body.email;
     console.log(email);
     let parkingId = await db.getParkingLotId(email);

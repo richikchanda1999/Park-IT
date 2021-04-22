@@ -23,13 +23,13 @@ function LoginForm(props) {
     const {switchToSignup, switchToOTP} = useContext(AccountContext);
     const {authUpdate} = useContext(AuthContext);
 
-    function onEmailChange(e) {
+    function onEmailChange(e) {                 // Changes Email as it is typed
         let val = e.target.value;
         setEmail(val);
         setEnabled(password.length > 0 && val.length > 0);
     }
 
-    function onPasswordChange(p) {
+    function onPasswordChange(p) {                 // Changes Password as it is typed
         let val = p.target.value;
         setPassword(val);
         setEnabled(email.length > 0 && val.length > 0);
@@ -39,7 +39,8 @@ function LoginForm(props) {
     const emailNotPresent = () => toast.error("Email ID not present! Please sign up");
     const passwordIncorrect = () => toast.error("Password Incorrect!");
     const managerNotApproved = () =>toast.error("You have not been verified by admin!")
-    async function onLogin(authUpdate) {
+
+    async function onLogin(authUpdate) {            // To check detail and sign in if correct
         if (!submitEnable) return;
         console.log(`Email: ${email}, Password: ${password}`);
         let requestOptions = {

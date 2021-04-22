@@ -46,37 +46,44 @@ function Content1(){
   const vehicleNotPresent = () => toast.info("Vehicle No. not present! Please Enter", {position: "top-center",autoClose: false, draggable: true});
   const noSpace = () => toast.error("No Space In Parking Lot", {position: "top-center",autoClose: false, draggable: true});
   const alreadyEntered = () => toast.info("Vehicle is Already in the Parking Lot", {position: "top-center",autoClose: false, draggable: true});
+  const WrongVehicleNumberFormat = () => toast.info("Wrong Vehicle Number Format", {position: "top-center",autoClose: false, draggable: true});
 
 
-  async function onClick(){
+  async function onClick(){                             //entering vehicle in the database
     console.log(vehicle, vehicleType);
     if(vehicle != ""){
       if(vehicleType == "")
         setVehicleType("bike")
-      var today = new Date();
-      var time = today.getHours() + ":" + today.getMinutes();
-      var date = (today.getMonth() + 1) + '/' + today.getDate() + '/' + today.getFullYear();
-      var entry_time = date + " " + time;
-      console.log(entry_time);
-      let requestOption = {
-        method: "POST",
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ 'parking_lot': parking_lot, 'vehicle': vehicle, 'vehicleType': vehicleType, 'entry_time': entry_time}),
-      };
-      let res = await fetch(`${REACT_APP_API_BACKEND}/manager/parking/vehicle_enter`, requestOption);
-      console.log(res);
-      
-      if (res.status === 200) {
-          let val = await res.json();
-          console.log(val);
-          if(val == '-1')
-            noSpace();
-          else if(val == '-2')
-            alreadyEntered();
-          else
-            vehicleEnter();
-          setVehicleType(null);
-          setVehicle("");
+      var vehicleformat = /^[A-Z]{2}[ -][0-9]{1,2}(?: [A-Z])?(?: [A-Z]*)? [0-9]{4}$/;
+      if(vehicle.match(vehicleformat)){
+        var today = new Date();
+        var time = today.getHours() + ":" + today.getMinutes();
+        var date = (today.getMonth() + 1) + '/' + today.getDate() + '/' + today.getFullYear();
+        var entry_time = date + " " + time;
+        console.log(entry_time);
+        let requestOption = {
+          method: "POST",
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ 'parking_lot': parking_lot, 'vehicle': vehicle, 'vehicleType': vehicleType, 'entry_time': entry_time}),
+        };
+        let res = await fetch(`${REACT_APP_API_BACKEND}/manager/parking/vehicle_enter`, requestOption);
+        console.log(res);
+        
+        if (res.status === 200) {
+            let val = await res.json();
+            console.log(val);
+            if(val == '-1')
+              noSpace();
+            else if(val == '-2')
+              alreadyEntered();
+            else
+              vehicleEnter();
+            setVehicleType(null);
+            setVehicle("");
+        }
+      }
+      else{
+        WrongVehicleNumberFormat();
       }
     }
     else{
@@ -84,13 +91,13 @@ function Content1(){
     }
   }
 
-  function onChange(e){
+  function onChange(e){                         //Storing Vehicle Type          
     let val = e.target.value;
     console.log(val);
     setVehicleType(val);
   }
 
-  function vehicleChange(fn){
+  function vehicleChange(fn){                   //Storing Vehicle Number
     let val = fn.target.value;
     console.log(val);
     setVehicle(val);
@@ -125,23 +132,30 @@ function Content2(){
 
   const parkCost = () => toast.info("Total Cost is Rs."+ cost1, {position: "top-center",autoClose: false, draggable: true});
   const noVehicle = () => toast.error("Vehicle Number Not Present!!!", {position: "top-center",autoClose: false, draggable: true});
+  const WrongVehicleNumberFormat = () => toast.info("Wrong Vehicle Number Format", {position: "top-center",autoClose: false, draggable: true});
 
-  function vehicleChange(fn){
+  function vehicleChange(fn){               //Storing Vehicle Number
     let val = fn.target.value;
     console.log(val);
     setVehicle(val);
   }
 
-  const onOpenModal = () => {
-      setOpen(true);
+  const onOpenModal = () => {              // Opening Modal and checking vehicle Number Format
+      var vehicleformat = /^[A-Z]{2}[ -][0-9]{1,2}(?: [A-Z])?(?: [A-Z]*)? [0-9]{4}$/;
+      if(vehicle.match(vehicleformat)){
+        setOpen(true);
+      }
+      else{
+        WrongVehicleNumberFormat();
+      }
   };
 
-  const onCloseModal = () => {
+  const onCloseModal = () => {              // Closing Modal
       setOpen(false);
       setValue(0);
   };
 
-  async function onClick(){
+  async function onClick(){                            //exiting vehicle from the database 
     console.log(vehicle);
     if(vehicle != ""){
       console.log(value);
@@ -169,7 +183,7 @@ function Content2(){
             parkCost();
           }
         setVehicle("");
-      } 
+      }
     }
   }
 

@@ -8,7 +8,7 @@ function MyParking() {
 
     const [parkingStatus, setParkingStatus] = useState([]);
 
-    const getParking = useCallback(async () => {
+    const getParking = useCallback(async () => {                    // To get Parking lot Details
         let requestOption = {
             method: "POST",
             headers: {'Content-Type': 'application/json'},
@@ -24,7 +24,7 @@ function MyParking() {
     }, []);
 
 
-    useEffect(() => {
+    useEffect(() => {                           // Single render of getParking function
         async function getInitialParkingData() {
             await getParking();
         }
@@ -33,7 +33,12 @@ function MyParking() {
 
 
     const column = [
-        {title: 'Name', field: 'name'},
+        {title: 'Name', field: 'name',
+            cellStyle: {
+                backgroundColor: '#039be5',
+                color: '#FFF'
+            },
+        },
         {title: 'Latitude', field: 'latitude'},
         {title: 'Longitude', field: 'longitude'},
         {title: 'Current', field: 'CAP'},

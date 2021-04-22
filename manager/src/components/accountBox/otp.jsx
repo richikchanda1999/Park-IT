@@ -19,27 +19,27 @@ function OTPForm() {
     const [screen, setScreen] = useState("send");
     const [code, setCode] = useState("");
 
-    function onCountryChange(c) {
+    function onCountryChange(c) {                 // Changes Country Code as it is chosen
         let val = c.target.value;
         console.log('Country code changed: ${val}');
         setCountry(val);
         setEnabled(val.length > 0 && number.length > 0);
     }
 
-    function onNumberChange(n) {
+    function onNumberChange(n) {                 // Changes phone Number as it is typed
         let val = n.target.value;
         setNumber(val);
         setEnabled(val.length > 0 && country.length > 0);
     }
 
-    function onCodeChanged(c) {
+    function onCodeChanged(c) {                 // Changes code as it is typed
         let val = c.target.value;
         console.log(val);
         setCode(val);
         setEnabled(val.length > 0);
     }
 
-    async function onSendOTP() {
+    async function onSendOTP() {            // To send OTP to the entered Number
         if (!submitEnable) return;
         console.log(`Country Code: ${country}, Number: ${number}`);
         let requestOptions = {
@@ -56,7 +56,7 @@ function OTPForm() {
         }
     }
 
-    async function onVerifyOTP() {
+    async function onVerifyOTP() {                  // To verify if typed otp is correct
         console.log(`Code: ${code}`);
         let requestOptions = {
             method: "POST",

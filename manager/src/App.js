@@ -45,7 +45,7 @@ function App() {
   const [isSignedIn, setSignIn] = useState(false);
   const path = usePath();
 
-  function authUpdate(val) {
+  function authUpdate(val) {                      // Setting sign in status
     setSignIn(val);
   }
 
@@ -53,7 +53,7 @@ function App() {
     console.log("Sign In State: ", isSignedIn);
   }, [isSignedIn]);
 
-  useEffect(() => {
+  useEffect(() => {                               // Change of path using navigation bar
     console.log("Path changed to: ", path)
   }, [path])
 
