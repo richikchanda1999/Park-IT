@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
     BoldLink,
     BoxContainer,
@@ -9,7 +9,6 @@ import {
 } from "./common";
 import Marginer from "../marginer";
 import { AccountContext } from "./accountContext";
-import {useContext} from "react/cjs/react.production.min";
 import {navigate} from 'hookrouter';
 import {AuthContext} from "../../authContext";
 import {toast} from "react-toastify";
@@ -58,6 +57,7 @@ function OTPForm() {
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({'countryCode': country, 'number': number}),
         };
+        console.log(`${REACT_APP_API_BACKEND}/auth/otp/send`);
         let res = await fetch(`${REACT_APP_API_BACKEND}/auth/otp/send`, requestOptions);
         console.log(res.status);
         if (res.status === 200) {
